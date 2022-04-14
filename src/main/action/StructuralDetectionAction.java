@@ -51,7 +51,7 @@ public class StructuralDetectionAction extends AnAction {
             System.out.println("\nNon si è trovato alcuno Smell");
         } else {
             //TestSmellWindowFactory.createWindow(false, true, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
-            CommitWindowFactory.createWindow(false, true, Project.DIRECTORY_STORE_FOLDER/*anActionEvent.getProject()*/, generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
+            CommitWindowFactory.createWindow(false, true, anActionEvent.getData(DataKeys.PROJECT)/*Project.DIRECTORY_STORE_FOLDER*//*anActionEvent.getProject()*/, generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
         }
     }
 
