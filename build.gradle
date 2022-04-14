@@ -1,16 +1,12 @@
 plugins {
     id 'java'
+    id 'org.jetbrains.intellij' version '0.7.2'
 }
 
-group 'org.example'
 version '2.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    /*jcenter() deprecato*/
-    maven { url 'https://maven.google.com' }
-    // OR
-    google()
 }
 
 sourceSets {
@@ -20,6 +16,7 @@ sourceSets {
         }
     }
 }
+
 dependencies {
     compile 'junit:junit:4.12'
     // https://mvnrepository.com/artifact/com.intellij/openapi
@@ -28,4 +25,15 @@ dependencies {
     implementation group: 'org.repodriller', name: 'repodriller', version: '2.0.1'
     compile fileTree(dir: 'Installer', include: ['*.jar'])
 
+}
+
+intellij {
+    version '2020.3.1'
+    plugins = ['com.intellij.java']
+}
+
+patchPluginXml {
+    changeNotes """
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>"""
 }
