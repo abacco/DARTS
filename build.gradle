@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.intellij' version '0.7.2'
 }
 
-version '2.0-SNAPSHOT'
+version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -28,7 +28,7 @@ dependencies {
 }
 
 intellij {
-    version '2020.3.1'
+    version /*'2020.3.3'*/ '2021.1'
     plugins = ['com.intellij.java']
 }
 
@@ -37,3 +37,9 @@ patchPluginXml {
       Add change notes here.<br>
       <em>most HTML tags may be used</em>"""
 }
+
+tasks.withType(JavaCompile) {
+    options.failOnError(false)
+}
+
+tasks.buildSearchableOptions { enabled = false }

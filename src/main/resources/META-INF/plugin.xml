@@ -1,6 +1,6 @@
 <idea-plugin>
-  <id>com.your.company.unique.plugin.id</id>
-  <name>DARTS</name>
+  <id>DARTS</id>
+  <name>DARTS_2.0</name>
   <version>1.0</version>
   <vendor>UNISA: SESA Lab</vendor>
 
@@ -12,15 +12,14 @@
   <depends>com.intellij.java</depends>
 
   <extensions defaultExtensionNs="com.intellij">
-    <extension id="main.extension.CommitFactory"/>
     <checkinHandlerFactory implementation="main.extension.CommitFactory"/>
   </extensions>
 
   <actions>
-    <group id="MyPlugin.SampleMenu" text="TestSmell detection" description="Sample menu" popup="true">
+    <group id="SampleMenu" text="TestSmell detection" description="Sample menu" popup="true">
       <add-to-group group-id="AnalyzeMenu" anchor="last"  />
-      <action id="Myplugin.TextSmellTextualDetection" class="main.action.TextualDetectionAction" text="Execute Textual detection" description="A test menu item" />
-      <action id="Myplugin.TextSmellStructuralDetection" class="main.action.StructuralDetectionAction" text="Execute Structural detection" description="A test menu item" />
+      <action id="TextSmellTextualDetection" class="main.action.TextualDetectionAction" text="Execute Textual detection" description="A test menu item" />
+      <action id="TextSmellStructuralDetection" class="main.action.StructuralDetectionAction" text="Execute Structural detection" description="A test menu item" />
     </group>
   </actions>
 

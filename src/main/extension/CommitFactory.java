@@ -18,7 +18,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 
-public class CommitFactory  extends CheckinHandlerFactory{
+public class CommitFactory extends CheckinHandlerFactory{
     //Oggetto usato per ottenere i file salvati durante la fase di commit
     private CheckinProjectPanel myPanel;
 
