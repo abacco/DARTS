@@ -22,9 +22,9 @@ public class TextualDetectionAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
-        /*IDetector detector = new TestSmellTextualDetector(anActionEvent.getProject());*/
-        /*IDetector detector = new TestSmellStructuralDetector(Project.DIRECTORY_STORE_FOLDER);*//*anActionEvent.getProject());*/
-        IDetector detector = new TestSmellStructuralDetector(anActionEvent.getData(DataKeys.PROJECT));/*anActionEvent.getProject());*/
+        IDetector detector = new TestSmellTextualDetector(anActionEvent.getProject());
+/*        *//*IDetector detector = new TestSmellStructuralDetector(Project.DIRECTORY_STORE_FOLDER);*//**//*anActionEvent.getProject());*//*
+        IDetector detector = new TestSmellStructuralDetector(anActionEvent.getData(DataKeys.PROJECT));*//*anActionEvent.getProject());*/
         ArrayList<GeneralFixtureInfo> generalFixtureInfos = detector.executeDetectionForGeneralFixture();
         ArrayList<EagerTestInfo> eagerTestInfos = detector.executeDetectionForEagerTest();
         ArrayList<LackOfCohesionInfo> lackOfCohesionInfos = detector.executeDetectionForLackOfCohesion();
@@ -45,7 +45,7 @@ public class TextualDetectionAction extends AnAction {
         } else {
             //TestSmellWindowFactory.createWindow(true, false, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
             /*CommitWindowFactory.createWindow(true, false, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);*/
-            CommitWindowFactory.createWindow(false, true, anActionEvent.getData(DataKeys.PROJECT)/*Project.DIRECTORY_STORE_FOLDER*//*anActionEvent.getProject()*/, generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
+            CommitWindowFactory.createWindow(false, true, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
         }
     }
 

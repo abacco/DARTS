@@ -196,7 +196,7 @@ public class ContextualAnalysisFrame extends JFrame {
     public ContextualAnalysisFrame(Project project, TestSmellInfo smellInfo, TestProjectAnalysis projectAnalysis) {
         mainFrame = new JFrame("Contextual Analysis");
         this.projectAnalysis = projectAnalysis;
-        this.projectPath = project.getLocation();//.getBasePath();
+        this.projectPath = project.getBasePath();
         this.smellInfo = smellInfo;
         this.productionClass = smellInfo.getClassWithSmell().getProductionClass().getName();
         sinceCommitDate = new GregorianCalendar();

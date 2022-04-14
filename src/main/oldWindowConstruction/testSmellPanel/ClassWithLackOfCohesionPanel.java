@@ -166,7 +166,7 @@ public class ClassWithLackOfCohesionPanel extends JPanel {
                 }
                 TestProjectAnalysis projectAnalysis = new TestProjectAnalysis();
                 //Project proj = e.getData(PlatformDataKeys.PROJECT);
-                String projectFolder = project.getLocation();//project.getBasePath();
+                String projectFolder = project.getBasePath();
                 File root = new File(projectFolder);
                 String srcPath = root.getAbsolutePath() + "/src";
                 String mainPath = srcPath + "/main";
@@ -182,7 +182,7 @@ public class ClassWithLackOfCohesionPanel extends JPanel {
                             isMaven = true;
                     }
                     projectAnalysis.setMaven(isMaven);
-                    String projectSDK = ProjectRootManager.getInstance(project).getProjectJdkName();//.getProjectSdk().getHomePath();
+                    String projectSDK = ProjectRootManager.getInstance(project).getProjectSdk().getHomePath();
                     LOGGER.info(projectSDK);
                     String os = System.getProperty("os.name");
                     String javaPath;
@@ -191,7 +191,7 @@ public class ClassWithLackOfCohesionPanel extends JPanel {
                     else
                         javaPath = projectSDK + "/bin/java";
                     projectAnalysis.setName(project.getName());
-                    projectAnalysis.setPath(project.getLocation());//.getBasePath());
+                    projectAnalysis.setPath(project.getBasePath());
                     projectAnalysis.setJavaPath(javaPath);
                     VirtualFile[] libraries = ProjectRootManager.getInstance(project).getContentSourceRoots();
                             //OrderEnumerator.orderEntries(project).runtimeOnly().librariesOnly().getClassesRoots();

@@ -30,8 +30,8 @@ public class StructuralDetectionAction extends AnAction {
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
         //Project.DIRECTORY_STORE_FOLDER;
 
-        /*IDetector detector = new TestSmellStructuralDetector(Project.DIRECTORY_STORE_FOLDER);*//*anActionEvent.getProject());*/
-        IDetector detector = new TestSmellStructuralDetector(anActionEvent.getData(DataKeys.PROJECT));
+        IDetector detector = new TestSmellStructuralDetector(anActionEvent.getProject());
+        /*IDetector detector = new TestSmellStructuralDetector(anActionEvent.getData(DataKeys.PROJECT));*/
         ArrayList<GeneralFixtureInfo> generalFixtureInfos = detector.executeDetectionForGeneralFixture();
         ArrayList<EagerTestInfo> eagerTestInfos = detector.executeDetectionForEagerTest();
         ArrayList<LackOfCohesionInfo> lackOfCohesionInfos = detector.executeDetectionForLackOfCohesion();
@@ -51,7 +51,7 @@ public class StructuralDetectionAction extends AnAction {
             System.out.println("\nNon si è trovato alcuno Smell");
         } else {
             //TestSmellWindowFactory.createWindow(false, true, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
-            CommitWindowFactory.createWindow(false, true, anActionEvent.getData(DataKeys.PROJECT)/*Project.DIRECTORY_STORE_FOLDER*//*anActionEvent.getProject()*/, generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
+            CommitWindowFactory.createWindow(false, true, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
         }
     }
 
