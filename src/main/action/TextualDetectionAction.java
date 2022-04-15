@@ -2,10 +2,7 @@ package main.action;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataKeys;
-import com.intellij.openapi.project.Project;
 import main.testSmellDetection.detector.IDetector;
-import main.testSmellDetection.detector.TestSmellStructuralDetector;
 import main.testSmellDetection.detector.TestSmellTextualDetector;
 import main.testSmellDetection.testSmellInfo.eagerTest.EagerTestInfo;
 import main.testSmellDetection.testSmellInfo.generalFixture.GeneralFixtureInfo;
@@ -23,8 +20,6 @@ public class TextualDetectionAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
         IDetector detector = new TestSmellTextualDetector(anActionEvent.getProject());
-/*        *//*IDetector detector = new TestSmellStructuralDetector(Project.DIRECTORY_STORE_FOLDER);*//**//*anActionEvent.getProject());*//*
-        IDetector detector = new TestSmellStructuralDetector(anActionEvent.getData(DataKeys.PROJECT));*//*anActionEvent.getProject());*/
         ArrayList<GeneralFixtureInfo> generalFixtureInfos = detector.executeDetectionForGeneralFixture();
         ArrayList<EagerTestInfo> eagerTestInfos = detector.executeDetectionForEagerTest();
         ArrayList<LackOfCohesionInfo> lackOfCohesionInfos = detector.executeDetectionForLackOfCohesion();
@@ -44,8 +39,7 @@ public class TextualDetectionAction extends AnAction {
             System.out.println("\n Non si è trovato alcuno Smell");
         } else {
             //TestSmellWindowFactory.createWindow(true, false, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
-            /*CommitWindowFactory.createWindow(true, false, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);*/
-            CommitWindowFactory.createWindow(false, true, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
+            CommitWindowFactory.createWindow(true, false, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
         }
     }
 

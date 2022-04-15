@@ -1,7 +1,7 @@
 package main.action;
 
-import com.intellij.openapi.actionSystem.*;
-import com.intellij.openapi.project.Project;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
 import main.testSmellDetection.detector.IDetector;
 import main.testSmellDetection.detector.TestSmellStructuralDetector;
 import main.testSmellDetection.testSmellInfo.eagerTest.EagerTestInfo;
@@ -12,26 +12,15 @@ import main.windowCommitConstruction.CommitWindowFactory;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import org.jetbrains.annotations.NotNull;
-
-
-import java.nio.file.Paths;
-import java.util.ArrayList;
 
 /**
  * Questa classe descrive la action per eseguire una analisi Strutturale sul progetto attualmente attivo
  */
 public class StructuralDetectionAction extends AnAction {
 
-
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
-        //Project.DIRECTORY_STORE_FOLDER;
-
         IDetector detector = new TestSmellStructuralDetector(anActionEvent.getProject());
-        /*IDetector detector = new TestSmellStructuralDetector(anActionEvent.getData(DataKeys.PROJECT));*/
         ArrayList<GeneralFixtureInfo> generalFixtureInfos = detector.executeDetectionForGeneralFixture();
         ArrayList<EagerTestInfo> eagerTestInfos = detector.executeDetectionForEagerTest();
         ArrayList<LackOfCohesionInfo> lackOfCohesionInfos = detector.executeDetectionForLackOfCohesion();
