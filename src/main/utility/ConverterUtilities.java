@@ -1,4 +1,3 @@
-/*
 package main.utility;
 
 import com.intellij.ide.projectView.ProjectViewSettings;
@@ -22,12 +21,11 @@ import java.util.Set;
 
 public abstract class ConverterUtilities {
 
-    */
 /**
      * Restituisce un array contenenti tutte le classi del progetto in esame sotto forma di PsiClass.
      * @param myProject il progetto in esame.
-     * @return un array contenente tutte le classi del progetto in esame.
-     *//*
+     * @return un array contenente tutte le classi del progetto in esame.*/
+
 
     public static ArrayList<PsiClassBean> getClassesFromPackages(Project myProject){
         System.out.println("############ Sono ConverterUtilities. Inizio la conversione del progetto. ################");
@@ -42,13 +40,12 @@ public abstract class ConverterUtilities {
             System.out.println("\nCLASSE TROVATA: " + psiClassBean.getPsiClass().getName() + " ################################");
             System.out.println("   PACKAGE: " + psiClassBean.getPsiPackage());
             System.out.println("\n   VARIABILI BLOBALI");
-            */
-/*ArrayList<PsiVariable> instanceVariables = PsiTestSmellUtilities.getAllInstanceVariable(psiClassBean.getPsiClass());
+            ArrayList<PsiVariable> instanceVariables = PsiTestSmellUtilities.getAllInstanceVariable(psiClassBean.getPsiClass());
             for(PsiVariable var : instanceVariables){
                 if(var != null) {
                     System.out.println("\n" + var.getTypeElement().getText());
                 }
-            }*//*
+            }
 
             System.out.println("\n   METODI");
             ArrayList<PsiMethodBean> psiMethodBeans = getMethodFromClass(psiClassBean.getPsiClass());
@@ -74,12 +71,11 @@ public abstract class ConverterUtilities {
         return classBeans;
     }
 
-    */
 /**
      * Metodo usato per ottenere la lista dei metodi di una classe con alcune informazioni aggiuntive.
      * @param psiClass la classe in esame.
-     * @return la lista di metodi se ce ne sono, null altrimenti.
-     *//*
+     * @return la lista di metodi se ce ne sono, null altrimenti.*/
+
 
     private static ArrayList<PsiMethodBean> getMethodFromClass(PsiClass psiClass){
         ArrayList<PsiMethodBean> methodBeans = new ArrayList<>();
@@ -99,8 +95,9 @@ public abstract class ConverterUtilities {
     }
 
 
-    */
-/* ######################################################## METODI DI SUPPORTO ########################################################## *//*
+/*
+ ######################################################## METODI DI SUPPORTO ##########################################################
+*/
 
     public static ArrayList<PsiPackage> getPackages(Project myProject) {
         ProjectViewSettings viewSettings = new ProjectViewSettings() {
@@ -215,4 +212,3 @@ public abstract class ConverterUtilities {
     }
 
 }
-*/

@@ -4,7 +4,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.OrderEntry;
-/*import com.intellij.openapi.roots.OrderEnumerator;*/
+import com.intellij.openapi.roots.OrderEnumerator;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -193,8 +193,7 @@ public class ClassWithLackOfCohesionPanel extends JPanel {
                     projectAnalysis.setName(project.getName());
                     projectAnalysis.setPath(project.getBasePath());
                     projectAnalysis.setJavaPath(javaPath);
-                    VirtualFile[] libraries = ProjectRootManager.getInstance(project).getContentSourceRoots();
-                            //OrderEnumerator.orderEntries(project).runtimeOnly().librariesOnly().getClassesRoots();
+                    VirtualFile[] libraries = OrderEnumerator.orderEntries(project).runtimeOnly().librariesOnly().getClassesRoots();
                     ArrayList<String> librariesPaths = new ArrayList<>();
                     for(VirtualFile file : libraries){
                         librariesPaths.add(file.getPath());
