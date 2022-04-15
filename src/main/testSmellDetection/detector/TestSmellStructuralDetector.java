@@ -38,14 +38,6 @@ public class TestSmellStructuralDetector implements IDetector{
         productionClassesSingleton.setProductionClasses(productionClasses);
     }
 
-    public TestSmellStructuralDetector(String project){
-        /*classBeans = ConverterUtilities.getClassesFromPackages(project.);*/
-        testClasses = TestSmellUtilities.getAllTestClasses(classBeans);
-        productionClasses = TestSmellUtilities.getAllProductionClasses(classBeans, testClasses);
-        productionClassesSingleton = ProductionClassesSingleton.getIstance();
-        productionClassesSingleton.setProductionClasses(productionClasses);
-    }
-
     public ArrayList<GeneralFixtureInfo> executeDetectionForGeneralFixture() {
         ArrayList<GeneralFixtureInfo> classesWithGeneralFixture = new ArrayList<>();
         for(PsiClassBean testClass : testClasses){

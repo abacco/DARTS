@@ -1,6 +1,8 @@
 package main.oldWindowConstruction;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.ui.components.JBScrollPane;
+import com.intellij.ui.components.JBTabbedPane;
 import main.testSmellDetection.testSmellInfo.eagerTest.EagerTestInfo;
 import main.testSmellDetection.testSmellInfo.generalFixture.GeneralFixtureInfo;
 import main.testSmellDetection.testSmellInfo.lackOfCohesion.LackOfCohesionInfo;
@@ -36,7 +38,7 @@ public class TestSmellWindowFactory {
             principalFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         }
 
-        JTabbedPane detectionTp =  principalFrame.getDetectionTp();
+        JBTabbedPane detectionTp = (JBTabbedPane) principalFrame.getDetectionTp();
         if(textual){
             principalFrame.removeTextualPanel();
             principalFrame.addTextualPanel(createPanel(project, listGFI, listETI, listLOCI));
@@ -55,7 +57,7 @@ public class TestSmellWindowFactory {
         principalFrame.setVisible(true);
     }
 
-    private static JTabbedPane createPanel(Project project,
+    private static JBTabbedPane createPanel(Project project,
                              ArrayList<GeneralFixtureInfo> listGFI,
                              ArrayList<EagerTestInfo> listETI,
                              ArrayList<LackOfCohesionInfo> listLOCI){
@@ -71,18 +73,18 @@ public class TestSmellWindowFactory {
         }
 
         //In questa parte costruisco le tab della window.
-        JTabbedPane tp = new JTabbedPane();
+        JBTabbedPane tp = new JBTabbedPane();
         tp.setPreferredSize(new Dimension(1000, 500));
         if(listGFI != null){
-            JScrollPane scroll = new JScrollPane(generalFixturePanel);
+            JBScrollPane scroll = new JBScrollPane(generalFixturePanel);
             tp.add("GeneralFixture", scroll);
         }
         if (listETI != null){
-            JScrollPane scroll = new JScrollPane(eagerTestPanel);
+            JBScrollPane scroll = new JBScrollPane(eagerTestPanel);
             tp.add("EagerTest", scroll);
         }
         if (listLOCI != null) {
-            JScrollPane scroll = new JScrollPane(lackOfCohesionPanel);
+            JBScrollPane scroll = new JBScrollPane(lackOfCohesionPanel);
             tp.add("LackOfCohesion", scroll);
         }
         return tp;

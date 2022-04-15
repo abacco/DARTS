@@ -185,7 +185,7 @@ public class ClassWithGeneralFixturePanel extends JPanel {
 
                     }
                     if (!jacocoProp.exists()) {
-                        if(System.getProperty("os.name").toLowerCase().contains("windows")) {
+                        if(SystemInfo.getOsNameAndVersion().toLowerCase().contains("windows")) {
                             pluginFolderWin = pluginFolderWin.replace("\\", "\\\\");
                             String output = "destfile = " + pluginFolderWin + "\\\\jacoco.exec";
                             FileUtility.writeFile(output, pluginFolderWin + "\\" + "jacoco-agent.properties");
@@ -197,8 +197,7 @@ public class ClassWithGeneralFixturePanel extends JPanel {
                     }
                     TestProjectAnalysis projectAnalysis = new TestProjectAnalysis();
                     //Project proj = e.getData(PlatformDataKeys.PROJECT);
-                    //String projectFolder = project.getBasePath(); // Originale
-                    String projectFolder = project.getProjectFilePath(); //Nuova
+                    String projectFolder = project.getBasePath();
                     File root = new File(projectFolder);
                     String srcPath = root.getAbsolutePath() + "/src";
                     String mainPath = srcPath + "/main";
@@ -216,7 +215,7 @@ public class ClassWithGeneralFixturePanel extends JPanel {
                         projectAnalysis.setMaven(isMaven);
                         String projectSDK = ProjectRootManager.getInstance(project).getProjectSdk().getHomePath();
                         LOGGER.info(projectSDK);
-                        String os = System.getProperty("os.name");
+                        String os = SystemInfo.getOsNameAndVersion();
                         String javaPath;
                         if(os.toLowerCase().contains("windows"))
                             javaPath = projectSDK + "/bin/java.exe";

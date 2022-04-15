@@ -1,5 +1,6 @@
 package main.windowCommitConstruction.general.listRenderer;
 
+import com.intellij.ui.JBColor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,11 +19,11 @@ public class CustomLabel2 extends JLabel {
     public void setSelected ( boolean selected )
     {
         this.selected = selected;
-        setForeground ( selected ? Color.WHITE : Color.BLACK);
+        setForeground ( selected ? JBColor.WHITE : JBColor.BLACK);
         if(selected){
-            this.setBackground(Color.darkGray);
+            this.setBackground(JBColor.darkGray);
         } else {
-            this.setBackground(Color.pink);
+            this.setBackground(JBColor.background());
         }
     }
 

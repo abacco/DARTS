@@ -12,6 +12,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiPackageStatement;
 import com.intellij.psi.util.PsiTreeUtil;
 
+import com.intellij.refactoring.extractMethod.PrepareFailedException;
 import data.TestClassAnalysis;
 import data.TestProjectAnalysis;
 import it.unisa.testSmellDiffusion.beans.PackageBean;
@@ -154,7 +155,7 @@ public class ClassWithLackOfCohesionPanel extends JPanel {
 
                 }
                 if (!jacocoProp.exists()) {
-                    if(System.getProperty("os.name").toLowerCase().contains("windows")) {
+                    if(SystemInfo.getOsNameAndVersion().toLowerCase().contains("windows")) {
                         pluginFolderWin = pluginFolderWin.replace("\\", "\\\\");
                         String output = "destfile = " + pluginFolderWin + "\\\\jacoco.exec";
                         FileUtility.writeFile(output, pluginFolderWin + "\\" + "jacoco-agent.properties");
@@ -184,7 +185,7 @@ public class ClassWithLackOfCohesionPanel extends JPanel {
                     projectAnalysis.setMaven(isMaven);
                     String projectSDK = ProjectRootManager.getInstance(project).getProjectSdk().getHomePath();
                     LOGGER.info(projectSDK);
-                    String os = System.getProperty("os.name");
+                    String os = SystemInfo.getOsNameAndVersion();
                     String javaPath;
                     if(os.toLowerCase().contains("windows"))
                         javaPath = projectSDK + "/bin/java.exe";
