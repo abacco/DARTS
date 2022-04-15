@@ -1,28 +1,30 @@
 package main.windowCommitConstruction;
 
+import com.intellij.ui.components.JBTabbedPane;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class CommitPrincipalFrame extends JFrame {
-    private JTabbedPane detectionTp;
-    private JTabbedPane textualTp;
-    private JTabbedPane structuralTp;
+    private JBTabbedPane detectionTp;
+    private JBTabbedPane textualTp;
+    private JBTabbedPane structuralTp;
 
     public CommitPrincipalFrame(){
         super("DARTS");
-        detectionTp = new JTabbedPane();
+        detectionTp = new JBTabbedPane();
         textualTp = null;
         structuralTp = null;
 
         this.setMinimumSize(new Dimension(800, 500));
     }
 
-    public void addTextualPanel(JTabbedPane textualTp){
+    public void addTextualPanel(JBTabbedPane textualTp){
         this.setTextualTp(textualTp);
         detectionTp.add("Textual Detection", textualTp);
     }
 
-    public void addStructuralPanel(JTabbedPane structuralTp){
+    public void addStructuralPanel(JBTabbedPane structuralTp){
         this.setStructuralTp(structuralTp);
         detectionTp.add("Structural Detection", structuralTp);
     }
@@ -39,27 +41,27 @@ public class CommitPrincipalFrame extends JFrame {
 
     /* GETTERS & SETTERS */
 
-    public JTabbedPane getDetectionTp() {
+    public JBTabbedPane getDetectionTp() {
         return detectionTp;
     }
 
-    public void setDetectionTp(JTabbedPane detectionTp) {
+    public void setDetectionTp(JBTabbedPane detectionTp) {
         this.detectionTp = detectionTp;
     }
 
-    public JTabbedPane getTextualTp() {
+    public JBTabbedPane getTextualTp() {
         return textualTp;
     }
 
-    public void setTextualTp(JTabbedPane textualTp) {
+    public void setTextualTp(JBTabbedPane textualTp) {
         this.textualTp = textualTp;
     }
 
-    public JTabbedPane getStructuralTp() {
+    public JBTabbedPane getStructuralTp() {
         return structuralTp;
     }
 
-    public void setStructuralTp(JTabbedPane structuralTp) {
+    public void setStructuralTp(JBTabbedPane structuralTp) {
         this.structuralTp = structuralTp;
     }
 }

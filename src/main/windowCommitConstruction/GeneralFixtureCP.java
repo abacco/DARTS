@@ -2,6 +2,8 @@ package main.windowCommitConstruction;
 
 import com.intellij.openapi.project.Project;
 
+import com.intellij.ui.components.JBList;
+import com.intellij.ui.components.JBScrollPane;
 import main.testSmellDetection.testSmellInfo.generalFixture.GeneralFixtureInfo;
 import main.windowCommitConstruction.general.listRenderer.CustomListRenderer;
 import main.windowCommitConstruction.testSmellPanel.GFSmellPanel;
@@ -21,7 +23,7 @@ public class GeneralFixtureCP extends JPanel implements ListSelectionListener {
     private JSplitPane firstSplitPane;
     private JSplitPane secondSplitPane;
 
-    private JList classList;
+    private JBList classList;
 
     ArrayList<String> classesNames;
 
@@ -47,14 +49,14 @@ public class GeneralFixtureCP extends JPanel implements ListSelectionListener {
 
             // Setup della lista delle classi.
 
-            classList = new JList(model);
+            classList = new JBList(model);
             classList.setCellRenderer( new CustomListRenderer(classList));
             classList.setBorder ( BorderFactory.createEmptyBorder ( 5, 5, 5, 5 ) );
 
             classList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             classList.setSelectedIndex(0);
             classList.addListSelectionListener(this);
-            JScrollPane classScrollPane = new JScrollPane(classList);
+            JBScrollPane classScrollPane = new JBScrollPane(classList);
             classScrollPane.setBorder(new TitledBorder("CLASSES"));
 
             // Inizializzo la secondSplitPane per la prima esecuzione.

@@ -28,13 +28,13 @@ dependencies {
 }
 
 intellij {
-    version '2020.3' /*'2021.1' | 2020.3.3 */
+    version '2021.1' /*'2021.1' | 2020.3.3 */
     plugins = ['com.intellij.java']
 }
 
 patchPluginXml {
     changeNotes """
-      Add change notes here.<br>
+      Add change notes here HELLO HELLO.<br>
       <em>most HTML tags may be used</em>"""
 }
 

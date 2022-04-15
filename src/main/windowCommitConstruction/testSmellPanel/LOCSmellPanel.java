@@ -2,6 +2,9 @@ package main.windowCommitConstruction.testSmellPanel;
 
 import com.intellij.openapi.project.Project;
 
+import com.intellij.ui.components.JBList;
+import com.intellij.ui.components.JBPanel;
+import com.intellij.ui.components.JBScrollPane;
 import main.testSmellDetection.bean.PsiMethodBean;
 import main.testSmellDetection.testSmellInfo.lackOfCohesion.LackOfCohesionInfo;
 import main.windowCommitConstruction.LackOfCohesionCP;
@@ -16,8 +19,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class LOCSmellPanel extends JSplitPane implements ListSelectionListener {
-    private JList smellList;
-    private JPanel refactorPreviewPanel;
+    private JBList smellList;
+    private JBPanel refactorPreviewPanel;
 
     ArrayList<String> methodsNames = new ArrayList<>();
 
@@ -34,7 +37,7 @@ public class LOCSmellPanel extends JSplitPane implements ListSelectionListener {
 
         model = new DefaultListModel ();
 
-        this.refactorPreviewPanel = new JPanel();
+        this.refactorPreviewPanel = new JBPanel();
         this.lackOfCohesionInfo = lackOfCohesionInfo;
 
         for(PsiMethodBean methodWithLackOfCohesion : lackOfCohesionInfo.getMethodsThatCauseLackOfCohesion()){
@@ -42,13 +45,13 @@ public class LOCSmellPanel extends JSplitPane implements ListSelectionListener {
             methodsNames.add(methodWithLackOfCohesion.getName());
         }
 
-        smellList = new JList(model);
+        smellList = new JBList(model);
         smellList.setCellRenderer( new CustomListRenderer2(smellList));
 
         smellList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         smellList.setSelectedIndex(0);
         smellList.addListSelectionListener(this);
-        JScrollPane smellScrollPane = new JScrollPane(smellList);
+        JBScrollPane smellScrollPane = new JBScrollPane(smellList);
         smellScrollPane.setBorder(new TitledBorder("METHODS"));
 
         // Creazione dello split pane con la lista degli smell e la preview del refactoring.
