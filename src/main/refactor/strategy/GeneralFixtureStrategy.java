@@ -6,6 +6,8 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.refactoring.*;
+import com.intellij.refactoring.extractMethod.ExtractMethodHandler;
+import com.intellij.refactoring.extractMethod.ExtractMethodProcessor;
 import com.intellij.refactoring.extractclass.ExtractClassProcessor;
 import main.refactor.IRefactor;
 import main.testSmellDetection.bean.PsiClassBean;
@@ -105,7 +107,7 @@ public class GeneralFixtureStrategy implements IRefactor {
             if (methodProcessor.prepare()) {
                 //methodProcessor.setMethodVisibility(PsiModifier.PUBLIC);
                 methodProcessor.testPrepare();
-                methodProcessor.testNullability();
+                //methodProcessor.testNullability();
                 ExtractMethodHandler.extractMethod(project, methodProcessor);
             }
 
@@ -120,6 +122,7 @@ public class GeneralFixtureStrategy implements IRefactor {
             methodsToMove.add(methodProcessor.getExtractedMethod());
 // aoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
             //Utile per cancellare la chiamata al nuovo metodo creato
+            /*
             WriteCommandAction.ensureFilesWritable(project, () -> {
                 PsiStatement[] statements = psiSetup.getBody().getStatements();
                 String methodName = methodProcessor.getExtractedMethod().getName() +"();";
@@ -129,6 +132,8 @@ public class GeneralFixtureStrategy implements IRefactor {
                     }
                 }
             });
+
+             */
             WriteCommandAction.runWriteCommandAction(project, () -> {
                 PsiStatement[] statements = psiSetup.getBody().getStatements();
                 String methodName = methodProcessor.getExtractedMethod().getName() +"();";
