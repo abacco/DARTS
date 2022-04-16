@@ -1,4 +1,3 @@
-/*
 package main.refactor.strategy;
 
 import com.intellij.openapi.command.WriteCommandAction;
@@ -7,6 +6,7 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.refactoring.*;
+import com.intellij.refactoring.extractclass.ExtractClassProcessor;
 import main.refactor.IRefactor;
 import main.testSmellDetection.bean.PsiClassBean;
 import main.testSmellDetection.bean.PsiMethodBean;
@@ -129,8 +129,7 @@ public class GeneralFixtureStrategy implements IRefactor {
                     }
                 }
             });
-*/
-/*            WriteCommandAction.runWriteCommandAction(project, () -> {
+            WriteCommandAction.runWriteCommandAction(project, () -> {
                 PsiStatement[] statements = psiSetup.getBody().getStatements();
                 String methodName = methodProcessor.getExtractedMethod().getName() +"();";
                 for (PsiStatement statement : statements) {
@@ -138,7 +137,7 @@ public class GeneralFixtureStrategy implements IRefactor {
                         statement.delete();
                     }
                 }
-            });*//*
+            });
 
         }
         String classShortName = psiOriginalClass.getName() + "s";
@@ -154,4 +153,3 @@ public class GeneralFixtureStrategy implements IRefactor {
         processor.run();
     }
 }
-*/

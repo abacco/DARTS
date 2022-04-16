@@ -1,9 +1,9 @@
-/*
 package main.refactor.strategy;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 //import com.intellij.refactoring.extractclass.ExtractClassProcessor;
+import com.intellij.refactoring.extractclass.ExtractClassProcessor;
 import main.refactor.IRefactor;
 import main.testSmellDetection.bean.PsiClassBean;
 import main.testSmellDetection.bean.PsiMethodBean;
@@ -92,4 +92,4 @@ public class LackOfCohesionStrategy implements IRefactor {
 
         }
     }
-}*/
+}
