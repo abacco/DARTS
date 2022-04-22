@@ -12,14 +12,14 @@
   <depends>com.intellij.java</depends>
 
   <extensions defaultExtensionNs="com.intellij">
-    <checkinHandlerFactory implementation="main.extension.CommitFactory"/>
+    <checkinHandlerFactory implementation="extension.CommitFactory"/>
   </extensions>
 
   <actions>
     <group id="SampleMenu" text="TestSmell detection" description="Sample menu" popup="true">
       <add-to-group group-id="AnalyzeMenu" anchor="last"  />
-      <action id="TextSmellTextualDetection" class="main.action.TextualDetectionAction" text="Execute Textual detection" description="A test menu item" />
-      <action id="TextSmellStructuralDetection" class="main.action.StructuralDetectionAction" text="Execute Structural detection" description="A test menu item" />
+      <action id="TextSmellTextualDetection" class="action.TextualDetectionAction" text="Execute Textual detection" description="A test menu item" />
+      <action id="TextSmellStructuralDetection" class="action.StructuralDetectionAction" text="Execute Structural detection" description="A test menu item" />
     </group>
   </actions>
 

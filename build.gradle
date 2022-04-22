@@ -17,7 +17,6 @@ sourceSets {
     }
 }
 
-
 configurations {
     extraDeps
     compileClasspath.extendsFrom(extraDeps)
@@ -38,9 +37,6 @@ dependencies {
     testImplementation group: 'org.jacoco', name: 'org.jacoco.agent', version: '0.8.6'
 }
 
-
-
-
 test {
     useJUnitPlatform()
 }
@@ -58,11 +54,6 @@ patchPluginXml {
 
 tasks.withType(JavaCompile) {
     options.failOnError(false)
-}
-
-tasks.withType(Test){
-    scanForTestClasses = false
-
 }
 
 tasks.buildSearchableOptions { enabled = false }
