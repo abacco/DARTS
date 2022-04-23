@@ -1,14 +1,10 @@
 package testSmellDetection.textualRules;
 
 import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase;
-import org.junit.jupiter.api.Test;
-
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.testSmellInfo.eagerTest.MethodWithEagerTest;
 import utility.ConverterUtilities;
 import utility.TestSmellUtilities;
-import testSmellDetection.textualRules.EagerTestTextual;
-
 import java.util.ArrayList;
 
 public class EagerTestTextualTest extends LightJavaCodeInsightFixtureTestCase {
