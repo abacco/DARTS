@@ -10,7 +10,7 @@ public class MagicNumberNotPresentTest {
     @Test
     public void test1() {
         int numeroUno = 1;
-        assertEquals(EXPECTED,numeroUno);
+        Assert.assertEquals(EXPECTED,numeroUno);
     }
 
     @Test
