@@ -3,6 +3,7 @@ package action;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 
+import testSmellDetection.testSmellInfo.magicNamberTest.MagicNumberTestInfo;
 import windowCommitConstruction.CommitWindowFactory;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,6 +25,8 @@ public class TextualDetectionAction extends AnAction {
         ArrayList<GeneralFixtureInfo> generalFixtureInfos = detector.executeDetectionForGeneralFixture();
         ArrayList<EagerTestInfo> eagerTestInfos = detector.executeDetectionForEagerTest();
         ArrayList<LackOfCohesionInfo> lackOfCohesionInfos = detector.executeDetectionForLackOfCohesion();
+        //Magic Number
+        ArrayList<MagicNumberTestInfo> magicNumberTestInfos = detector.executeDetectionForMagicNumber();
 
         System.out.println("\n\n ########################### ACTION - DETECTOR TESTUALE: risultato dell'analisi. ###########################\n\n");
         for(GeneralFixtureInfo info : generalFixtureInfos){
@@ -35,12 +38,20 @@ public class TextualDetectionAction extends AnAction {
         for(LackOfCohesionInfo info : lackOfCohesionInfos){
             System.out.println("\n   LACK OF COHESION: " + info.toString());
         }
+        //Magic Number
+        for(MagicNumberTestInfo info : magicNumberTestInfos){
+            System.out.println("\n   MAGIC NUMBER: " + info.toString());
+        }
 
         if(generalFixtureInfos.isEmpty() && eagerTestInfos.isEmpty() && lackOfCohesionInfos.isEmpty()){
             System.out.println("\n Non si è trovato alcuno Smell");
         } else {
             //TestSmellWindowFactory.createWindow(true, false, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
             CommitWindowFactory.createWindow(true, false, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
+            System.out.println("GENERAL FIXTURE "+generalFixtureInfos);
+            System.out.println("EAGER TEST "+eagerTestInfos);
+            System.out.println("LOC "+lackOfCohesionInfos);
+            System.out.println("MAGIC NUMBER "+magicNumberTestInfos);
         }
     }
 
