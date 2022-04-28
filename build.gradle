@@ -17,14 +17,28 @@ sourceSets {
     }
 }
 
+configurations {
+    extraDeps
+    compileClasspath.extendsFrom(extraDeps)
+}
+
 dependencies {
-    compile 'junit:junit:4.12'
+    /*compile 'junit:junit:4.12'*/
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     // https://mvnrepository.com/artifact/com.intellij/openapi
     implementation group: 'com.intellij', name: 'openapi', version: '7.0.3'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation group: 'org.repodriller', name: 'repodriller', version: '2.0.1'
-    compile fileTree(dir: 'Installer', include: ['*.jar'])
+    /*compile fileTree(dir: 'Installer', include: ['*.jar'])*/
+    extraDeps fileTree(dir: 'Installer', include: ['*.jar'])
+    testImplementation group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+    testImplementation group: 'org.jacoco', name: 'org.jacoco.agent', version: '0.8.6'
+}
 
+test {
+    useJUnitPlatform()
 }
 
 intellij {

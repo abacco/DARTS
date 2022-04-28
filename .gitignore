@@ -78,3 +78,7 @@ build/*
 .gradle/*
 
 .idea/*
+
+# To add ?
+#gradlew
+#gradle
