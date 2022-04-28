@@ -30,11 +30,15 @@ import testSmellDetection.testSmellInfo.generalFixture.MethodWithGeneralFixture;
 import testSmellDetection.testSmellInfo.lackOfCohesion.LackOfCohesionInfo;
 import java.util.ArrayList;
 import java.util.Vector;
+
+import testSmellDetection.testSmellInfo.magicNamberTest.MagicNumberTestInfo;
+import testSmellDetection.testSmellInfo.magicNamberTest.MethodWithMagicNumber;
 import utility.TestSmellUtilities;
 import windowCommitConstruction.contextualAnalysisPanel.ContextualAnalysisFrame;
 import windowCommitConstruction.testSmellPanel.ETSmellPanel;
 import windowCommitConstruction.testSmellPanel.GFSmellPanel;
 import windowCommitConstruction.testSmellPanel.LOCSmellPanel;
+import windowCommitConstruction.testSmellPanel.MNSmellPanel;
 
 public class RefactorWindow extends JPanel implements ActionListener{
     private JPanel rootPanel;
@@ -48,19 +52,51 @@ public class RefactorWindow extends JPanel implements ActionListener{
     private JButton executeContextualAnalysis;
 
 
+    private MethodWithMagicNumber methodWithMagicNumber;
     private MethodWithGeneralFixture methodWithGeneralFixture;
     private MethodWithEagerTest methodWithEagerTest;
     private PsiMethodBean methodWithLOC;
 
+    private MagicNumberTestInfo magicNumberTestInfo = null;
     private GeneralFixtureInfo generalFixtureInfo = null;
     private EagerTestInfo eagerTestInfo = null;
     private LackOfCohesionInfo lackOfCohesionInfo = null;
 
     private Project project;
 
+    private MNSmellPanel mnSmellPanel;
     private GFSmellPanel gfSmellPanel;
     private ETSmellPanel etSmellPanel;
     private LOCSmellPanel locSmellPanel;
+
+    /**
+     * Call this for Magic Number Panel.
+     * @param methodWithMagicNumber
+     * @param magicNumberTestInfo
+     * @param project
+     */
+    public RefactorWindow(MethodWithMagicNumber methodWithMagicNumber, MagicNumberTestInfo magicNumberTestInfo, Project project, MNSmellPanel mnSmellPanel) {
+        super();
+        this.methodWithMagicNumber = methodWithMagicNumber;
+        this.magicNumberTestInfo = magicNumberTestInfo;
+        this.project = project;
+        this.mnSmellPanel = mnSmellPanel;
+
+        String methodName = "<html> Method " + methodWithMagicNumber.getMethodWithMagicNumber().getPsiMethod().getName() + " is affected by Magic Number because it uses the literal number in assert <br/>";
+
+        methodName = methodName + "<br/>The Smell will be removed using one of this refactoring operations:<br/>";
+        methodName = methodName + "   - Change argument type: change argument \"Expected\" from literal number to constant integer <br/>";
+
+        tipsTextLabel.setText(methodName);
+
+        String signature = methodWithMagicNumber.getMethodWithMagicNumber().getPsiMethod().getSignature(PsiSubstitutor.EMPTY).toString();
+        String methodBody = methodWithMagicNumber.getMethodWithMagicNumber().getPsiMethod().getBody().getText();
+        signature = signature + " " + methodBody;
+        methodTextArea.setText(signature);
+
+        refactorPreviewButton.addActionListener(this);
+        setupContextualAnalysisButton(magicNumberTestInfo);
+    }
 
     /**
      * Call this for General Fixture Panel.

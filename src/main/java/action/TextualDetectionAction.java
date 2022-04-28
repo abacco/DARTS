@@ -47,7 +47,8 @@ public class TextualDetectionAction extends AnAction {
             System.out.println("\n Non si è trovato alcuno Smell");
         } else {
             //TestSmellWindowFactory.createWindow(true, false, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
-            CommitWindowFactory.createWindow(true, false, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
+            //CommitWindowFactory.createWindow(true, false, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
+            CommitWindowFactory.createWindow(true, false,anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos, magicNumberTestInfos);
             System.out.println("GENERAL FIXTURE "+generalFixtureInfos);
             System.out.println("EAGER TEST "+eagerTestInfos);
             System.out.println("LOC "+lackOfCohesionInfos);
