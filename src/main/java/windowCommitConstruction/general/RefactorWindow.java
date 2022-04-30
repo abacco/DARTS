@@ -23,6 +23,8 @@ import refactor.strategy.GeneralFixtureStrategy;
 import refactor.strategy.LackOfCohesionStrategy;
 import testSmellDetection.bean.PsiMethodBean;
 import testSmellDetection.testSmellInfo.TestSmellInfo;
+import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
+import testSmellDetection.testSmellInfo.constructorInitialization.MethodWithConstructorInitialization;
 import testSmellDetection.testSmellInfo.eagerTest.EagerTestInfo;
 import testSmellDetection.testSmellInfo.eagerTest.MethodWithEagerTest;
 import testSmellDetection.testSmellInfo.generalFixture.GeneralFixtureInfo;
@@ -35,10 +37,7 @@ import testSmellDetection.testSmellInfo.magicNamberTest.MagicNumberTestInfo;
 import testSmellDetection.testSmellInfo.magicNamberTest.MethodWithMagicNumber;
 import utility.TestSmellUtilities;
 import windowCommitConstruction.contextualAnalysisPanel.ContextualAnalysisFrame;
-import windowCommitConstruction.testSmellPanel.ETSmellPanel;
-import windowCommitConstruction.testSmellPanel.GFSmellPanel;
-import windowCommitConstruction.testSmellPanel.LOCSmellPanel;
-import windowCommitConstruction.testSmellPanel.MNSmellPanel;
+import windowCommitConstruction.testSmellPanel.*;
 
 public class RefactorWindow extends JPanel implements ActionListener{
     private JPanel rootPanel;
@@ -51,12 +50,13 @@ public class RefactorWindow extends JPanel implements ActionListener{
     private JButton refactorPreviewButton;
     private JButton executeContextualAnalysis;
 
-
+    private MethodWithConstructorInitialization methodWithConstructorInitialization;
     private MethodWithMagicNumber methodWithMagicNumber;
     private MethodWithGeneralFixture methodWithGeneralFixture;
     private MethodWithEagerTest methodWithEagerTest;
     private PsiMethodBean methodWithLOC;
 
+    private ConstructorInitializationInfo constructorInitializationInfo = null;
     private MagicNumberTestInfo magicNumberTestInfo = null;
     private GeneralFixtureInfo generalFixtureInfo = null;
     private EagerTestInfo eagerTestInfo = null;
@@ -64,6 +64,7 @@ public class RefactorWindow extends JPanel implements ActionListener{
 
     private Project project;
 
+    private CIISmellPanel ciiSmellPanel;
     private MNSmellPanel mnSmellPanel;
     private GFSmellPanel gfSmellPanel;
     private ETSmellPanel etSmellPanel;
@@ -83,6 +84,35 @@ public class RefactorWindow extends JPanel implements ActionListener{
         this.mnSmellPanel = mnSmellPanel;
 
         String methodName = "<html> Method " + methodWithMagicNumber.getMethodWithMagicNumber().getPsiMethod().getName() + " is affected by Magic Number because it uses the literal number in assert <br/>";
+
+        methodName = methodName + "<br/>The Smell will be removed using one of this refactoring operations:<br/>";
+        methodName = methodName + "   - Change argument type: change argument \"Expected\" from literal number to constant integer <br/>";
+
+        tipsTextLabel.setText(methodName);
+
+        String signature = methodWithMagicNumber.getMethodWithMagicNumber().getPsiMethod().getSignature(PsiSubstitutor.EMPTY).toString();
+        String methodBody = methodWithMagicNumber.getMethodWithMagicNumber().getPsiMethod().getBody().getText();
+        signature = signature + " " + methodBody;
+        methodTextArea.setText(signature);
+
+        refactorPreviewButton.addActionListener(this);
+        setupContextualAnalysisButton(magicNumberTestInfo);
+    }
+
+    /**
+     * Call this for Constructor Initialization.
+     * @param methodWithConstructorInitialization
+     * @param constructorInitializationInfo
+     * @param project
+     */
+    public RefactorWindow(MethodWithConstructorInitialization methodWithConstructorInitialization, ConstructorInitializationInfo constructorInitializationInfo, Project project, CIISmellPanel ciiSmellPanel) {
+        super();
+        this.methodWithConstructorInitialization = methodWithConstructorInitialization;
+        this.constructorInitializationInfo = constructorInitializationInfo;
+        this.project = project;
+        this.ciiSmellPanel = ciiSmellPanel;
+
+        String methodName = "<html> Method " + methodWithMagicNumber.getMethodWithMagicNumber().getPsiMethod().getName() + " is affected by Constructor Initialization because it uses the constructor instead of setup method <br/>";
 
         methodName = methodName + "<br/>The Smell will be removed using one of this refactoring operations:<br/>";
         methodName = methodName + "   - Change argument type: change argument \"Expected\" from literal number to constant integer <br/>";

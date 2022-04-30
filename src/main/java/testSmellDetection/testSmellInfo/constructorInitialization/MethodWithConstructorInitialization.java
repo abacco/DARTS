@@ -4,17 +4,17 @@ import testSmellDetection.bean.PsiMethodBean;
 
 public class MethodWithConstructorInitialization {
 
-    private PsiMethodBean methodWithMagicNumber;
+    private PsiMethodBean methodWithConstructorInitialization;
 
-    public MethodWithConstructorInitialization(PsiMethodBean methodWithMagicNumber) {
-        this.methodWithMagicNumber = methodWithMagicNumber;
+    public MethodWithConstructorInitialization(PsiMethodBean methodWithConstructorInitialization) {
+        this.methodWithConstructorInitialization = methodWithConstructorInitialization;
     }
 
-    public PsiMethodBean getMethodWithMagicNumber() {
-        return methodWithMagicNumber;
+    public PsiMethodBean getMethodWithConstructorInitialization() {
+        return methodWithConstructorInitialization;
     }
 
-    public void setMethodWithMagicNumber(PsiMethodBean methodWithMagicNumber) {
-        this.methodWithMagicNumber = methodWithMagicNumber;
+    public void setMethodWithConstructorInitialization(PsiMethodBean methodWithConstructorInitialization) {
+        this.methodWithConstructorInitialization = methodWithConstructorInitialization;
     }
 }

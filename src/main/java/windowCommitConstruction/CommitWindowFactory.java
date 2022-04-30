@@ -6,6 +6,8 @@ import com.intellij.ui.components.JBTabbedPane;
 
 import javax.swing.*;
 import java.awt.*;
+
+import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
 import testSmellDetection.testSmellInfo.eagerTest.EagerTestInfo;
 import testSmellDetection.testSmellInfo.generalFixture.GeneralFixtureInfo;
 import testSmellDetection.testSmellInfo.lackOfCohesion.LackOfCohesionInfo;
@@ -18,6 +20,7 @@ public class CommitWindowFactory {
     private static JPanel eagerTestPanel;
     private static JPanel lackOfCohesionPanel;
     private static JPanel magicNumberPanel;
+    private static JPanel constructorInitializationPanel;
 
     /* createWindow per GF-ET-LOC-MN */
     public static void createWindow(Boolean textual, Boolean structural,
@@ -25,7 +28,8 @@ public class CommitWindowFactory {
                                     ArrayList<GeneralFixtureInfo> listGFI,
                                     ArrayList<EagerTestInfo> listETI,
                                     ArrayList<LackOfCohesionInfo> listLOCI,
-                                    ArrayList<MagicNumberTestInfo> listMNI) {
+                                    ArrayList<MagicNumberTestInfo> listMNI,
+                                    ArrayList<ConstructorInitializationInfo> listCII) {
         CommitPrincipalFrame principalFrame = null;
         //Controllo per vedere se la window esiste già.
         boolean frameExist = false;
@@ -45,11 +49,11 @@ public class CommitWindowFactory {
         JBTabbedPane detectionTp = (JBTabbedPane) principalFrame.getDetectionTp();
         if(textual){
             principalFrame.removeTextualPanel();
-            principalFrame.addTextualPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI));
+            principalFrame.addTextualPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI, listCII));
         }
         if(structural){
             principalFrame.removeStructuralPanel();
-            principalFrame.addStructuralPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI));
+            principalFrame.addStructuralPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI, listCII));
         }
         principalFrame.add(detectionTp);
         // Mostra la schermata al centro dello schermo
@@ -105,7 +109,8 @@ public class CommitWindowFactory {
                                             ArrayList<GeneralFixtureInfo> listGFI,
                                             ArrayList<EagerTestInfo> listETI,
                                             ArrayList<LackOfCohesionInfo> listLOCI,
-                                            ArrayList<MagicNumberTestInfo> listMNI){
+                                            ArrayList<MagicNumberTestInfo> listMNI,
+                                            ArrayList<ConstructorInitializationInfo> listCII){
         // Controllo se ho trovato degli smells.
         if (listGFI != null) {
             generalFixturePanel = new GeneralFixtureCP(listGFI, project);
@@ -119,6 +124,10 @@ public class CommitWindowFactory {
         if(listMNI != null){
             magicNumberPanel = new MagicNumberCP(listMNI, project);
         }
+        if(listCII != null){
+            constructorInitializationPanel = new ConstructorInitializazionCP(listCII, project);
+        }
+
 
         //In questa parte costruisco le tab della window.
         JBTabbedPane tp = new JBTabbedPane();
@@ -138,6 +147,10 @@ public class CommitWindowFactory {
         if (listMNI != null) {
             JBScrollPane scroll = new JBScrollPane(magicNumberPanel);
             tp.add("MagicNumber", scroll);
+        }
+        if (listCII != null) {
+            JBScrollPane scroll = new JBScrollPane(constructorInitializationPanel);
+            tp.add("ConstructorInitialization", scroll);
         }
         return tp;
     }
