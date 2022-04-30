@@ -47,12 +47,9 @@ public class TestSmellTextualDetector implements IDetector{
 
     @Override
     public ArrayList<ConstructorInitializationInfo> executeDetectionForConstructorInitialization() {
-
-
-
         ArrayList<ConstructorInitializationInfo> classesWithConstructorInitialization = new ArrayList<>();
         for(PsiClassBean testClass : testClasses){
-            ArrayList<MethodWithConstructorInitialization> methodWithMagicNumbers = ConstructorInitTextual.checkMethodsThatCauseMagicNumber(testClass);
+            ArrayList<MethodWithConstructorInitialization> methodWithMagicNumbers = ConstructorInitTextual.checkMethodsThatCauseConstructorInitialization(testClass);
             if(methodWithMagicNumbers != null){
                 classesWithConstructorInitialization.add(new ConstructorInitializationInfo(testClass, methodWithMagicNumbers));
             }

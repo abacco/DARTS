@@ -20,24 +20,13 @@ public abstract class ConstructorInitTextual {
     }
 
 // The test class utilizes a constructor instead of a setUp method to initialize fields.
-    public static ArrayList<MethodWithConstructorInitialization> checkMethodsThatCauseMagicNumber(PsiClassBean testClass){
+    public static ArrayList<MethodWithConstructorInitialization> checkMethodsThatCauseConstructorInitialization(PsiClassBean testClass){
         ArrayList<MethodWithConstructorInitialization> methodWithConstructorInitializationArrayList = new ArrayList<>();
 
         for(PsiMethodBean psiMethodBeanInside : testClass.getPsiMethodBeans()){
             String methodName = psiMethodBeanInside.getPsiMethod().getName();
-            if(!methodName.equals(testClass.getPsiClass().getName()) &&
-                    !methodName.toLowerCase().equals("setup") && // != da setup
-                    !methodName.toLowerCase().equals("teardown")){
-                ArrayList<PsiMethodCallExpression> methodCalls = psiMethodBeanInside.getMethodCalls();
-                if(methodCalls.size() >= 1){
-                    for(PsiMethodCallExpression callExpression : methodCalls){
-                        /*Prendo il nome del metodo */
-                        String methodCallName = callExpression.getMethodExpression().getQualifiedName();
-                        if(methodCallName.equals(testClass.getName())){
-                            methodWithConstructorInitializationArrayList.add(new MethodWithConstructorInitialization(psiMethodBeanInside));
-                        }
-                    }
-                }
+            if(methodName.equals(testClass.getPsiClass().getName())) {
+               methodWithConstructorInitializationArrayList.add(0, new MethodWithConstructorInitialization(psiMethodBeanInside));
             }
         }
         if(methodWithConstructorInitializationArrayList.isEmpty()){
