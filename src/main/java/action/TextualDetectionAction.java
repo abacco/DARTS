@@ -3,6 +3,8 @@ package action;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 
+import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
+import testSmellDetection.testSmellInfo.magicNamberTest.MagicNumberTestInfo;
 import windowCommitConstruction.CommitWindowFactory;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,6 +26,10 @@ public class TextualDetectionAction extends AnAction {
         ArrayList<GeneralFixtureInfo> generalFixtureInfos = detector.executeDetectionForGeneralFixture();
         ArrayList<EagerTestInfo> eagerTestInfos = detector.executeDetectionForEagerTest();
         ArrayList<LackOfCohesionInfo> lackOfCohesionInfos = detector.executeDetectionForLackOfCohesion();
+        //Magic Number
+        ArrayList<MagicNumberTestInfo> magicNumberTestInfos = detector.executeDetectionForMagicNumber();
+        // ConstructorInitialization
+        ArrayList<ConstructorInitializationInfo> constructorInitializationInfos = detector.executeDetectionForConstructorInitialization();
 
         System.out.println("\n\n ########################### ACTION - DETECTOR TESTUALE: risultato dell'analisi. ###########################\n\n");
         for(GeneralFixtureInfo info : generalFixtureInfos){
@@ -35,12 +41,26 @@ public class TextualDetectionAction extends AnAction {
         for(LackOfCohesionInfo info : lackOfCohesionInfos){
             System.out.println("\n   LACK OF COHESION: " + info.toString());
         }
+        //Magic Number
+        for(MagicNumberTestInfo info : magicNumberTestInfos){
+            System.out.println("\n   MAGIC NUMBER: " + info.toString());
+        }
+        // ConstructorInitialization
+        for(ConstructorInitializationInfo info : constructorInitializationInfos){
+            System.out.println("\n   CONSTRUCTOR INIT : " + info.toString());
+        }
 
         if(generalFixtureInfos.isEmpty() && eagerTestInfos.isEmpty() && lackOfCohesionInfos.isEmpty()){
             System.out.println("\n Non si è trovato alcuno Smell");
         } else {
             //TestSmellWindowFactory.createWindow(true, false, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
-            CommitWindowFactory.createWindow(true, false, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
+            //CommitWindowFactory.createWindow(true, false, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
+            CommitWindowFactory.createWindow(true, false,anActionEvent.getProject(),
+                    generalFixtureInfos,
+                    eagerTestInfos, lackOfCohesionInfos,
+                    magicNumberTestInfos,
+                    constructorInitializationInfos);
+
         }
     }
 

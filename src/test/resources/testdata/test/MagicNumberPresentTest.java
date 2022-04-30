@@ -8,7 +8,7 @@ public class MagicNumberPresentTest {
     @Test
     public void test1() {
         int numeroUno = 1;
-        assertEquals(1,numeroUno);
+        Assert.assertEquals(1,numeroUno);
     }
 
     @Test
