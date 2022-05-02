@@ -3,6 +3,7 @@ package action;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 
+import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
 import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
 import testSmellDetection.testSmellInfo.magicNamberTest.MagicNumberTestInfo;
 import windowCommitConstruction.CommitWindowFactory;
@@ -30,6 +31,8 @@ public class TextualDetectionAction extends AnAction {
         ArrayList<MagicNumberTestInfo> magicNumberTestInfos = detector.executeDetectionForMagicNumber();
         // ConstructorInitialization
         ArrayList<ConstructorInitializationInfo> constructorInitializationInfos = detector.executeDetectionForConstructorInitialization();
+        // Exception Handling
+        ArrayList<ExceptionHandlingInfo> exceptionHandlingInfos = detector.executeDetectionForExceptionHandling();
 
         System.out.println("\n\n ########################### ACTION - DETECTOR TESTUALE: risultato dell'analisi. ###########################\n\n");
         for(GeneralFixtureInfo info : generalFixtureInfos){
@@ -49,6 +52,10 @@ public class TextualDetectionAction extends AnAction {
         for(ConstructorInitializationInfo info : constructorInitializationInfos){
             System.out.println("\n   CONSTRUCTOR INIT : " + info.toString());
         }
+        // ExceptionHandling
+        for(ExceptionHandlingInfo info : exceptionHandlingInfos){
+            System.out.println("\n   EXCEPTION HANDLING : " + info.toString());
+        }
 
         if(generalFixtureInfos.isEmpty() && eagerTestInfos.isEmpty() && lackOfCohesionInfos.isEmpty()){
             System.out.println("\n Non si è trovato alcuno Smell");
@@ -59,7 +66,8 @@ public class TextualDetectionAction extends AnAction {
                     generalFixtureInfos,
                     eagerTestInfos, lackOfCohesionInfos,
                     magicNumberTestInfos,
-                    constructorInitializationInfos);
+                    constructorInitializationInfos,
+                    exceptionHandlingInfos);
 
         }
     }

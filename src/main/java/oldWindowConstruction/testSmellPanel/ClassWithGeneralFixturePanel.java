@@ -1,3 +1,4 @@
+
 package oldWindowConstruction.testSmellPanel;
 
 import com.intellij.openapi.diagnostic.Logger;
@@ -8,9 +9,11 @@ import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.util.PsiTreeUtil;
+
 /*
 import com.intellij.refactoring.extractMethod.PrepareFailedException;
 */
+
 import data.TestClassAnalysis;
 import data.TestProjectAnalysis;
 import it.unisa.testSmellDiffusion.beans.PackageBean;
@@ -23,17 +26,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
+import main.refactor.strategy.GeneralFixtureStrategy;
 import refactor.IRefactor;
-import refactor.strategy.GeneralFixtureStrategy;
+/*import refactor.strategy.GeneralFixtureStrategy;*/
 import testSmellDetection.testSmellInfo.generalFixture.GeneralFixtureInfo;
 import testSmellDetection.testSmellInfo.generalFixture.MethodWithGeneralFixture;
 import java.util.ArrayList;
 import java.util.Vector;
 import windowCommitConstruction.contextualAnalysisPanel.ContextualAnalysisFrame;
 
+
 /**
  * Questa classe rappresenta la GUI nella quale vengono mostrate le informazioni riguardanti una classe affetta da GeneralFixture
  */
+
 public class ClassWithGeneralFixturePanel extends JPanel {
 
     private static final Logger LOGGER = Logger.getInstance("global");
@@ -116,7 +123,7 @@ public class ClassWithGeneralFixturePanel extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-                    IRefactor refactor = new GeneralFixtureStrategy(mb, project, gfi);
+                    IRefactor refactor = null;/*new GeneralFixtureStrategy(mb, project, gfi);*/
                     try {
                         refactor.doRefactor();
                     } catch (Exception e1) {
@@ -269,3 +276,4 @@ public class ClassWithGeneralFixturePanel extends JPanel {
 
 
 }
+

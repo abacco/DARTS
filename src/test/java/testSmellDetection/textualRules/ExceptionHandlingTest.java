@@ -2,32 +2,33 @@ package testSmellDetection.textualRules;
 
 import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase;
 import testSmellDetection.bean.PsiClassBean;
+import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.MethodWithExceptionHandling;
 import testSmellDetection.testSmellInfo.constructorInitialization.MethodWithConstructorInitialization;
 import utility.ConverterUtilities;
 import utility.TestSmellUtilities;
 
 import java.util.ArrayList;
 
-public class ConstructorInitializationTest extends LightJavaCodeInsightFixtureTestCase {
+public class ExceptionHandlingTest extends LightJavaCodeInsightFixtureTestCase {
 
     @Override
     protected String getTestDataPath() {
         return "src/test/resources/testdata/";
     }
 
-    public void testConstructorNotPresent() {
+    public void testExceptionHandlingNotPresent() {
         myFixture.configureByFile("test/ConstructorInitializationNotPresentTest.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
-        ArrayList<MethodWithConstructorInitialization> smellList = ConstructorInitTextual.checkMethodsThatCauseConstructorInitialization(testClassBeans.get(0));
+        ArrayList<MethodWithExceptionHandling> smellList = ExceptionHandlingTextual.checkMethodsThatContainExceptions(testClassBeans.get(0));
         assertEquals(null, smellList);
     }
 
-    public void testConstructorPresent() {
-        myFixture.configureByFile("test/ConstructorInitializationPresentTest.java");
+    public void testExceptionHandling() {
+        myFixture.configureByFile("test/ExceptionTestPresent.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
-        ArrayList<MethodWithConstructorInitialization> smellList = ConstructorInitTextual.checkMethodsThatCauseConstructorInitialization(testClassBeans.get(0));
+        ArrayList<MethodWithExceptionHandling> smellList = ExceptionHandlingTextual.checkMethodsThatContainExceptions(testClassBeans.get(0));
         assertEquals(1, smellList.size());
     }
 }
