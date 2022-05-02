@@ -19,7 +19,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import refactor.IRefactor;
 import refactor.strategy.EagerTestStrategy;
-import refactor.strategy.GeneralFixtureStrategy;
+/*import refactor.strategy.GeneralFixtureStrategy;*/
 import refactor.strategy.LackOfCohesionStrategy;
 import testSmellDetection.bean.PsiMethodBean;
 import testSmellDetection.testSmellInfo.TestSmellInfo;
@@ -228,7 +228,7 @@ public class RefactorWindow extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         try{
             if(generalFixtureInfo != null){
-                IRefactor refactor = new GeneralFixtureStrategy(methodWithGeneralFixture, project, generalFixtureInfo);
+                IRefactor refactor = null;/*new GeneralFixtureStrategy(methodWithGeneralFixture, project, generalFixtureInfo);*/
                 refactor.doRefactor();
                 gfSmellPanel.doAfterRefactor();
             } else if(eagerTestInfo != null){

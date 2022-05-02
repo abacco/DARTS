@@ -23,8 +23,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
+import main.refactor.strategy.GeneralFixtureStrategy;
 import refactor.IRefactor;
-import refactor.strategy.GeneralFixtureStrategy;
+/*import refactor.strategy.GeneralFixtureStrategy;*/
 import testSmellDetection.testSmellInfo.generalFixture.GeneralFixtureInfo;
 import testSmellDetection.testSmellInfo.generalFixture.MethodWithGeneralFixture;
 import java.util.ArrayList;
@@ -116,7 +118,7 @@ public class ClassWithGeneralFixturePanel extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-                    IRefactor refactor = new GeneralFixtureStrategy(mb, project, gfi);
+                    IRefactor refactor = null;/*new GeneralFixtureStrategy(mb, project, gfi);*/
                     try {
                         refactor.doRefactor();
                     } catch (Exception e1) {
