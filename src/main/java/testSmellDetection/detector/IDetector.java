@@ -1,5 +1,6 @@
 package testSmellDetection.detector;
 
+import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
 import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
 import testSmellDetection.testSmellInfo.eagerTest.EagerTestInfo;
 import testSmellDetection.testSmellInfo.generalFixture.GeneralFixtureInfo;
@@ -18,4 +19,6 @@ public interface IDetector {
     ArrayList<MagicNumberTestInfo> executeDetectionForMagicNumber();
 
     ArrayList<ConstructorInitializationInfo> executeDetectionForConstructorInitialization();
+
+    ArrayList<ExceptionHandlingInfo> executeDetectionForExceptionHandling();
 }

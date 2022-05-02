@@ -4,6 +4,8 @@ import com.intellij.openapi.project.Project;
 import contextualAnalysis.hashUtilies.ProductionClassesSingleton;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.bean.PsiMethodBean;
+import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
+import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.MethodWithExceptionHandling;
 import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
 import testSmellDetection.testSmellInfo.constructorInitialization.MethodWithConstructorInitialization;
 import testSmellDetection.testSmellInfo.eagerTest.EagerTestInfo;
@@ -43,6 +45,18 @@ public class TestSmellTextualDetector implements IDetector{
             }
         }
         return classesWithMagicNumber;
+    }
+
+    @Override
+    public ArrayList<ExceptionHandlingInfo> executeDetectionForExceptionHandling() {
+        ArrayList<ExceptionHandlingInfo> classesWithExceptionHandling = new ArrayList<>();
+        for(PsiClassBean testClass : testClasses){
+            ArrayList<MethodWithExceptionHandling> methodWithExceptionHandling = ExceptionHandlingTextual.checkMethodsThatContainExceptions(testClass);
+            if(methodWithExceptionHandling != null){
+                classesWithExceptionHandling.add(new ExceptionHandlingInfo(testClass, methodWithExceptionHandling));
+            }
+        }
+        return classesWithExceptionHandling;
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.intellij.openapi.project.Project;
 import contextualAnalysis.hashUtilies.ProductionClassesSingleton;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.bean.PsiMethodBean;
+import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
 import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
 import testSmellDetection.testSmellInfo.magicNamberTest.MagicNumberTestInfo;
 import utility.ConverterUtilities;
@@ -46,6 +47,11 @@ public class TestSmellStructuralDetector implements IDetector{
 
     @Override
     public ArrayList<ConstructorInitializationInfo> executeDetectionForConstructorInitialization() { return null; }
+
+    @Override
+    public ArrayList<ExceptionHandlingInfo> executeDetectionForExceptionHandling() {
+        return null;
+    }
 
     public ArrayList<GeneralFixtureInfo> executeDetectionForGeneralFixture() {
         ArrayList<GeneralFixtureInfo> classesWithGeneralFixture = new ArrayList<>();
