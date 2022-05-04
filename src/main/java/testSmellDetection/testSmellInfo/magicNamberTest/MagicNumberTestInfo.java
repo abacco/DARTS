@@ -16,9 +16,9 @@ public class MagicNumberTestInfo extends TestSmellInfo {
 
   @Override
   public String toString() {
-    return "GeneralFixtureInfo{" +
-            "classWithGeneralFixture=" + classWithSmell +
-            ", methodsThatCauseGeneralFixture=" + methodsThatCauseMagicNumber +
+    return "MagicNumberInfo{" +
+            "classWithMagicNumber=" + classWithSmell +
+            ", methodsThatCauseMagicNumber=" + methodsThatCauseMagicNumber +
             '}';
   }
 
