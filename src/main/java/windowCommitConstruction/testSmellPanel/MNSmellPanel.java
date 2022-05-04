@@ -88,24 +88,4 @@ public class MNSmellPanel extends JSplitPane implements ListSelectionListener {
         RefactorWindow refactorWindow = new RefactorWindow(methodWithMN, magicNumberTestInfo, project, this);
         this.setRightComponent(refactorWindow.getRootPanel());
     }
-
-    public void doAfterRefactor(){
-        int index = smellList.getSelectedIndex();
-
-        methodsNames.remove(index);
-        magicNumberTestInfo.getMethodsThatCauseMagicNumber().remove(index);
-        model.remove(index);
-
-        if(model.getSize() == 0){
-            System.out.println("PASSO1");
-            magicNumberCP.doAfterRefactor();
-        } else {
-            if(index == model.getSize()){
-                index --;
-            }
-            smellList.setSelectedIndex(index);
-            smellList.ensureIndexIsVisible(index);
-            updateRefactorPreviewLabel(smellList.getSelectedIndex());
-        }
-    }
 }

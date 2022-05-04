@@ -4,19 +4,19 @@ import testSmellDetection.bean.PsiMethodBean;
 
 public class MethodWithCondTestLogic {
 
-    private PsiMethodBean methodWithMagicNumber;
+    private PsiMethodBean methodWithCondTestLogic;
 
-    public MethodWithCondTestLogic(PsiMethodBean methodWithMagicNumber) {
-        this.methodWithMagicNumber = methodWithMagicNumber;
+    public MethodWithCondTestLogic(PsiMethodBean methodWithCondTestLogic) {
+        this.methodWithCondTestLogic = methodWithCondTestLogic;
     }
 
     /* GETTER & SETTER */
 
-    public PsiMethodBean getMethodWithMagicNumber() {
-        return methodWithMagicNumber;
+    public PsiMethodBean getMethodWithCondTestLogic() {
+        return methodWithCondTestLogic;
     }
 
-    public void setMethodWithMagicNumber(PsiMethodBean methodWithMagicNumber) {
-        this.methodWithMagicNumber = methodWithMagicNumber;
+    public void setMethodWithCondTestLogic(PsiMethodBean methodWithCondTestLogic) {
+        this.methodWithCondTestLogic = methodWithCondTestLogic;
     }
 }

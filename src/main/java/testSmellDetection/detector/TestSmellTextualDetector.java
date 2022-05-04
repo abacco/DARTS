@@ -4,6 +4,8 @@ import com.intellij.openapi.project.Project;
 import contextualAnalysis.hashUtilies.ProductionClassesSingleton;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.bean.PsiMethodBean;
+import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
+import testSmellDetection.testSmellInfo.conditionalTestLogic.MethodWithCondTestLogic;
 import testSmellDetection.testSmellInfo.eagerTest.EagerTestInfo;
 import testSmellDetection.testSmellInfo.eagerTest.MethodWithEagerTest;
 import testSmellDetection.testSmellInfo.generalFixture.GeneralFixtureInfo;
@@ -11,10 +13,7 @@ import testSmellDetection.testSmellInfo.generalFixture.MethodWithGeneralFixture;
 import testSmellDetection.testSmellInfo.lackOfCohesion.LackOfCohesionInfo;
 import testSmellDetection.testSmellInfo.magicNamberTest.MagicNumberTestInfo;
 import testSmellDetection.testSmellInfo.magicNamberTest.MethodWithMagicNumber;
-import testSmellDetection.textualRules.EagerTestTextual;
-import testSmellDetection.textualRules.GeneralFixtureTextual;
-import testSmellDetection.textualRules.LackOfCohesionOfTestSmellTextual;
-import testSmellDetection.textualRules.MagicNumberTextual;
+import testSmellDetection.textualRules.*;
 import utility.ConverterUtilities;
 import utility.TestSmellUtilities;
 
@@ -44,6 +43,18 @@ public class TestSmellTextualDetector implements IDetector{
             }
         }
         return classesWithMagicNumber;
+    }
+
+    @Override
+    public ArrayList<CondTestLogicInfo> executeDetectionForCondTestLogic() {
+        ArrayList<CondTestLogicInfo> classesWithCondTestLogic = new ArrayList<>();
+        for(PsiClassBean testClass : testClasses){
+            ArrayList<MethodWithCondTestLogic> methodWithCondTestLogics = CondTestLogicTextual.checkMethodsThatCauseCondTestLogic(testClass);
+            if(methodWithCondTestLogics != null){
+                classesWithCondTestLogic.add(new CondTestLogicInfo(testClass, methodWithCondTestLogics));
+            }
+        }
+        return classesWithCondTestLogic;
     }
 
     public ArrayList<GeneralFixtureInfo> executeDetectionForGeneralFixture() {

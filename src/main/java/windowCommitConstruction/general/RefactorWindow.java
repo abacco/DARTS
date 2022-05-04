@@ -23,6 +23,8 @@ import refactor.strategy.GeneralFixtureStrategy;
 import refactor.strategy.LackOfCohesionStrategy;
 import testSmellDetection.bean.PsiMethodBean;
 import testSmellDetection.testSmellInfo.TestSmellInfo;
+import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
+import testSmellDetection.testSmellInfo.conditionalTestLogic.MethodWithCondTestLogic;
 import testSmellDetection.testSmellInfo.eagerTest.EagerTestInfo;
 import testSmellDetection.testSmellInfo.eagerTest.MethodWithEagerTest;
 import testSmellDetection.testSmellInfo.generalFixture.GeneralFixtureInfo;
@@ -35,10 +37,7 @@ import testSmellDetection.testSmellInfo.magicNamberTest.MagicNumberTestInfo;
 import testSmellDetection.testSmellInfo.magicNamberTest.MethodWithMagicNumber;
 import utility.TestSmellUtilities;
 import windowCommitConstruction.contextualAnalysisPanel.ContextualAnalysisFrame;
-import windowCommitConstruction.testSmellPanel.ETSmellPanel;
-import windowCommitConstruction.testSmellPanel.GFSmellPanel;
-import windowCommitConstruction.testSmellPanel.LOCSmellPanel;
-import windowCommitConstruction.testSmellPanel.MNSmellPanel;
+import windowCommitConstruction.testSmellPanel.*;
 
 public class RefactorWindow extends JPanel implements ActionListener{
     private JPanel rootPanel;
@@ -51,12 +50,13 @@ public class RefactorWindow extends JPanel implements ActionListener{
     private JButton refactorPreviewButton;
     private JButton executeContextualAnalysis;
 
-
+    private MethodWithCondTestLogic methodWithCondTestLogic;
     private MethodWithMagicNumber methodWithMagicNumber;
     private MethodWithGeneralFixture methodWithGeneralFixture;
     private MethodWithEagerTest methodWithEagerTest;
     private PsiMethodBean methodWithLOC;
 
+    private CondTestLogicInfo condTestLogicInfo = null;
     private MagicNumberTestInfo magicNumberTestInfo = null;
     private GeneralFixtureInfo generalFixtureInfo = null;
     private EagerTestInfo eagerTestInfo = null;
@@ -64,10 +64,41 @@ public class RefactorWindow extends JPanel implements ActionListener{
 
     private Project project;
 
+    private CTLSmellPanel ctlSmellPanel;
     private MNSmellPanel mnSmellPanel;
     private GFSmellPanel gfSmellPanel;
     private ETSmellPanel etSmellPanel;
     private LOCSmellPanel locSmellPanel;
+
+
+    /**
+     * Call this for Conditional Test Logic Panel.
+     * @param methodWithCondTestLogic
+     * @param condTestLogicInfo
+     * @param project
+     */
+    public RefactorWindow(MethodWithCondTestLogic methodWithCondTestLogic, CondTestLogicInfo condTestLogicInfo, Project project, CTLSmellPanel ctlSmellPanel) {
+        super();
+        this.methodWithCondTestLogic = methodWithCondTestLogic;
+        this.condTestLogicInfo = condTestLogicInfo;
+        this.project = project;
+        this.ctlSmellPanel = ctlSmellPanel;
+
+        String methodName = "<html> Method " + methodWithCondTestLogic.getMethodWithCondTestLogic().getPsiMethod().getName() + " is affected by Condition Test Logic because it contains one or more control statement  <br/>";
+
+        methodName = methodName + "<br/>The Smell will be removed using one of this refactoring operations:<br/>";
+        methodName = methodName + "   - Change ...<br/>";
+
+        tipsTextLabel.setText(methodName);
+
+        String signature = methodWithCondTestLogic.getMethodWithCondTestLogic().getPsiMethod().getSignature(PsiSubstitutor.EMPTY).toString();
+        String methodBody = methodWithCondTestLogic.getMethodWithCondTestLogic().getPsiMethod().getBody().getText();
+        signature = signature + " " + methodBody;
+        methodTextArea.setText(signature);
+
+        refactorPreviewButton.addActionListener(this);
+        setupContextualAnalysisButton(condTestLogicInfo);
+    }
 
     /**
      * Call this for Magic Number Panel.
