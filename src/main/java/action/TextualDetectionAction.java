@@ -4,6 +4,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
+import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
 import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
 import testSmellDetection.testSmellInfo.magicNamberTest.MagicNumberTestInfo;
 import windowCommitConstruction.CommitWindowFactory;
@@ -29,6 +30,8 @@ public class TextualDetectionAction extends AnAction {
         ArrayList<LackOfCohesionInfo> lackOfCohesionInfos = detector.executeDetectionForLackOfCohesion();
         //Magic Number
         ArrayList<MagicNumberTestInfo> magicNumberTestInfos = detector.executeDetectionForMagicNumber();
+        //Conditional Test Logic
+        ArrayList<CondTestLogicInfo> condTestLogicInfos = detector.executeDetectionForCondTestLogic();
         // ConstructorInitialization
         ArrayList<ConstructorInitializationInfo> constructorInitializationInfos = detector.executeDetectionForConstructorInitialization();
         // Exception Handling
@@ -48,6 +51,10 @@ public class TextualDetectionAction extends AnAction {
         for(MagicNumberTestInfo info : magicNumberTestInfos){
             System.out.println("\n   MAGIC NUMBER: " + info.toString());
         }
+        //Conditional Test Logic
+        for(CondTestLogicInfo info : condTestLogicInfos){
+            System.out.println("\n   MAGIC NUMBER: " + info.toString());
+        }
         // ConstructorInitialization
         for(ConstructorInitializationInfo info : constructorInitializationInfos){
             System.out.println("\n   CONSTRUCTOR INIT : " + info.toString());
@@ -64,8 +71,10 @@ public class TextualDetectionAction extends AnAction {
             //CommitWindowFactory.createWindow(true, false, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
             CommitWindowFactory.createWindow(true, false,anActionEvent.getProject(),
                     generalFixtureInfos,
-                    eagerTestInfos, lackOfCohesionInfos,
+                    eagerTestInfos,
+                    lackOfCohesionInfos,
                     magicNumberTestInfos,
+                    condTestLogicInfos,
                     constructorInitializationInfos,
                     exceptionHandlingInfos);
 

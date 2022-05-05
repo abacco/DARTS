@@ -17,18 +17,18 @@ public class ExceptionHandlingTest extends LightJavaCodeInsightFixtureTestCase {
     }
 
     public void testExceptionHandlingNotPresent() {
-        myFixture.configureByFile("test/ConstructorInitializationNotPresentTest.java");
+        myFixture.configureByFile("test/ExceptionTestNotPresent.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
         ArrayList<MethodWithExceptionHandling> smellList = ExceptionHandlingTextual.checkMethodsThatContainExceptions(testClassBeans.get(0));
         assertEquals(null, smellList);
     }
 
-    public void testExceptionHandling() {
+    public void testExceptionHandlingPresent() {
         myFixture.configureByFile("test/ExceptionTestPresent.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
         ArrayList<MethodWithExceptionHandling> smellList = ExceptionHandlingTextual.checkMethodsThatContainExceptions(testClassBeans.get(0));
-        assertEquals(1, smellList.size());
+        assertEquals(2, smellList.size());
     }
 }

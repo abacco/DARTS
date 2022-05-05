@@ -1,27 +1,12 @@
 package testSmellDetection.textualRules;
 
-import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiMethodCallExpression;
-import com.intellij.psi.PsiReference;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.bean.PsiMethodBean;
-import testSmellDetection.testSmellInfo.eagerTest.MethodWithEagerTest;
-import testSmellDetection.testSmellInfo.generalFixture.MethodWithGeneralFixture;
 import testSmellDetection.testSmellInfo.magicNamberTest.MethodWithMagicNumber;
-
 import java.util.ArrayList;
 
 public abstract class MagicNumberTextual {
-
-  public static boolean isMagicNumber(PsiClassBean testClass){
-    //Dalla classe di test prendo tutti i metodi
-    ArrayList<PsiMethodBean> methods = testClass.getPsiMethodBeans();
-    //Per ogni metodo controllo quali chiamate fa
-    for (PsiMethodBean methodBean : methods){
-      ArrayList<PsiMethodCallExpression> methodCall = methodBean.getMethodCalls();
-    }
-    return false;
-  }
 
   public static ArrayList<MethodWithMagicNumber> checkMethodsThatCauseMagicNumber(PsiClassBean testClass){
     ArrayList<MethodWithMagicNumber> methodsWithMagicNumbers = new ArrayList<>();

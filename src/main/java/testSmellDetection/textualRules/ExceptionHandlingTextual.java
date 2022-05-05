@@ -2,6 +2,8 @@ package testSmellDetection.textualRules;
 
 import com.intellij.psi.PsiCodeBlock;
 import com.intellij.psi.PsiStatement;
+import com.intellij.psi.PsiThrowStatement;
+import com.intellij.psi.PsiTryStatement;
 import org.jetbrains.annotations.NotNull;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.bean.PsiMethodBean;
@@ -46,7 +48,7 @@ public abstract class ExceptionHandlingTextual {
             ArrayList<PsiStatement> arrayList1 = new ArrayList<>();
             for(PsiStatement statement : statements){
                 arrayList1.add(0, statement);
-                if(statement.getText().contains("try")){
+                if(statement instanceof PsiTryStatement || statement instanceof PsiThrowStatement){
                     arrayList.add(0, new MethodWithExceptionHandling(method));
                 }
             }

@@ -3,11 +3,11 @@ package windowCommitConstruction;
 import com.intellij.openapi.project.Project;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.components.JBScrollPane;
-import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
-import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
+import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
+import testSmellDetection.testSmellInfo.magicNamberTest.MagicNumberTestInfo;
 import windowCommitConstruction.general.listRenderer.CustomListRenderer;
-import windowCommitConstruction.testSmellPanel.CIISmellPanel;
-import windowCommitConstruction.testSmellPanel.ExHSmellPanel;
+import windowCommitConstruction.testSmellPanel.CTLSmellPanel;
+import windowCommitConstruction.testSmellPanel.MNSmellPanel;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -16,10 +16,9 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class ExceptionHandlingCP extends JPanel implements ListSelectionListener {
+public class CondTestLogicCP extends JPanel implements ListSelectionListener {
 
-    private ArrayList<ExceptionHandlingInfo> classWithExHandlingInitialization;
-
+    private ArrayList<CondTestLogicInfo> classesWithCondTestLogic;
     private Project project;
     DefaultListModel model;
 
@@ -30,7 +29,7 @@ public class ExceptionHandlingCP extends JPanel implements ListSelectionListener
 
     ArrayList<String> classesNames;
 
-    public ExceptionHandlingCP(ArrayList<ExceptionHandlingInfo> classWithExHandling, Project project){
+    public CondTestLogicCP(ArrayList<CondTestLogicInfo> classesWithCTL, Project project){
         // Inizializzazione delle variabili.
         this.project = project;
         model = new DefaultListModel ();
@@ -40,12 +39,17 @@ public class ExceptionHandlingCP extends JPanel implements ListSelectionListener
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         // Inizio la costruzione del Panel.
-        if(!classWithExHandling.isEmpty()){
-            classWithExHandlingInitialization = classWithExHandling;
+        if(!classesWithCTL.isEmpty()){
+            //Parte relativa all'inizializzazione del Panel per GeneralFixture.
+            classesWithCondTestLogic = classesWithCTL;
 
-            for(ExceptionHandlingInfo eH : classWithExHandlingInitialization){
-                model.addElement(eH);
+            // Mi prendo tutti i nomi delle classi affette dallo smell.
+            for (CondTestLogicInfo ctli : classesWithCondTestLogic){
+                //classesNames.add(loci.getClassWithSmell().getName());
+                model.addElement(ctli);
             }
+
+            // Setup della lista delle classi.
             classList = new JBList(model);
             classList.setCellRenderer( new CustomListRenderer(classList));
             classList.setBorder ( BorderFactory.createEmptyBorder ( 5, 5, 5, 5 ) );
@@ -55,7 +59,10 @@ public class ExceptionHandlingCP extends JPanel implements ListSelectionListener
             classList.addListSelectionListener(this);
             JBScrollPane classScrollPane = new JBScrollPane(classList);
             classScrollPane.setBorder(new TitledBorder("CLASSES"));
-            secondSplitPane = new ExHSmellPanel(classWithExHandlingInitialization.get(0), project, this);
+
+            // Inizializzo la secondSplitPane per la prima esecuzione.
+            secondSplitPane = new CTLSmellPanel(classesWithCondTestLogic.get(0), project, this);
+
             // Creazione dello split pane con la lista delle classi e la secondSplitPane.
             firstSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, classScrollPane, secondSplitPane);
             firstSplitPane.setOneTouchExpandable(true);
@@ -75,20 +82,21 @@ public class ExceptionHandlingCP extends JPanel implements ListSelectionListener
         }
     }
 
+    @Override
     public void valueChanged(ListSelectionEvent e) {
         updateSmellPanel(classList.getSelectedIndex());
     }
 
     protected void updateSmellPanel (int index) {
-        ExceptionHandlingInfo exH;
+        CondTestLogicInfo ctli;
         if(index == -1 && model.getSize() == 0){
             return;
         } else if(index == -1 && model.getSize() != 0){
-            exH = (ExceptionHandlingInfo) classList.getModel().getElementAt(0);
+            ctli = (CondTestLogicInfo) classList.getModel().getElementAt(0);
         } else {
-            exH = (ExceptionHandlingInfo) classList.getModel().getElementAt(index);
+            ctli = (CondTestLogicInfo) classList.getModel().getElementAt(index);
         }
-        secondSplitPane = new ExHSmellPanel( exH, project, this);
+        secondSplitPane = new CTLSmellPanel( ctli, project, this);
         firstSplitPane.setRightComponent(secondSplitPane);
         secondSplitPane.setMinimumSize(new Dimension(150, 100));
     }
@@ -96,7 +104,7 @@ public class ExceptionHandlingCP extends JPanel implements ListSelectionListener
     public void doAfterRefactor(){
         int index = classList.getSelectedIndex();
 
-        classWithExHandlingInitialization.remove(index);
+        classesWithCondTestLogic.remove(index);
         model.remove(index);
 
         if(model.getSize() == 0){

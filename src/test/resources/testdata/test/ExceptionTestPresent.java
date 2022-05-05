@@ -13,4 +13,9 @@ public class ExceptionTestPresent {
             System.out.println(e);
         }
     }
+
+    @Test
+    public void test2() {
+        throw new Exception();
+    }
 }

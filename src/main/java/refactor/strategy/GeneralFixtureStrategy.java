@@ -1,5 +1,5 @@
 /*
-package main.refactor.strategy;
+package refactor.strategy;
 
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Editor;
@@ -108,8 +108,7 @@ public class GeneralFixtureStrategy implements IRefactor {
             if (methodProcessor.prepare()) {
                 //methodProcessor.setMethodVisibility(PsiModifier.PUBLIC);
                 methodProcessor.testPrepare();
-                */
-/*methodProcessor.testNullability();*//*
+methodProcessor.testNullability();
 
                 ExtractMethodHandler.extractMethod(project, methodProcessor);
             }

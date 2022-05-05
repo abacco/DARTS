@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
+import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
 import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
 import testSmellDetection.testSmellInfo.eagerTest.EagerTestInfo;
 import testSmellDetection.testSmellInfo.generalFixture.GeneralFixtureInfo;
@@ -21,18 +22,20 @@ public class CommitWindowFactory {
     private static JPanel eagerTestPanel;
     private static JPanel lackOfCohesionPanel;
     private static JPanel magicNumberPanel;
+    private static JPanel condTestLogicPanel;
     private static JPanel constructorInitializationPanel;
     private static JPanel exceptionHandlingPanel;
 
-    /* createWindow per GF-ET-LOC-MN */
+    /* createWindow per GF-ET-LOC-MN-CTL */
     public static void createWindow(Boolean textual, Boolean structural,
                                     Project project,
                                     ArrayList<GeneralFixtureInfo> listGFI,
                                     ArrayList<EagerTestInfo> listETI,
                                     ArrayList<LackOfCohesionInfo> listLOCI,
                                     ArrayList<MagicNumberTestInfo> listMNI,
+                                    ArrayList<CondTestLogicInfo> listCTLI,
                                     ArrayList<ConstructorInitializationInfo> listCII,
-                                    ArrayList<ExceptionHandlingInfo> listExH) {
+                                    ArrayList<ExceptionHandlingInfo> listEHI) {
         CommitPrincipalFrame principalFrame = null;
         //Controllo per vedere se la window esiste già.
         boolean frameExist = false;
@@ -52,11 +55,11 @@ public class CommitWindowFactory {
         JBTabbedPane detectionTp = (JBTabbedPane) principalFrame.getDetectionTp();
         if(textual){
             principalFrame.removeTextualPanel();
-            principalFrame.addTextualPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI, listCII,listExH));
+            principalFrame.addTextualPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI, listCTLI, listCII, listEHI));
         }
         if(structural){
             principalFrame.removeStructuralPanel();
-            principalFrame.addStructuralPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI, listCII,listExH));
+            principalFrame.addStructuralPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI, listCTLI, listCII, listEHI));
         }
         principalFrame.add(detectionTp);
         // Mostra la schermata al centro dello schermo
@@ -67,7 +70,7 @@ public class CommitWindowFactory {
 
         principalFrame.setVisible(true);
     }
-    /* createWindow per GF-ET-LOC */
+
     public static void createWindow(Boolean textual, Boolean structural,
                                     Project project,
                                     ArrayList<GeneralFixtureInfo> listGFI,
@@ -107,14 +110,16 @@ public class CommitWindowFactory {
 
         principalFrame.setVisible(true);
     }
-    /* createPanel per GF-ET-LOC-MN */
+
+    /* createPanel for each smell */
     private static JBTabbedPane createPanel(Project project,
                                             ArrayList<GeneralFixtureInfo> listGFI,
                                             ArrayList<EagerTestInfo> listETI,
                                             ArrayList<LackOfCohesionInfo> listLOCI,
                                             ArrayList<MagicNumberTestInfo> listMNI,
+                                            ArrayList<CondTestLogicInfo> listCTLI,
                                             ArrayList<ConstructorInitializationInfo> listCII,
-                                            ArrayList<ExceptionHandlingInfo> listExH){
+                                            ArrayList<ExceptionHandlingInfo> listEHI){
         // Controllo se ho trovato degli smells.
         if (listGFI != null) {
             generalFixturePanel = new GeneralFixtureCP(listGFI, project);
@@ -128,13 +133,15 @@ public class CommitWindowFactory {
         if(listMNI != null){
             magicNumberPanel = new MagicNumberCP(listMNI, project);
         }
+        if(listCTLI != null){
+            condTestLogicPanel = new CondTestLogicCP(listCTLI,project);
+        }
         if(listCII != null){
             constructorInitializationPanel = new ConstructorInitializazionCP(listCII, project);
         }
-        if(listExH != null){
-            exceptionHandlingPanel = new ExceptionHandlingCP(listExH, project);
+        if(listEHI != null){
+            exceptionHandlingPanel = new ExceptionHandlingCP(listEHI, project);
         }
-
         //In questa parte costruisco le tab della window.
         JBTabbedPane tp = new JBTabbedPane();
         tp.setPreferredSize(new Dimension(1000, 500));
@@ -154,13 +161,21 @@ public class CommitWindowFactory {
             JBScrollPane scroll = new JBScrollPane(magicNumberPanel);
             tp.add("MagicNumber", scroll);
         }
-        if (listCII != null) {
+        if(listCTLI != null){
+            JBScrollPane scroll = new JBScrollPane(condTestLogicPanel);
+            tp.add("ConditionalTestLogic", scroll);
+        }
+        if(listCII != null){
             JBScrollPane scroll = new JBScrollPane(constructorInitializationPanel);
             tp.add("ConstructorInitialization", scroll);
         }
+        if(listEHI != null){
+            JBScrollPane scroll = new JBScrollPane(exceptionHandlingPanel);
+            tp.add("ExceptionHandling", scroll);
+        }
         return tp;
     }
-    /* createPanel per GF-ET-LOC */
+
     private static JBTabbedPane createPanel(Project project,
                                             ArrayList<GeneralFixtureInfo> listGFI,
                                             ArrayList<EagerTestInfo> listETI,
@@ -175,7 +190,6 @@ public class CommitWindowFactory {
         if (listLOCI != null){
             lackOfCohesionPanel = new LackOfCohesionCP(listLOCI, project);
         }
-
         //In questa parte costruisco le tab della window.
         JBTabbedPane tp = new JBTabbedPane();
         tp.setPreferredSize(new Dimension(1000, 500));

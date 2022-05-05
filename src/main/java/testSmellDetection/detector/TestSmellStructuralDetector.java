@@ -4,6 +4,7 @@ import com.intellij.openapi.project.Project;
 import contextualAnalysis.hashUtilies.ProductionClassesSingleton;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.bean.PsiMethodBean;
+import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
 import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
 import testSmellDetection.testSmellInfo.magicNamberTest.MagicNumberTestInfo;
@@ -42,6 +43,11 @@ public class TestSmellStructuralDetector implements IDetector{
     }
 
     public ArrayList<MagicNumberTestInfo> executeDetectionForMagicNumber(){
+        return null;
+    }
+
+    @Override
+    public ArrayList<CondTestLogicInfo> executeDetectionForCondTestLogic() {
         return null;
     }
 

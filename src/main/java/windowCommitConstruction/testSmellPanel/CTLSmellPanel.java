@@ -4,8 +4,11 @@ import com.intellij.openapi.project.Project;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBScrollPane;
+import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
+import testSmellDetection.testSmellInfo.conditionalTestLogic.MethodWithCondTestLogic;
 import testSmellDetection.testSmellInfo.magicNamberTest.MagicNumberTestInfo;
 import testSmellDetection.testSmellInfo.magicNamberTest.MethodWithMagicNumber;
+import windowCommitConstruction.CondTestLogicCP;
 import windowCommitConstruction.MagicNumberCP;
 import windowCommitConstruction.general.RefactorWindow;
 import windowCommitConstruction.general.listRenderer.CustomListRenderer2;
@@ -17,32 +20,32 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class MNSmellPanel extends JSplitPane implements ListSelectionListener {
+public class CTLSmellPanel  extends JSplitPane implements ListSelectionListener {
 
     private JBList smellList;
     private JBPanel refactorPreviewPanel;
 
     ArrayList<String> methodsNames = new ArrayList<>();
 
-    private MagicNumberTestInfo magicNumberTestInfo;
+    private CondTestLogicInfo condTestLogicInfo;
     private Project project;
-    private MagicNumberCP magicNumberCP;
+    private CondTestLogicCP condTestLogicCP;
     DefaultListModel model;
 
     Dimension minimumSize = new Dimension(150, 100);
 
-    public MNSmellPanel(MagicNumberTestInfo magicNumberTestInfo, Project project, MagicNumberCP magicNumberCP){
+    public CTLSmellPanel(CondTestLogicInfo condTestLogicInfo, Project project, CondTestLogicCP condTestLogicCP){
         this.project = project;
-        this.magicNumberCP = magicNumberCP;
+        this.condTestLogicCP = condTestLogicCP;
 
         model = new DefaultListModel ();
 
         this.refactorPreviewPanel = new JBPanel();
-        this.magicNumberTestInfo = magicNumberTestInfo;
+        this.condTestLogicInfo = condTestLogicInfo;
 
-        for(MethodWithMagicNumber methodWithMagicNumber : magicNumberTestInfo.getMethodsThatCauseMagicNumber()){
-            model.addElement(methodWithMagicNumber.getMethodWithMagicNumber().getName());
-            methodsNames.add(methodWithMagicNumber.getMethodWithMagicNumber().getName());
+        for(MethodWithCondTestLogic methodWithCondTestLogic : condTestLogicInfo.getMethodsThatCauseCondTestLogics()){
+            model.addElement(methodWithCondTestLogic.getMethodWithCondTestLogic().getName());
+            methodsNames.add(methodWithCondTestLogic.getMethodWithCondTestLogic().getName());
         }
 
         smellList = new JBList(model);
@@ -77,15 +80,16 @@ public class MNSmellPanel extends JSplitPane implements ListSelectionListener {
 
     //Renders the selected image
     protected void updateRefactorPreviewLabel (int index) {
-        MethodWithMagicNumber methodWithMN;
+        MethodWithCondTestLogic methodWithCTL;
         if(index == -1 && model.getSize() == 0){
             return;
         } else if(index == -1){
-            methodWithMN = magicNumberTestInfo.getMethodsThatCauseMagicNumber().get(0);
+            methodWithCTL = condTestLogicInfo.getMethodsThatCauseCondTestLogics().get(0);
         } else {
-            methodWithMN = magicNumberTestInfo.getMethodsThatCauseMagicNumber().get(index);
+            methodWithCTL = condTestLogicInfo.getMethodsThatCauseCondTestLogics().get(index);
         }
-        RefactorWindow refactorWindow = new RefactorWindow(methodWithMN, magicNumberTestInfo, project, this);
+        RefactorWindow refactorWindow = new RefactorWindow(methodWithCTL, condTestLogicInfo, project, this);
         this.setRightComponent(refactorWindow.getRootPanel());
     }
+
 }
