@@ -5,6 +5,8 @@ import contextualAnalysis.hashUtilies.ProductionClassesSingleton;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.bean.PsiMethodBean;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
+import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
+import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
 import testSmellDetection.testSmellInfo.magicNamberTest.MagicNumberTestInfo;
 import utility.ConverterUtilities;
 import utility.TestSmellUtilities;
@@ -46,6 +48,14 @@ public class TestSmellStructuralDetector implements IDetector{
 
     @Override
     public ArrayList<CondTestLogicInfo> executeDetectionForCondTestLogic() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<ConstructorInitializationInfo> executeDetectionForConstructorInitialization() { return null; }
+
+    @Override
+    public ArrayList<ExceptionHandlingInfo> executeDetectionForExceptionHandling() {
         return null;
     }
 

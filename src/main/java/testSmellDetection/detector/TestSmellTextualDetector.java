@@ -6,6 +6,10 @@ import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.bean.PsiMethodBean;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.MethodWithCondTestLogic;
+import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
+import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.MethodWithExceptionHandling;
+import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
+import testSmellDetection.testSmellInfo.constructorInitialization.MethodWithConstructorInitialization;
 import testSmellDetection.testSmellInfo.eagerTest.EagerTestInfo;
 import testSmellDetection.testSmellInfo.eagerTest.MethodWithEagerTest;
 import testSmellDetection.testSmellInfo.generalFixture.GeneralFixtureInfo;
@@ -43,6 +47,30 @@ public class TestSmellTextualDetector implements IDetector{
             }
         }
         return classesWithMagicNumber;
+    }
+
+    @Override
+    public ArrayList<ExceptionHandlingInfo> executeDetectionForExceptionHandling() {
+        ArrayList<ExceptionHandlingInfo> classesWithExceptionHandling = new ArrayList<>();
+        for(PsiClassBean testClass : testClasses){
+            ArrayList<MethodWithExceptionHandling> methodWithExceptionHandling = ExceptionHandlingTextual.checkMethodsThatContainExceptions(testClass);
+            if(methodWithExceptionHandling != null){
+                classesWithExceptionHandling.add(new ExceptionHandlingInfo(testClass, methodWithExceptionHandling));
+            }
+        }
+        return classesWithExceptionHandling;
+    }
+
+    @Override
+    public ArrayList<ConstructorInitializationInfo> executeDetectionForConstructorInitialization() {
+        ArrayList<ConstructorInitializationInfo> classesWithConstructorInitialization = new ArrayList<>();
+        for(PsiClassBean testClass : testClasses){
+            ArrayList<MethodWithConstructorInitialization> methodWithMagicNumbers = ConstructorInitTextual.checkMethodsThatCauseConstructorInitialization(testClass);
+            if(methodWithMagicNumbers != null){
+                classesWithConstructorInitialization.add(new ConstructorInitializationInfo(testClass, methodWithMagicNumbers));
+            }
+        }
+        return classesWithConstructorInitialization;
     }
 
     @Override

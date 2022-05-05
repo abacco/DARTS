@@ -1,3 +1,4 @@
+/*
 package oldWindowConstruction;
 
 import com.intellij.openapi.project.Project;
@@ -65,3 +66,4 @@ public class GeneralFixturePanel extends JPanel{
 
 
 }
+*/

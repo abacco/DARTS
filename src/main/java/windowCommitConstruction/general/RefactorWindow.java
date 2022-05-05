@@ -19,12 +19,16 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import refactor.IRefactor;
 import refactor.strategy.EagerTestStrategy;
-import refactor.strategy.GeneralFixtureStrategy;
+/*import refactor.strategy.GeneralFixtureStrategy;*/
 import refactor.strategy.LackOfCohesionStrategy;
 import testSmellDetection.bean.PsiMethodBean;
+import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
+import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.MethodWithExceptionHandling;
 import testSmellDetection.testSmellInfo.TestSmellInfo;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.MethodWithCondTestLogic;
+import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
+import testSmellDetection.testSmellInfo.constructorInitialization.MethodWithConstructorInitialization;
 import testSmellDetection.testSmellInfo.eagerTest.EagerTestInfo;
 import testSmellDetection.testSmellInfo.eagerTest.MethodWithEagerTest;
 import testSmellDetection.testSmellInfo.generalFixture.GeneralFixtureInfo;
@@ -51,12 +55,16 @@ public class RefactorWindow extends JPanel implements ActionListener{
     private JButton executeContextualAnalysis;
 
     private MethodWithCondTestLogic methodWithCondTestLogic;
+    private MethodWithExceptionHandling methodWithExceptionHandling;
+    private MethodWithConstructorInitialization methodWithConstructorInitialization;
     private MethodWithMagicNumber methodWithMagicNumber;
     private MethodWithGeneralFixture methodWithGeneralFixture;
     private MethodWithEagerTest methodWithEagerTest;
     private PsiMethodBean methodWithLOC;
 
     private CondTestLogicInfo condTestLogicInfo = null;
+    private ExceptionHandlingInfo exceptionHandlingInfo = null;
+    private ConstructorInitializationInfo constructorInitializationInfo = null;
     private MagicNumberTestInfo magicNumberTestInfo = null;
     private GeneralFixtureInfo generalFixtureInfo = null;
     private EagerTestInfo eagerTestInfo = null;
@@ -65,6 +73,8 @@ public class RefactorWindow extends JPanel implements ActionListener{
     private Project project;
 
     private CTLSmellPanel ctlSmellPanel;
+    private ExHSmellPanel exHSmellPanel;
+    private CIISmellPanel ciiSmellPanel;
     private MNSmellPanel mnSmellPanel;
     private GFSmellPanel gfSmellPanel;
     private ETSmellPanel etSmellPanel;
@@ -127,6 +137,65 @@ public class RefactorWindow extends JPanel implements ActionListener{
 
         refactorPreviewButton.addActionListener(this);
         setupContextualAnalysisButton(magicNumberTestInfo);
+    }
+
+    /**
+     * Call this for Exception handling.
+     * @param methodWithExceptionHandling
+     * @param exceptionHandlingInfo
+     * @param project
+     */
+    public RefactorWindow(MethodWithExceptionHandling methodWithExceptionHandling, ExceptionHandlingInfo exceptionHandlingInfo, Project project, ExHSmellPanel exHSmellPanel) {
+        super();
+        this.methodWithExceptionHandling = methodWithExceptionHandling;
+        this.exceptionHandlingInfo = exceptionHandlingInfo;
+        this.project = project;
+        this.exHSmellPanel = exHSmellPanel;
+
+        String methodName = "<html> Method " + methodWithExceptionHandling.getMethodWithExceptionHandling().getPsiMethod().getName() + " This smell occurs when a test method explicitly a passing or failing of a test method is dependent on the production method throwing an exception <br/>";
+
+        methodName = methodName + "<br/>The Smell will be removed using one of this refactoring operations:<br/>";
+        methodName = methodName + "   - Change argument type: change argument \"Expected\" from literal number to constant integer <br/>";
+
+        tipsTextLabel.setText(methodName);
+
+        String signature = methodWithExceptionHandling.getMethodWithExceptionHandling().getPsiMethod().getSignature(PsiSubstitutor.EMPTY).toString();
+        String methodBody = methodWithExceptionHandling.getMethodWithExceptionHandling().getPsiMethod().getBody().getText();
+        signature = signature + " " + methodBody;
+        methodTextArea.setText(signature);
+
+        refactorPreviewButton.addActionListener(this);
+        setupContextualAnalysisButton(exceptionHandlingInfo);
+    }
+
+
+    /**
+     * Call this for Constructor Initialization.
+     * @param methodWithConstructorInitialization
+     * @param constructorInitializationInfo
+     * @param project
+     */
+    public RefactorWindow(MethodWithConstructorInitialization methodWithConstructorInitialization, ConstructorInitializationInfo constructorInitializationInfo, Project project, CIISmellPanel ciiSmellPanel) {
+        super();
+        this.methodWithConstructorInitialization = methodWithConstructorInitialization;
+        this.constructorInitializationInfo = constructorInitializationInfo;
+        this.project = project;
+        this.ciiSmellPanel = ciiSmellPanel;
+
+        String methodName = "<html> Method " + methodWithConstructorInitialization.getMethodWithConstructorInitialization().getPsiMethod().getName() + " is affected by Constructor Initialization because it uses the constructor instead of setup method <br/>";
+
+        methodName = methodName + "<br/>The Smell will be removed using one of this refactoring operations:<br/>";
+        methodName = methodName + "   - Change argument type: change argument \"Expected\" from literal number to constant integer <br/>";
+
+        tipsTextLabel.setText(methodName);
+
+        String signature = methodWithConstructorInitialization.getMethodWithConstructorInitialization().getPsiMethod().getSignature(PsiSubstitutor.EMPTY).toString();
+        String methodBody = methodWithConstructorInitialization.getMethodWithConstructorInitialization().getPsiMethod().getBody().getText();
+        signature = signature + " " + methodBody;
+        methodTextArea.setText(signature);
+
+        refactorPreviewButton.addActionListener(this);
+        setupContextualAnalysisButton(constructorInitializationInfo);
     }
 
     /**
@@ -229,8 +298,8 @@ public class RefactorWindow extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         try{
             if(generalFixtureInfo != null){
-                IRefactor refactor = new GeneralFixtureStrategy(methodWithGeneralFixture, project, generalFixtureInfo);
-                refactor.doRefactor();
+                IRefactor refactor = null;//new GeneralFixtureStrategy(methodWithGeneralFixture, project, generalFixtureInfo);
+                //refactor.doRefactor();
                 gfSmellPanel.doAfterRefactor();
             } else if(eagerTestInfo != null){
                 IRefactor refactor = new EagerTestStrategy(methodWithEagerTest, project, eagerTestInfo);
