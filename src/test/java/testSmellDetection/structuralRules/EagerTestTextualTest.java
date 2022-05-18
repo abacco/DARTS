@@ -1,8 +1,9 @@
-package testSmellDetection.textualRules;
+package testSmellDetection.structuralRules;
 
 import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.testSmellInfo.eagerTest.MethodWithEagerTest;
+import testSmellDetection.textualRules.EagerTestTextual;
 import utility.ConverterUtilities;
 import utility.TestSmellUtilities;
 import java.util.ArrayList;

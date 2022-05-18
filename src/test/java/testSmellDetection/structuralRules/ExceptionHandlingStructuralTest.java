@@ -1,15 +1,15 @@
-package testSmellDetection.textualRules;
+package testSmellDetection.structuralRules;
 
 import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase;
 import testSmellDetection.bean.PsiClassBean;
+import testSmellDetection.structuralRules.ExceptionHandlingStructural;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.MethodWithExceptionHandling;
-import testSmellDetection.testSmellInfo.constructorInitialization.MethodWithConstructorInitialization;
 import utility.ConverterUtilities;
 import utility.TestSmellUtilities;
 
 import java.util.ArrayList;
 
-public class ExceptionHandlingTest extends LightJavaCodeInsightFixtureTestCase {
+public class ExceptionHandlingStructuralTest extends LightJavaCodeInsightFixtureTestCase {
 
     @Override
     protected String getTestDataPath() {
@@ -20,7 +20,7 @@ public class ExceptionHandlingTest extends LightJavaCodeInsightFixtureTestCase {
         myFixture.configureByFile("test/ExceptionTestNotPresent.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
-        ArrayList<MethodWithExceptionHandling> smellList = ExceptionHandlingTextual.checkMethodsThatContainExceptions(testClassBeans.get(0));
+        ArrayList<MethodWithExceptionHandling> smellList = ExceptionHandlingStructural.checkMethodsThatContainExceptions(testClassBeans.get(0));
         assertEquals(null, smellList);
     }
 
@@ -28,7 +28,7 @@ public class ExceptionHandlingTest extends LightJavaCodeInsightFixtureTestCase {
         myFixture.configureByFile("test/ExceptionTestPresent.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
-        ArrayList<MethodWithExceptionHandling> smellList = ExceptionHandlingTextual.checkMethodsThatContainExceptions(testClassBeans.get(0));
+        ArrayList<MethodWithExceptionHandling> smellList = ExceptionHandlingStructural.checkMethodsThatContainExceptions(testClassBeans.get(0));
         assertEquals(2, smellList.size());
     }
 }

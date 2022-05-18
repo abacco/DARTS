@@ -22,6 +22,8 @@ import java.util.*;
  */
 public class TextualDetectionAction extends AnAction {
 
+    private static final int THRESHOLD_MN = 0;
+
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
         IDetector detector = new TestSmellTextualDetector(anActionEvent.getProject());
@@ -31,7 +33,7 @@ public class TextualDetectionAction extends AnAction {
         //Magic Number
         ArrayList<MagicNumberTestInfo> magicNumberTestInfos = detector.executeDetectionForMagicNumber();
         //Conditional Test Logic
-        ArrayList<CondTestLogicInfo> condTestLogicInfos = detector.executeDetectionForCondTestLogic();
+        ArrayList<CondTestLogicInfo> condTestLogicInfos = detector.executeDetectionForCondTestLogic(THRESHOLD_MN);
         // ConstructorInitialization
         ArrayList<ConstructorInitializationInfo> constructorInitializationInfos = detector.executeDetectionForConstructorInitialization();
         // Exception Handling
@@ -53,7 +55,7 @@ public class TextualDetectionAction extends AnAction {
         }
         //Conditional Test Logic
         for(CondTestLogicInfo info : condTestLogicInfos){
-            System.out.println("\n   MAGIC NUMBER: " + info.toString());
+            System.out.println("\n   CONDITIONAL TEST LOGIC: " + info.toString());
         }
         // ConstructorInitialization
         for(ConstructorInitializationInfo info : constructorInitializationInfos){
@@ -64,7 +66,11 @@ public class TextualDetectionAction extends AnAction {
             System.out.println("\n   EXCEPTION HANDLING : " + info.toString());
         }
 
-        if(generalFixtureInfos.isEmpty() && eagerTestInfos.isEmpty() && lackOfCohesionInfos.isEmpty()){
+        if(generalFixtureInfos.isEmpty() && eagerTestInfos.isEmpty() && lackOfCohesionInfos.isEmpty() &&
+        magicNumberTestInfos.isEmpty() &&
+        condTestLogicInfos.isEmpty() &&
+        exceptionHandlingInfos.isEmpty() &&
+        constructorInitializationInfos.isEmpty()){
             System.out.println("\n Non si è trovato alcuno Smell");
         } else {
             //TestSmellWindowFactory.createWindow(true, false, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);

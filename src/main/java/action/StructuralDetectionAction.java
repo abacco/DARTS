@@ -21,18 +21,24 @@ import java.util.ArrayList;
  */
 public class StructuralDetectionAction extends AnAction {
 
+    private static final int THRESHOLD_MN = 0;
+
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
         IDetector detector = new TestSmellStructuralDetector(anActionEvent.getProject());
         ArrayList<GeneralFixtureInfo> generalFixtureInfos = detector.executeDetectionForGeneralFixture();
         ArrayList<EagerTestInfo> eagerTestInfos = detector.executeDetectionForEagerTest();
         ArrayList<LackOfCohesionInfo> lackOfCohesionInfos = detector.executeDetectionForLackOfCohesion();
+        //Magic Number
         ArrayList<MagicNumberTestInfo> magicNumberTestInfos = detector.executeDetectionForMagicNumber();
-        ArrayList<CondTestLogicInfo> condTestLogicInfos = detector.executeDetectionForCondTestLogic();
+        //Conditional Test Logic
+        ArrayList<CondTestLogicInfo> condTestLogicInfos = detector.executeDetectionForCondTestLogic(THRESHOLD_MN);
+        // ConstructorInitialization
         ArrayList<ConstructorInitializationInfo> constructorInitializationInfos = detector.executeDetectionForConstructorInitialization();
+        // Exception Handling
         ArrayList<ExceptionHandlingInfo> exceptionHandlingInfos = detector.executeDetectionForExceptionHandling();
 
-        System.out.println("\nDETECTOR STRUTTURALE: risultato dell'analisi.");
+        System.out.println("\n\n ########################### ACTION - DETECTOR STRUTTURALE: risultato dell'analisi. ###########################\n\n");
         for(GeneralFixtureInfo info : generalFixtureInfos){
             System.out.println("\n   GENERAL FIXTURE: " + info.toString());
         }
@@ -42,9 +48,29 @@ public class StructuralDetectionAction extends AnAction {
         for(LackOfCohesionInfo info : lackOfCohesionInfos){
             System.out.println("\n   LACK OF COHESION: " + info.toString());
         }
+        //Magic Number
+        for(MagicNumberTestInfo info : magicNumberTestInfos){
+            System.out.println("\n   MAGIC NUMBER: " + info.toString());
+        }
+        //Conditional Test Logic
+        for(CondTestLogicInfo info : condTestLogicInfos){
+            System.out.println("\n   CONDITIONAL TEST LOGIC: " + info.toString());
+        }
+        // ConstructorInitialization
+        for(ConstructorInitializationInfo info : constructorInitializationInfos){
+            System.out.println("\n   CONSTRUCTOR INIT : " + info.toString());
+        }
+        // ExceptionHandling
+        for(ExceptionHandlingInfo info : exceptionHandlingInfos){
+            System.out.println("\n   EXCEPTION HANDLING : " + info.toString());
+        }
 
-        if(generalFixtureInfos.isEmpty() && eagerTestInfos.isEmpty() && lackOfCohesionInfos.isEmpty()){
-            System.out.println("\nNon si è trovato alcuno Smell");
+        if(generalFixtureInfos.isEmpty() && eagerTestInfos.isEmpty() && lackOfCohesionInfos.isEmpty() &&
+                magicNumberTestInfos.isEmpty() &&
+                condTestLogicInfos.isEmpty() &&
+                exceptionHandlingInfos.isEmpty() &&
+                constructorInitializationInfos.isEmpty()){
+            System.out.println("\n Non si è trovato alcuno Smell");
         } else {
             //TestSmellWindowFactory.createWindow(false, true, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
             CommitWindowFactory.createWindow(false, true, anActionEvent.getProject(),

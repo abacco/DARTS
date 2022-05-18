@@ -16,6 +16,11 @@ public class ExceptionTestPresent {
 
     @Test
     public void test2() {
-        throw new Exception();
+        //CAMBIARE IL BLOCCO TRY CATCH CON IL LANCIO DI UNA ECCEZIONE
+        try {
+            System.out.println("ciao");
+        } catch(Exception e){
+            System.out.println(e);
+        }
     }
 }

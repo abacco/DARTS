@@ -11,6 +11,10 @@ public class CondTestLogicPresentTest {
             Assert.assertEquals(1,1);
         else
             Assert.assertEquals(2,2 );
+        if(1==1)
+            Assert.assertEquals(1,1);
+        else
+            Assert.assertEquals(2,2 );
 
     }
 

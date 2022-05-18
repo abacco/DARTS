@@ -4,16 +4,18 @@ import com.intellij.openapi.project.Project;
 import contextualAnalysis.hashUtilies.ProductionClassesSingleton;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.bean.PsiMethodBean;
+import testSmellDetection.structuralRules.*;
+import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.MethodWithExceptionHandling;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
+import testSmellDetection.testSmellInfo.conditionalTestLogic.MethodWithCondTestLogic;
 import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
+import testSmellDetection.testSmellInfo.constructorInitialization.MethodWithConstructorInitialization;
 import testSmellDetection.testSmellInfo.magicNamberTest.MagicNumberTestInfo;
+import testSmellDetection.testSmellInfo.magicNamberTest.MethodWithMagicNumber;
 import utility.ConverterUtilities;
 import utility.TestSmellUtilities;
 
-import testSmellDetection.structuralRules.EagerTestStructural;
-import testSmellDetection.structuralRules.GeneralFixtureStructural;
-import testSmellDetection.structuralRules.LackOfCohesionOfTestSmellStructural;
 import testSmellDetection.testSmellInfo.eagerTest.EagerTestInfo;
 import testSmellDetection.testSmellInfo.eagerTest.MethodWithEagerTest;
 import testSmellDetection.testSmellInfo.generalFixture.GeneralFixtureInfo;
@@ -42,21 +44,52 @@ public class TestSmellStructuralDetector implements IDetector{
         productionClassesSingleton.setProductionClasses(productionClasses);
     }
 
-    public ArrayList<MagicNumberTestInfo> executeDetectionForMagicNumber(){
-        return null;
-    }
-
     @Override
-    public ArrayList<CondTestLogicInfo> executeDetectionForCondTestLogic() {
-        return null;
+    public ArrayList<MagicNumberTestInfo> executeDetectionForMagicNumber() {
+        ArrayList<MagicNumberTestInfo> classesWithMagicNumber = new ArrayList<>();
+        for(PsiClassBean testClass : testClasses){
+            ArrayList<MethodWithMagicNumber> methodWithMagicNumbers = MagicNumberStructural.checkMethodsThatCauseMagicNumber(testClass);
+            if(methodWithMagicNumbers != null){
+                classesWithMagicNumber.add(new MagicNumberTestInfo(testClass, methodWithMagicNumbers));
+            }
+        }
+        return classesWithMagicNumber;
     }
-
-    @Override
-    public ArrayList<ConstructorInitializationInfo> executeDetectionForConstructorInitialization() { return null; }
 
     @Override
     public ArrayList<ExceptionHandlingInfo> executeDetectionForExceptionHandling() {
-        return null;
+        ArrayList<ExceptionHandlingInfo> classesWithExceptionHandling = new ArrayList<>();
+        for(PsiClassBean testClass : testClasses){
+            ArrayList<MethodWithExceptionHandling> methodWithExceptionHandling = ExceptionHandlingStructural.checkMethodsThatContainExceptions(testClass);
+            if(methodWithExceptionHandling != null){
+                classesWithExceptionHandling.add(new ExceptionHandlingInfo(testClass, methodWithExceptionHandling));
+            }
+        }
+        return classesWithExceptionHandling;
+    }
+
+    @Override
+    public ArrayList<ConstructorInitializationInfo> executeDetectionForConstructorInitialization() {
+        ArrayList<ConstructorInitializationInfo> classesWithConstructorInitialization = new ArrayList<>();
+        for(PsiClassBean testClass : testClasses){
+            ArrayList<MethodWithConstructorInitialization> methodWithMagicNumbers = ConstructorInitStructural.checkMethodsThatCauseConstructorInitialization(testClass);
+            if(methodWithMagicNumbers != null){
+                classesWithConstructorInitialization.add(new ConstructorInitializationInfo(testClass, methodWithMagicNumbers));
+            }
+        }
+        return classesWithConstructorInitialization;
+    }
+
+    @Override
+    public ArrayList<CondTestLogicInfo> executeDetectionForCondTestLogic(int threshold) {
+        ArrayList<CondTestLogicInfo> classesWithCondTestLogic = new ArrayList<>();
+        for(PsiClassBean testClass : testClasses){
+            ArrayList<MethodWithCondTestLogic> methodWithCondTestLogics = CondTestLogicStructural.checkMethodsThatCauseCondTestLogic(testClass, threshold);
+            if(methodWithCondTestLogics != null){
+                classesWithCondTestLogic.add(new CondTestLogicInfo(testClass, methodWithCondTestLogics));
+            }
+        }
+        return classesWithCondTestLogic;
     }
 
     public ArrayList<GeneralFixtureInfo> executeDetectionForGeneralFixture() {

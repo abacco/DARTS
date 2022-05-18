@@ -1,4 +1,4 @@
-package testSmellDetection.textualRules;
+package testSmellDetection.structuralRules;
 
 import com.intellij.psi.PsiCodeBlock;
 import com.intellij.psi.PsiStatement;
@@ -11,7 +11,7 @@ import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.MethodWithExceptio
 
 import java.util.ArrayList;
 
-public abstract class ExceptionHandlingTextual {
+public abstract class ExceptionHandlingStructural {
 
 /*    public static boolean checkMethodsThatContainExceptions(@NotNull PsiClassBean testClass) {
         ArrayList<PsiMethodBean> arrayList = testClass.getPsiMethodBeans();

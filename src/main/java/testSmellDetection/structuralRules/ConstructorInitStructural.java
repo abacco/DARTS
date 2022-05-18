@@ -1,4 +1,4 @@
-package testSmellDetection.textualRules;
+package testSmellDetection.structuralRules;
 
 import com.intellij.psi.PsiMethodCallExpression;
 import testSmellDetection.bean.PsiClassBean;
@@ -8,7 +8,7 @@ import testSmellDetection.testSmellInfo.magicNamberTest.MethodWithMagicNumber;
 
 import java.util.ArrayList;
 
-public abstract class ConstructorInitTextual {
+public abstract class ConstructorInitStructural {
 
     public static boolean isMagicNumber(PsiClassBean testClass){//Dalla classe di test prendo tutti i metodi
         ArrayList<PsiMethodBean> methods = testClass.getPsiMethodBeans();

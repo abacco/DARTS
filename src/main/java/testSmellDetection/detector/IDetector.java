@@ -23,5 +23,5 @@ public interface IDetector {
 
     ArrayList<ExceptionHandlingInfo> executeDetectionForExceptionHandling();
 
-    ArrayList<CondTestLogicInfo> executeDetectionForCondTestLogic();
+    ArrayList<CondTestLogicInfo> executeDetectionForCondTestLogic(int threshold);
 }

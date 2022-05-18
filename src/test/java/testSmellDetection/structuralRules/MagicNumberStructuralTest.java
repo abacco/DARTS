@@ -1,4 +1,4 @@
-package testSmellDetection.textualRules;
+package testSmellDetection.structuralRules;
 
 import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase;
 import testSmellDetection.bean.PsiClassBean;
@@ -7,7 +7,7 @@ import utility.ConverterUtilities;
 import utility.TestSmellUtilities;
 import java.util.ArrayList;
 
-public class MagicNumberTextualTest extends LightJavaCodeInsightFixtureTestCase {
+public class MagicNumberStructuralTest extends LightJavaCodeInsightFixtureTestCase {
     @Override
     protected String getTestDataPath() {
         return "src/test/resources/testdata/";
@@ -17,7 +17,7 @@ public class MagicNumberTextualTest extends LightJavaCodeInsightFixtureTestCase 
         myFixture.configureByFile("test/MagicNumberNotPresentTest.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
-        ArrayList<MethodWithMagicNumber> smellList = MagicNumberTextual.checkMethodsThatCauseMagicNumber(testClassBeans.get(0));
+        ArrayList<MethodWithMagicNumber> smellList = MagicNumberStructural.checkMethodsThatCauseMagicNumber(testClassBeans.get(0));
         assertEquals(null, smellList);
     }
 
@@ -25,7 +25,7 @@ public class MagicNumberTextualTest extends LightJavaCodeInsightFixtureTestCase 
         myFixture.configureByFile("test/MagicNumberPresentTest.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
-        ArrayList<MethodWithMagicNumber> smellList = MagicNumberTextual.checkMethodsThatCauseMagicNumber(testClassBeans.get(0));
+        ArrayList<MethodWithMagicNumber> smellList = MagicNumberStructural.checkMethodsThatCauseMagicNumber(testClassBeans.get(0));
         assertEquals(3, smellList.size());
     }
 }
