@@ -57,10 +57,10 @@ public class TestSmellStructuralDetector implements IDetector{
     }
 
     @Override
-    public ArrayList<ExceptionHandlingInfo> executeDetectionForExceptionHandling() {
+    public ArrayList<ExceptionHandlingInfo> executeDetectionForExceptionHandling(int threshold) {
         ArrayList<ExceptionHandlingInfo> classesWithExceptionHandling = new ArrayList<>();
         for(PsiClassBean testClass : testClasses){
-            ArrayList<MethodWithExceptionHandling> methodWithExceptionHandling = ExceptionHandlingStructural.checkMethodsThatContainExceptions(testClass);
+            ArrayList<MethodWithExceptionHandling> methodWithExceptionHandling = ExceptionHandlingStructural.checkMethodsThatContainExceptions(testClass,threshold);
             if(methodWithExceptionHandling != null){
                 classesWithExceptionHandling.add(new ExceptionHandlingInfo(testClass, methodWithExceptionHandling));
             }

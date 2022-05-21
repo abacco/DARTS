@@ -1,31 +1,26 @@
-package testSmellDetection.structuralRules;
+package testSmellDetection;
 
-import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase;
+import org.junit.Test;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.structuralRules.ConstructorInitStructural;
 import testSmellDetection.testSmellInfo.constructorInitialization.MethodWithConstructorInitialization;
 import utility.ConverterUtilities;
 import utility.TestSmellUtilities;
-
+import testConfiguration.TestConfig;
 import java.util.ArrayList;
 
-public class ConstrInitStructuralTest extends LightJavaCodeInsightFixtureTestCase {
-
-    @Override
-    protected String getTestDataPath() {
-        return "src/test/resources/testdata/";
-    }
-
+public class ConstrInitStructuralTest extends TestConfig {
+    @Test
     public void testConstructorNotPresent() {
-        myFixture.configureByFile("test/ConstructorInitializationNotPresentTest.java");
+        super.setFileName("test/ConstructorInitializationNotPresentTest.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
         ArrayList<MethodWithConstructorInitialization> smellList = ConstructorInitStructural.checkMethodsThatCauseConstructorInitialization(testClassBeans.get(0));
         assertEquals(null, smellList);
     }
-
+    @Test
     public void testConstructorPresent() {
-        myFixture.configureByFile("test/ConstructorInitializationPresentTest.java");
+        super.setFileName("test/ConstructorInitializationPresentTest.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
         ArrayList<MethodWithConstructorInitialization> smellList = ConstructorInitStructural.checkMethodsThatCauseConstructorInitialization(testClassBeans.get(0));

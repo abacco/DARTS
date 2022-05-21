@@ -2,7 +2,7 @@ package test;
 
 import main.EagerTestPresent;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class ExceptionTestNotPresent {
 

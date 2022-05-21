@@ -31,10 +31,6 @@ public abstract class CondTestLogicStructural {
                 count = 0;
             }
         }
-        //NUMERO DI CONDIZIONI LOGICHE MAGGIORE DELLA THRESHOLD PREFISSATA
-        for (MethodWithCondTestLogic method: methodsWithCondTestLogics) {
-
-        }
         if(methodsWithCondTestLogics.isEmpty()){
             return null;
         } else {

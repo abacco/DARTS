@@ -1,20 +1,16 @@
-package testSmellDetection.structuralRules;
+package testSmellDetection;
 
-import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase;
+import org.junit.Test;
 import testSmellDetection.bean.PsiClassBean;
 import utility.ConverterUtilities;
 import utility.TestSmellUtilities;
 
+import testConfiguration.TestConfig;
 import java.util.ArrayList;
 
-public class TestSmellUtilitiesTest extends LightJavaCodeInsightFixtureTestCase {
+public class TestSmellUtilitiesTest extends TestConfig {
 
     private ArrayList<PsiClassBean> psiClassBeans;
-
-    @Override
-    protected String getTestDataPath() {
-        return "src/test/resources/testdata/";
-    }
 
     @Override
     protected void setUp() throws Exception {
@@ -22,17 +18,17 @@ public class TestSmellUtilitiesTest extends LightJavaCodeInsightFixtureTestCase 
         myFixture.configureByFile("test/CondTestLogicNotPresentTest.java");
         psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
     }
-
+    @Test
     public void testSmellUtilitiesNotNull() {
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
         assertNotNull(testClassBeans);
     }
-
+    @Test
     public void testSmellUtilitiesIstanceOfArrayList() {
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
         assertInstanceOf(testClassBeans,ArrayList.class);
     }
-
+    @Test
     public void testSmellUtilitiesIstanceOfPsiClassBean() {
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
         assertInstanceOf(testClassBeans.get(0),PsiClassBean.class);

@@ -100,7 +100,7 @@ public class TestSmellTextualDetector implements IDetector{
     }
 
     @Override
-    public ArrayList<ExceptionHandlingInfo> executeDetectionForExceptionHandling() {
+    public ArrayList<ExceptionHandlingInfo> executeDetectionForExceptionHandling(int threshold) {
         return null;
     }
 

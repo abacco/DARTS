@@ -1,7 +1,7 @@
 package test;
 
 import main.EagerTestPresent;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class EagerTestPresentTest {
 

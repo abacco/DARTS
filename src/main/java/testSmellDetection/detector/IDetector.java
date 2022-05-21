@@ -21,7 +21,7 @@ public interface IDetector {
 
     ArrayList<ConstructorInitializationInfo> executeDetectionForConstructorInitialization();
 
-    ArrayList<ExceptionHandlingInfo> executeDetectionForExceptionHandling();
+    ArrayList<ExceptionHandlingInfo> executeDetectionForExceptionHandling(int threshold);
 
     ArrayList<CondTestLogicInfo> executeDetectionForCondTestLogic(int threshold);
 }

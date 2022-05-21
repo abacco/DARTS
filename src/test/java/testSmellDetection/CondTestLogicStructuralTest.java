@@ -1,65 +1,61 @@
-package testSmellDetection.structuralRules;
+package testSmellDetection;
 
-import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase;
+import org.junit.Test;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.structuralRules.CondTestLogicStructural;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.MethodWithCondTestLogic;
 import utility.ConverterUtilities;
 import utility.TestSmellUtilities;
 import java.util.ArrayList;
+import testConfiguration.TestConfig;
 
-public class CondTestLogicStructuralTest extends LightJavaCodeInsightFixtureTestCase {
-
+public class CondTestLogicStructuralTest extends TestConfig {
     private static final int THRESHOLD_1 = 1;
     private static final int THRESHOLD_0 = 0;
 
-    @Override
-    protected String getTestDataPath() {
-        return "src/test/resources/testdata/";
-    }
-
+    @Test
     public void testCondTestLogicNotPresent() {
-        myFixture.configureByFile("test/CondTestLogicNotPresentTest.java");
+        super.setFileName("test/CondTestLogicNotPresentTest.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
         ArrayList<MethodWithCondTestLogic> smellList = CondTestLogicStructural.checkMethodsThatCauseCondTestLogic(testClassBeans.get(0),THRESHOLD_1);
         assertEquals(null, smellList);
     }
-
+    @Test
     public void testCondTestLogicPresentThreshold0() {
-        myFixture.configureByFile("test/CondTestLogicPresentTest.java");
+        super.setFileName("test/CondTestLogicPresentTest.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
         ArrayList<MethodWithCondTestLogic> smellList = CondTestLogicStructural.checkMethodsThatCauseCondTestLogic(testClassBeans.get(0),THRESHOLD_0);
         assertEquals(3, smellList.size());
     }
-
+    @Test
     public void testCondTestLogicPresentThreshold1() {
-        myFixture.configureByFile("test/CondTestLogicPresentTest.java");
+        super.setFileName("test/CondTestLogicPresentTest.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
         ArrayList<MethodWithCondTestLogic> smellList = CondTestLogicStructural.checkMethodsThatCauseCondTestLogic(testClassBeans.get(0),THRESHOLD_1);
         assertEquals(1, smellList.size());
     }
-
+    @Test
     public void testCondTestLogicPresentIf() {
-        myFixture.configureByFile("test/CondTestLogicPresentIf.java");
+        super.setFileName("test/CondTestLogicPresentIf.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
         ArrayList<MethodWithCondTestLogic> smellList = CondTestLogicStructural.checkMethodsThatCauseCondTestLogic(testClassBeans.get(0),THRESHOLD_0);
         assertEquals(1, smellList.size());
     }
-
+    @Test
     public void testCondTestLogicPresentSwitch() {
-        myFixture.configureByFile("test/CondTestLogicPresentSwitch.java");
+        super.setFileName("test/CondTestLogicPresentSwitch.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
         ArrayList<MethodWithCondTestLogic> smellList = CondTestLogicStructural.checkMethodsThatCauseCondTestLogic(testClassBeans.get(0),THRESHOLD_0);
         assertEquals(1, smellList.size());
     }
-
+    @Test
     public void testCondTestLogicPresentLoopStatement() {
-        myFixture.configureByFile("test/CondTestLogicPresentLoopStatement.java");
+        super.setFileName("test/CondTestLogicPresentLoopStatement.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
         ArrayList<MethodWithCondTestLogic> smellList = CondTestLogicStructural.checkMethodsThatCauseCondTestLogic(testClassBeans.get(0),THRESHOLD_0);

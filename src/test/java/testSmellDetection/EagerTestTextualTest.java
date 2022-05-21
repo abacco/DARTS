@@ -1,31 +1,28 @@
-package testSmellDetection.structuralRules;
+package testSmellDetection;
 
-import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase;
+import org.junit.Test;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.testSmellInfo.eagerTest.MethodWithEagerTest;
 import testSmellDetection.textualRules.EagerTestTextual;
 import utility.ConverterUtilities;
 import utility.TestSmellUtilities;
+import testConfiguration.TestConfig;
 import java.util.ArrayList;
 
-public class EagerTestTextualTest extends LightJavaCodeInsightFixtureTestCase {
-    @Override
-    protected String getTestDataPath() {
-        return "src/test/resources/testdata/";
-    }
-
+public class EagerTestTextualTest extends TestConfig {
+    @Test
     public void testEagerTestNotPresent() {
-        myFixture.configureByFile("main/EagerTestNotPresent.java");
-        myFixture.configureByFile("test/EagerTestNotPresentTest.java");
+        super.setFileName("test/EagerTestNotPresentTest.java");
+        super.setFileName("main/EagerTestNotPresent.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
         ArrayList<MethodWithEagerTest> smellList = EagerTestTextual.checkMethodsThatCauseEagerTest(testClassBeans.get(0), testClassBeans.get(0).getProductionClass());
         assertEquals(null, smellList);
     }
-
+    @Test
     public void testEagerTestPresent() {
-        myFixture.configureByFile("main/EagerTestPresent.java");
-        myFixture.configureByFile("test/EagerTestPresentTest.java");
+        super.setFileName("test/EagerTestPresentTest.java");
+        super.setFileName("main/EagerTestPresent.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
         ArrayList<MethodWithEagerTest> smellList = EagerTestTextual.checkMethodsThatCauseEagerTest(testClassBeans.get(0), testClassBeans.get(0).getProductionClass());

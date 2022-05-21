@@ -20,9 +20,7 @@ public abstract class MagicNumberStructural {
           for(PsiMethodCallExpression callExpression : methodCalls){
             /*Prendo il nome del metodo */
             String methodCallName = callExpression.getMethodExpression().getQualifiedName();
-            if(methodCallName.toLowerCase().contains("assertequal") ||
-                    methodCallName.toLowerCase().contains("assert") ||
-                    methodCallName.toLowerCase().contains("assertnotequals")){
+            if(methodCallName.toLowerCase().contains("assert")){
               /*Prendo il primo argomento (expected) dall'assert */
               String firtsArg = callExpression.getArgumentList().getExpressions()[0].getText();
               if(firtsArg.matches("[0-9]+")){

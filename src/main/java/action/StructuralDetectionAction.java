@@ -22,6 +22,7 @@ import java.util.ArrayList;
 public class StructuralDetectionAction extends AnAction {
 
     private static final int THRESHOLD_MN = 0;
+    private static final int THRESHOLD_EH = 0;
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
@@ -36,7 +37,7 @@ public class StructuralDetectionAction extends AnAction {
         // ConstructorInitialization
         ArrayList<ConstructorInitializationInfo> constructorInitializationInfos = detector.executeDetectionForConstructorInitialization();
         // Exception Handling
-        ArrayList<ExceptionHandlingInfo> exceptionHandlingInfos = detector.executeDetectionForExceptionHandling();
+        ArrayList<ExceptionHandlingInfo> exceptionHandlingInfos = detector.executeDetectionForExceptionHandling(THRESHOLD_EH);
 
         System.out.println("\n\n ########################### ACTION - DETECTOR STRUTTURALE: risultato dell'analisi. ###########################\n\n");
         for(GeneralFixtureInfo info : generalFixtureInfos){
