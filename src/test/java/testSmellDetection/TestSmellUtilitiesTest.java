@@ -1,6 +1,7 @@
 package testSmellDetection;
 
 import org.junit.Test;
+import org.mockito.Mockito;
 import testSmellDetection.bean.PsiClassBean;
 import utility.ConverterUtilities;
 import utility.TestSmellUtilities;
@@ -16,7 +17,7 @@ public class TestSmellUtilitiesTest extends TestConfig {
     protected void setUp() throws Exception {
         super.setUp();
         myFixture.configureByFile("test/CondTestLogicNotPresentTest.java");
-        psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
+        psiClassBeans = Mockito.mock(ConverterUtilities.class).getClassesFromPackages(getProject());
     }
     @Test
     public void testSmellUtilitiesNotNull() {
