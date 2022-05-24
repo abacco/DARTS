@@ -1,4 +1,4 @@
-package testSmellDetection;
+package dartsFuncionality;
 
 import org.junit.Test;
 import testSmellDetection.bean.PsiClassBean;

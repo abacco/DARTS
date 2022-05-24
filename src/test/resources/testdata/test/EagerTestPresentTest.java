@@ -11,6 +11,8 @@ public class EagerTestPresentTest {
       new EagerTestPresent().doSomething(1);
       new EagerTestPresent().doSomething2(22);
       new EagerTestPresent().doSomething2(22);
+      new EagerTestPresent().doSomething3(22);
+      new EagerTestPresent().doSomething3(22);
   }
 
   @Test
