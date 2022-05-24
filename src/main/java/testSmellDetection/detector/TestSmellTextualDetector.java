@@ -8,6 +8,7 @@ import testSmellDetection.structuralRules.CondTestLogicStructural;
 import testSmellDetection.structuralRules.ConstructorInitStructural;
 import testSmellDetection.structuralRules.ExceptionHandlingStructural;
 import testSmellDetection.structuralRules.MagicNumberStructural;
+import testSmellDetection.testSmellInfo.DuplicateAssert.DuplicateAssertInfo;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.MethodWithCondTestLogic;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
@@ -106,6 +107,11 @@ public class TestSmellTextualDetector implements IDetector{
 
     @Override
     public ArrayList<CondTestLogicInfo> executeDetectionForCondTestLogic(int threshold) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<DuplicateAssertInfo> executeDetectionForDuplicateAssertInfo() {
         return null;
     }
 

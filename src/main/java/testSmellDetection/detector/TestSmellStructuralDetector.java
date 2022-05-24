@@ -5,6 +5,8 @@ import contextualAnalysis.hashUtilies.ProductionClassesSingleton;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.bean.PsiMethodBean;
 import testSmellDetection.structuralRules.*;
+import testSmellDetection.testSmellInfo.DuplicateAssert.DuplicateAssertInfo;
+import testSmellDetection.testSmellInfo.DuplicateAssert.MethodWithDuplicateAssert;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.MethodWithExceptionHandling;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
@@ -90,6 +92,18 @@ public class TestSmellStructuralDetector implements IDetector{
             }
         }
         return classesWithCondTestLogic;
+    }
+
+    @Override
+    public ArrayList<DuplicateAssertInfo> executeDetectionForDuplicateAssertInfo() {
+        ArrayList<DuplicateAssertInfo> classesWithDuplicateAssert = new ArrayList<>();
+        for(PsiClassBean testClass : testClasses){
+            ArrayList<MethodWithDuplicateAssert> methodWithDuplicateAsserts = DuplicateAssertStructural.checkMethodsThatCauseDuplicateAssert(testClass);
+            if(methodWithDuplicateAsserts != null){
+                classesWithDuplicateAssert.add(new DuplicateAssertInfo(testClass, methodWithDuplicateAsserts));
+            }
+        }
+        return classesWithDuplicateAssert;
     }
 
     public ArrayList<GeneralFixtureInfo> executeDetectionForGeneralFixture() {
