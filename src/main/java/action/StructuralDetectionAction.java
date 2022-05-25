@@ -2,6 +2,7 @@ package action;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import testSmellDetection.testSmellInfo.DuplicateAssert.DuplicateAssertInfo;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
 import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
@@ -38,6 +39,8 @@ public class StructuralDetectionAction extends AnAction {
         ArrayList<ConstructorInitializationInfo> constructorInitializationInfos = detector.executeDetectionForConstructorInitialization();
         // Exception Handling
         ArrayList<ExceptionHandlingInfo> exceptionHandlingInfos = detector.executeDetectionForExceptionHandling(THRESHOLD_EH);
+        // Exception Handling
+        ArrayList<DuplicateAssertInfo> duplicateAssertInfos = detector.executeDetectionForDuplicateAssertInfo(THRESHOLD_EH);
 
         System.out.println("\n\n ########################### ACTION - DETECTOR STRUTTURALE: risultato dell'analisi. ###########################\n\n");
         for(GeneralFixtureInfo info : generalFixtureInfos){
@@ -65,6 +68,10 @@ public class StructuralDetectionAction extends AnAction {
         for(ExceptionHandlingInfo info : exceptionHandlingInfos){
             System.out.println("\n   EXCEPTION HANDLING : " + info.toString());
         }
+        // DuplicateAssert
+        for(DuplicateAssertInfo info : duplicateAssertInfos){
+            System.out.println("\n   DUPLICATE ASSERT : " + info.toString());
+        }
 
         if(generalFixtureInfos.isEmpty() && eagerTestInfos.isEmpty() && lackOfCohesionInfos.isEmpty() &&
                 magicNumberTestInfos.isEmpty() &&
@@ -81,7 +88,8 @@ public class StructuralDetectionAction extends AnAction {
                     magicNumberTestInfos,
                     condTestLogicInfos,
                     constructorInitializationInfos,
-                    exceptionHandlingInfos);
+                    exceptionHandlingInfos,
+                    duplicateAssertInfos);
         }
     }
 

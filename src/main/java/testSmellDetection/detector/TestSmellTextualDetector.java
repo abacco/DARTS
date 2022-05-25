@@ -4,24 +4,16 @@ import com.intellij.openapi.project.Project;
 import contextualAnalysis.hashUtilies.ProductionClassesSingleton;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.bean.PsiMethodBean;
-import testSmellDetection.structuralRules.CondTestLogicStructural;
-import testSmellDetection.structuralRules.ConstructorInitStructural;
-import testSmellDetection.structuralRules.ExceptionHandlingStructural;
-import testSmellDetection.structuralRules.MagicNumberStructural;
 import testSmellDetection.testSmellInfo.DuplicateAssert.DuplicateAssertInfo;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
-import testSmellDetection.testSmellInfo.conditionalTestLogic.MethodWithCondTestLogic;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
-import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.MethodWithExceptionHandling;
 import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
-import testSmellDetection.testSmellInfo.constructorInitialization.MethodWithConstructorInitialization;
 import testSmellDetection.testSmellInfo.eagerTest.EagerTestInfo;
 import testSmellDetection.testSmellInfo.eagerTest.MethodWithEagerTest;
 import testSmellDetection.testSmellInfo.generalFixture.GeneralFixtureInfo;
 import testSmellDetection.testSmellInfo.generalFixture.MethodWithGeneralFixture;
 import testSmellDetection.testSmellInfo.lackOfCohesion.LackOfCohesionInfo;
 import testSmellDetection.testSmellInfo.magicNamberTest.MagicNumberTestInfo;
-import testSmellDetection.testSmellInfo.magicNamberTest.MethodWithMagicNumber;
 import testSmellDetection.textualRules.*;
 import utility.ConverterUtilities;
 import utility.TestSmellUtilities;
@@ -111,7 +103,7 @@ public class TestSmellTextualDetector implements IDetector{
     }
 
     @Override
-    public ArrayList<DuplicateAssertInfo> executeDetectionForDuplicateAssertInfo() {
+    public ArrayList<DuplicateAssertInfo> executeDetectionForDuplicateAssertInfo(int thresholdEh) {
         return null;
     }
 

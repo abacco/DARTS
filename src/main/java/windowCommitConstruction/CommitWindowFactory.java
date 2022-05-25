@@ -7,6 +7,7 @@ import com.intellij.ui.components.JBTabbedPane;
 import javax.swing.*;
 import java.awt.*;
 
+import testSmellDetection.testSmellInfo.DuplicateAssert.DuplicateAssertInfo;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
 import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
@@ -27,15 +28,18 @@ public class CommitWindowFactory {
     private static JPanel exceptionHandlingPanel;
 
     /* createWindow per GF-ET-LOC-MN-CTL */
-    public static void createWindow(Boolean textual, Boolean structural,
-                                    Project project,
-                                    ArrayList<GeneralFixtureInfo> listGFI,
-                                    ArrayList<EagerTestInfo> listETI,
-                                    ArrayList<LackOfCohesionInfo> listLOCI,
-                                    ArrayList<MagicNumberTestInfo> listMNI,
-                                    ArrayList<CondTestLogicInfo> listCTLI,
-                                    ArrayList<ConstructorInitializationInfo> listCII,
-                                    ArrayList<ExceptionHandlingInfo> listEHI) {
+    public static <listDAI> void createWindow(Boolean textual, Boolean structural,
+                                              Project project,
+                                              ArrayList<GeneralFixtureInfo> listGFI,
+                                              ArrayList<EagerTestInfo> listETI,
+                                              ArrayList<LackOfCohesionInfo> listLOCI,
+                                              ArrayList<MagicNumberTestInfo> listMNI,
+                                              ArrayList<CondTestLogicInfo> listCTLI,
+                                              ArrayList<ConstructorInitializationInfo> listCII,
+                                              ArrayList<ExceptionHandlingInfo> listEHI,
+                                              ArrayList<DuplicateAssertInfo> listDAI)
+
+    {
         CommitPrincipalFrame principalFrame = null;
         //Controllo per vedere se la window esiste già.
         boolean frameExist = false;
