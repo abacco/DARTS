@@ -106,6 +106,7 @@ public class TestSmellStructuralDetector implements IDetector{
         return classesWithDuplicateAssert;
     }
 
+    
     public ArrayList<GeneralFixtureInfo> executeDetectionForGeneralFixture() {
         ArrayList<GeneralFixtureInfo> classesWithGeneralFixture = new ArrayList<>();
         for(PsiClassBean testClass : testClasses){
