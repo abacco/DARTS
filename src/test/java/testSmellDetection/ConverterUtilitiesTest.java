@@ -15,6 +15,12 @@ public class ConverterUtilitiesTest extends TestConfig {
         assertNotNull("PsiClassBean not null",psiClassBeans);
     }
     @Test
+    public void testConverterUtilitiesNull() {
+        super.setFileName("test/CondTestLogicNotPresentTest.java");
+        ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(null);
+        assertNull("PsiClassBean null",psiClassBeans);
+    }
+    @Test
     public void testConverterUtilitiesIstanceOfPsiClassBean() {
         super.setFileName("test/CondTestLogicNotPresentTest.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());

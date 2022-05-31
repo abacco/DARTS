@@ -28,7 +28,8 @@ public abstract class ConverterUtilities {
     public static ArrayList<PsiClassBean> getClassesFromPackages(Project myProject){
         System.out.println("############ Sono ConverterUtilities. Inizio la conversione del progetto. ################");
         ArrayList<PsiClassBean> classBeans = new ArrayList<>();
-
+        if(myProject == null)
+            return null;
         ArrayList<PsiPackage> packages = getPackages(myProject);
         for(PsiPackage psiPackage : packages){
             recursiveResearch(psiPackage, classBeans);

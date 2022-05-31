@@ -2,11 +2,11 @@ package testSmellDetection;
 
 import org.junit.Test;
 import org.mockito.Mockito;
+import testConfiguration.TestConfig;
 import testSmellDetection.bean.PsiClassBean;
 import utility.ConverterUtilities;
 import utility.TestSmellUtilities;
 
-import testConfiguration.TestConfig;
 import java.util.ArrayList;
 
 public class TestSmellUtilitiesTest extends TestConfig {
@@ -23,6 +23,11 @@ public class TestSmellUtilitiesTest extends TestConfig {
     public void testSmellUtilitiesNotNull() {
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
         assertNotNull(testClassBeans);
+    }
+    @Test
+    public void testSmellUtilitiesNull() {
+        ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(null);
+        assertNull(testClassBeans);
     }
     @Test
     public void testSmellUtilitiesIstanceOfArrayList() {
