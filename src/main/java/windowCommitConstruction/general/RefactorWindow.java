@@ -22,6 +22,8 @@ import refactor.strategy.EagerTestStrategy;
 /*import refactor.strategy.GeneralFixtureStrategy;*/
 import refactor.strategy.LackOfCohesionStrategy;
 import testSmellDetection.bean.PsiMethodBean;
+import testSmellDetection.testSmellInfo.DuplicateAssert.DuplicateAssertInfo;
+import testSmellDetection.testSmellInfo.DuplicateAssert.MethodWithDuplicateAssert;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.MethodWithExceptionHandling;
 import testSmellDetection.testSmellInfo.TestSmellInfo;
@@ -86,8 +88,9 @@ public class RefactorWindow extends JPanel implements ActionListener{
      * @param methodWithCondTestLogic
      * @param condTestLogicInfo
      * @param project
+     * @param ctlSmellPanel
      */
-    public RefactorWindow(MethodWithCondTestLogic methodWithCondTestLogic, CondTestLogicInfo condTestLogicInfo, Project project, CTLSmellPanel ctlSmellPanel) {
+    public RefactorWindow(MethodWithDuplicateAssert methodWithCondTestLogic, DuplicateAssertInfo condTestLogicInfo, Project project, DASmellPanel ctlSmellPanel) {
         super();
         this.methodWithCondTestLogic = methodWithCondTestLogic;
         this.condTestLogicInfo = condTestLogicInfo;
