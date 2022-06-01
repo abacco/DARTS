@@ -21,9 +21,6 @@ import java.util.*;
  * Questa classe descrive la action per eseguire una analisi Strutturale sul progetto attualmente attivo
  */
 public class TextualDetectionAction extends AnAction {
-    
-    private ThresholdPanel thresholdPanel;
-
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {

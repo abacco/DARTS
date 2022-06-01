@@ -22,13 +22,11 @@ import java.util.ArrayList;
  * Questa classe descrive la action per eseguire una analisi Strutturale sul progetto attualmente attivo
  */
 public class StructuralDetectionAction extends AnAction {
-
-    private ThresholdPanel thresholdPanel;
-
+    
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
 
-        thresholdPanel = new ThresholdPanel(anActionEvent.getProject());
+        ThresholdPanel thresholdPanel = new ThresholdPanel(anActionEvent.getProject());
         thresholdPanel.setListener(thresholdPanel.getEnterButton());
 
     }
