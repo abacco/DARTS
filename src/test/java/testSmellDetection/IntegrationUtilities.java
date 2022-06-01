@@ -18,11 +18,10 @@ public class IntegrationUtilities extends TestConfig {
 
     @Test
     public void testIntegrationUtilities_ClassNull() {
-        super.setFileName("test/CondTestLogicPresentTest.java");
+        super.setFileName("main/ProductionClass.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
-        psiClassBeans = null;
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
-        assertNull(testClassBeans);
+        assertEquals( 0,testClassBeans.size());
     }
 
     @Test
