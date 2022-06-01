@@ -23,9 +23,6 @@ import java.util.ArrayList;
  */
 public class StructuralDetectionAction extends AnAction {
 
-    private static  int THRESHOLD_MN = 0;
-    private static  int THRESHOLD_EH = 0;
-
     private ThresholdPanel thresholdPanel;
 
     @Override
