@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public abstract class CondTestLogicStructural {
 
     public static ArrayList<MethodWithCondTestLogic> checkMethodsThatCauseCondTestLogic(PsiClassBean testClass, int threshold){
+        if(threshold<0 || threshold>5)
+            return null;
         ArrayList<MethodWithCondTestLogic> methodsWithCondTestLogics = new ArrayList<>();
         int count = 0;
         for(PsiMethodBean psiMethodBeanInside : testClass.getPsiMethodBeans()){

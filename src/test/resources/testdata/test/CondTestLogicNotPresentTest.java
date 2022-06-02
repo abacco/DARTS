@@ -7,7 +7,7 @@ public class CondTestLogicNotPresentTest {
 
     @Test
     public void test1() {
-        Assert.assertEquals(1,1);
+
     }
 
     @Test

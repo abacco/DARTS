@@ -1,11 +1,9 @@
-package dartsFuncionality;
+package dartsFunctionality;
 
 import org.junit.Test;
 import testConfiguration.TestConfig;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.structuralRules.EagerTestStructural;
-import testSmellDetection.testSmellInfo.eagerTest.MethodWithEagerTest;
-import testSmellDetection.textualRules.EagerTestTextual;
 import utility.ConverterUtilities;
 import utility.TestSmellUtilities;
 

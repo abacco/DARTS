@@ -8,7 +8,6 @@ import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorIni
 import testSmellDetection.testSmellInfo.magicNamberTest.MagicNumberTestInfo;
 import windowCommitConstruction.CommitWindowFactory;
 import org.jetbrains.annotations.NotNull;
-
 import testSmellDetection.detector.IDetector;
 import testSmellDetection.detector.TestSmellStructuralDetector;
 import testSmellDetection.testSmellInfo.eagerTest.EagerTestInfo;
