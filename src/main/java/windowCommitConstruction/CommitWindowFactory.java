@@ -55,10 +55,12 @@ public class CommitWindowFactory {
         JBTabbedPane detectionTp = (JBTabbedPane) principalFrame.getDetectionTp();
         if(textual){
             principalFrame.removeTextualPanel();
+            principalFrame.removeStructuralPanel();
             principalFrame.addTextualPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI, listCTLI, listCII, listEHI));
         }
         if(structural){
             principalFrame.removeStructuralPanel();
+            principalFrame.removeTextualPanel();
             principalFrame.addStructuralPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI, listCTLI, listCII, listEHI));
         }
         principalFrame.add(detectionTp);

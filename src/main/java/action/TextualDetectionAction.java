@@ -25,8 +25,38 @@ public class TextualDetectionAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
 
-        ThresholPanelTextual thresholdPanelTextual = new ThresholPanelTextual(anActionEvent.getProject());
-        thresholdPanelTextual.setListener(thresholdPanelTextual.getEnterButton());
+        IDetector detector = new TestSmellTextualDetector(anActionEvent.getProject());
+        ArrayList<GeneralFixtureInfo> generalFixtureInfos = detector.executeDetectionForGeneralFixture();
+        ArrayList<EagerTestInfo> eagerTestInfos = detector.executeDetectionForEagerTest();
+        ArrayList<LackOfCohesionInfo> lackOfCohesionInfos = detector.executeDetectionForLackOfCohesion();
+        //Magic Number
+        ArrayList<MagicNumberTestInfo> magicNumberTestInfos = detector.executeDetectionForMagicNumber();
+        //Conditional Test Logic
+        ArrayList<CondTestLogicInfo> condTestLogicInfos = detector.executeDetectionForCondTestLogic(0);
+        // ConstructorInitialization
+        ArrayList<ConstructorInitializationInfo> constructorInitializationInfos = detector.executeDetectionForConstructorInitialization();
+        // Exception Handling
+        ArrayList<ExceptionHandlingInfo> exceptionHandlingInfos = detector.executeDetectionForExceptionHandling(0);
+
+        if (generalFixtureInfos.isEmpty()
+                && eagerTestInfos.isEmpty()
+                && lackOfCohesionInfos.isEmpty()
+                && magicNumberTestInfos.isEmpty()
+                && condTestLogicInfos.isEmpty()
+                && exceptionHandlingInfos.isEmpty()
+                && constructorInitializationInfos.isEmpty()) {
+            System.out.println("\n Non si è trovato alcuno Smell");
+
+        } else {
+            CommitWindowFactory.createWindow(true, false, anActionEvent.getProject(),
+                    generalFixtureInfos,
+                    eagerTestInfos,
+                    lackOfCohesionInfos,
+                    magicNumberTestInfos,
+                    condTestLogicInfos,
+                    constructorInitializationInfos,
+                    exceptionHandlingInfos);
+        }
 
     }
 
