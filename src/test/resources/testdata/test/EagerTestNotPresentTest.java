@@ -1,9 +1,17 @@
 package test;
 
 import main.EagerTestNotPresent;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class EagerTestNotPresentTest {
+
+  public void setup(){
+
+  }
+
+  public void teardown(){
+
+  }
 
   @Test
   public void test1() {

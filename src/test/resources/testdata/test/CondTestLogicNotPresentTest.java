@@ -1,13 +1,13 @@
 package test;
 
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class CondTestLogicNotPresentTest {
 
     @Test
     public void test1() {
-        Assert.assertEquals(1,1);
+
     }
 
     @Test

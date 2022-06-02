@@ -155,7 +155,7 @@ public class RefactorWindow extends JPanel implements ActionListener{
         String methodName = "<html> Method " + methodWithExceptionHandling.getMethodWithExceptionHandling().getPsiMethod().getName() + " This smell occurs when a test method explicitly a passing or failing of a test method is dependent on the production method throwing an exception <br/>";
 
         methodName = methodName + "<br/>The Smell will be removed using one of this refactoring operations:<br/>";
-        methodName = methodName + "   - Change argument type: change argument \"Expected\" from literal number to constant integer <br/>";
+        methodName = methodName + "   - Change ... <br/>";
 
         tipsTextLabel.setText(methodName);
 
@@ -185,7 +185,7 @@ public class RefactorWindow extends JPanel implements ActionListener{
         String methodName = "<html> Method " + methodWithConstructorInitialization.getMethodWithConstructorInitialization().getPsiMethod().getName() + " is affected by Constructor Initialization because it uses the constructor instead of setup method <br/>";
 
         methodName = methodName + "<br/>The Smell will be removed using one of this refactoring operations:<br/>";
-        methodName = methodName + "   - Change argument type: change argument \"Expected\" from literal number to constant integer <br/>";
+        methodName = methodName + "   - Change ... <br/>";
 
         tipsTextLabel.setText(methodName);
 

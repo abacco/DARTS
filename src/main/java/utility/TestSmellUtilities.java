@@ -14,6 +14,9 @@ public abstract class TestSmellUtilities {
      */
     public static ArrayList<PsiClassBean> getAllTestClasses(ArrayList<PsiClassBean> allClasses){
         ArrayList<PsiClassBean> allTestClasses = new ArrayList<>();
+        if(allClasses == null){
+            return null;
+        }
         for(PsiClassBean psiClassBean : allClasses){
             if(TestSmellUtilities.isTestClass(psiClassBean)){
                 psiClassBean.setProductionClass(findProductionClass(psiClassBean, allClasses));

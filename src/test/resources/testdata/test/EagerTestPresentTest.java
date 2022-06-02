@@ -1,7 +1,7 @@
 package test;
 
 import main.EagerTestPresent;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class EagerTestPresentTest {
 
@@ -11,6 +11,8 @@ public class EagerTestPresentTest {
       new EagerTestPresent().doSomething(1);
       new EagerTestPresent().doSomething2(22);
       new EagerTestPresent().doSomething2(22);
+      new EagerTestPresent().doSomething3(22);
+      new EagerTestPresent().doSomething3(22);
   }
 
   @Test

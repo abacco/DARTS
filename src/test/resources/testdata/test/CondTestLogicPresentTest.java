@@ -1,12 +1,16 @@
 package test;
 
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class CondTestLogicPresentTest {
 
     @Test
     public void test1() {
+        if(1==1)
+            Assert.assertEquals(1,1);
+        else
+            Assert.assertEquals(2,2 );
         if(1==1)
             Assert.assertEquals(1,1);
         else
@@ -17,7 +21,7 @@ public class CondTestLogicPresentTest {
     @Test
     public void test2() {
         for(int i=0;i<5;i++){
-            Assert.assertEquals(1,i);
+            Assert.assertEquals(1,1);
         }
     }
 

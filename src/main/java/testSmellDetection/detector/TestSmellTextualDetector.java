@@ -4,6 +4,10 @@ import com.intellij.openapi.project.Project;
 import contextualAnalysis.hashUtilies.ProductionClassesSingleton;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.bean.PsiMethodBean;
+import testSmellDetection.structuralRules.CondTestLogicStructural;
+import testSmellDetection.structuralRules.ConstructorInitStructural;
+import testSmellDetection.structuralRules.ExceptionHandlingStructural;
+import testSmellDetection.structuralRules.MagicNumberStructural;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.MethodWithCondTestLogic;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
@@ -37,53 +41,7 @@ public class TestSmellTextualDetector implements IDetector{
         productionClassesSingleton.setProductionClasses(productionClasses);
     }
 
-    @Override
-    public ArrayList<MagicNumberTestInfo> executeDetectionForMagicNumber() {
-        ArrayList<MagicNumberTestInfo> classesWithMagicNumber = new ArrayList<>();
-        for(PsiClassBean testClass : testClasses){
-            ArrayList<MethodWithMagicNumber> methodWithMagicNumbers = MagicNumberTextual.checkMethodsThatCauseMagicNumber(testClass);
-            if(methodWithMagicNumbers != null){
-                classesWithMagicNumber.add(new MagicNumberTestInfo(testClass, methodWithMagicNumbers));
-            }
-        }
-        return classesWithMagicNumber;
-    }
 
-    @Override
-    public ArrayList<ExceptionHandlingInfo> executeDetectionForExceptionHandling() {
-        ArrayList<ExceptionHandlingInfo> classesWithExceptionHandling = new ArrayList<>();
-        for(PsiClassBean testClass : testClasses){
-            ArrayList<MethodWithExceptionHandling> methodWithExceptionHandling = ExceptionHandlingTextual.checkMethodsThatContainExceptions(testClass);
-            if(methodWithExceptionHandling != null){
-                classesWithExceptionHandling.add(new ExceptionHandlingInfo(testClass, methodWithExceptionHandling));
-            }
-        }
-        return classesWithExceptionHandling;
-    }
-
-    @Override
-    public ArrayList<ConstructorInitializationInfo> executeDetectionForConstructorInitialization() {
-        ArrayList<ConstructorInitializationInfo> classesWithConstructorInitialization = new ArrayList<>();
-        for(PsiClassBean testClass : testClasses){
-            ArrayList<MethodWithConstructorInitialization> methodWithMagicNumbers = ConstructorInitTextual.checkMethodsThatCauseConstructorInitialization(testClass);
-            if(methodWithMagicNumbers != null){
-                classesWithConstructorInitialization.add(new ConstructorInitializationInfo(testClass, methodWithMagicNumbers));
-            }
-        }
-        return classesWithConstructorInitialization;
-    }
-
-    @Override
-    public ArrayList<CondTestLogicInfo> executeDetectionForCondTestLogic() {
-        ArrayList<CondTestLogicInfo> classesWithCondTestLogic = new ArrayList<>();
-        for(PsiClassBean testClass : testClasses){
-            ArrayList<MethodWithCondTestLogic> methodWithCondTestLogics = CondTestLogicTextual.checkMethodsThatCauseCondTestLogic(testClass);
-            if(methodWithCondTestLogics != null){
-                classesWithCondTestLogic.add(new CondTestLogicInfo(testClass, methodWithCondTestLogics));
-            }
-        }
-        return classesWithCondTestLogic;
-    }
 
     public ArrayList<GeneralFixtureInfo> executeDetectionForGeneralFixture() {
         ArrayList<GeneralFixtureInfo> classesWithGeneralFixture = new ArrayList<>();
@@ -129,6 +87,26 @@ public class TestSmellTextualDetector implements IDetector{
             }
         }
         return classesWithLackOfCohesion;
+    }
+
+    @Override
+    public ArrayList<MagicNumberTestInfo> executeDetectionForMagicNumber() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<ConstructorInitializationInfo> executeDetectionForConstructorInitialization() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<ExceptionHandlingInfo> executeDetectionForExceptionHandling(int threshold) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<CondTestLogicInfo> executeDetectionForCondTestLogic(int threshold) {
+        return null;
     }
 
 
