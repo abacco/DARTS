@@ -41,8 +41,9 @@ public class DuplicateAssertCP extends JPanel implements ListSelectionListener {
 
         // Inizio la costruzione del Panel.
         if(!classesWithDA.isEmpty()){
+            classesWithDuplicateAssert = classesWithDA;
             //Parte relativa all'inizializzazione del Panel per GeneralFixture.
-            ArrayList<DuplicateAssertInfo> classesWithDuplicateAssert = classesWithDA;
+           // ArrayList<DuplicateAssertInfo> classesWithDuplicateAssert = classesWithDA;
 
             // Mi prendo tutti i nomi delle classi affette dallo smell.
             for (DuplicateAssertInfo dai : classesWithDuplicateAssert){
@@ -62,7 +63,7 @@ public class DuplicateAssertCP extends JPanel implements ListSelectionListener {
             classScrollPane.setBorder(new TitledBorder("CLASSES"));
 
             // Inizializzo la secondSplitPane per la prima esecuzione.
-            secondSplitPane = new DASmellPanel(classesWithDuplicateAssert.get(0), project, this);
+           secondSplitPane = new DASmellPanel(classesWithDuplicateAssert.get(0), project, this);
 
             // Creazione dello split pane con la lista delle classi e la secondSplitPane.
             firstSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, classScrollPane, secondSplitPane);

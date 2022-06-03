@@ -95,7 +95,7 @@ public class TestSmellStructuralDetector implements IDetector{
     }
 
     @Override
-    public ArrayList<DuplicateAssertInfo> executeDetectionForDuplicateAssertInfo(int thresholdEh) {
+    public ArrayList<DuplicateAssertInfo> executeDetectionForDuplicateAssertInfo() {
         ArrayList<DuplicateAssertInfo> classesWithDuplicateAssert = new ArrayList<>();
         for(PsiClassBean testClass : testClasses){
             ArrayList<MethodWithDuplicateAssert> methodWithDuplicateAsserts = DuplicateAssertStructural.checkMethodsThatCauseDuplicateAssert(testClass);

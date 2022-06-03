@@ -9,7 +9,8 @@ public class ExceptionHandlingInfo extends TestSmellInfo {
 
     private ArrayList<MethodWithExceptionHandling> methodWithExceptionHandlings;
 
-    public ExceptionHandlingInfo(PsiClassBean classWithSmell, ArrayList<MethodWithExceptionHandling> methodWithExceptionHandlings) {
+    public ExceptionHandlingInfo(PsiClassBean classWithSmell,
+                                 ArrayList<MethodWithExceptionHandling> methodWithExceptionHandlings) {
         super(classWithSmell);
         this.methodWithExceptionHandlings = methodWithExceptionHandlings;
     }

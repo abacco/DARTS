@@ -9,9 +9,10 @@ import java.util.ArrayList;
 public class DuplicateAssertInfo extends TestSmellInfo {
     private ArrayList<MethodWithDuplicateAssert> methodsThatCauseDuplicateAssert;
 
-    public DuplicateAssertInfo(PsiClassBean classWithMagicNumber, ArrayList<MethodWithDuplicateAssert> methodsThatCauseMagicNumber) {
-        super(classWithMagicNumber);
-        this.methodsThatCauseDuplicateAssert = methodsThatCauseDuplicateAssert;
+    public DuplicateAssertInfo(PsiClassBean classWithSmell,
+                               ArrayList<MethodWithDuplicateAssert> methodsThatCauseMagicNumber) {
+        super(classWithSmell);
+        this.methodsThatCauseDuplicateAssert = methodsThatCauseMagicNumber;
     }
 
 

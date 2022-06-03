@@ -103,7 +103,7 @@ public class TestSmellTextualDetector implements IDetector{
     }
 
     @Override
-    public ArrayList<DuplicateAssertInfo> executeDetectionForDuplicateAssertInfo(int thresholdEh) {
+    public ArrayList<DuplicateAssertInfo> executeDetectionForDuplicateAssertInfo() {
         return null;
     }
 

@@ -27,7 +27,7 @@ public class DASmellPanel extends JSplitPane implements ListSelectionListener {
 
     ArrayList<String> methodsNames = new ArrayList<>();
 
-    private DuplicateAssertInfo duplicateAssertTestInfo;
+    private DuplicateAssertInfo duplicateAssertInfo;
     private Project project;
     private DuplicateAssertCP duplicateAssertCP;
     DefaultListModel model;
@@ -41,9 +41,9 @@ public class DASmellPanel extends JSplitPane implements ListSelectionListener {
         model = new DefaultListModel ();
 
         this.refactorPreviewPanel = new JBPanel();
-        this.duplicateAssertTestInfo = duplicateAssertInfo;
+        this.duplicateAssertInfo = duplicateAssertInfo;
 
-        for(MethodWithDuplicateAssert methodWithDuplicateAssert : duplicateAssertTestInfo.getMethodsThatCauseDuplicateAssert()){
+        for(MethodWithDuplicateAssert methodWithDuplicateAssert : duplicateAssertInfo.getMethodsThatCauseDuplicateAssert()){
             model.addElement(methodWithDuplicateAssert.getMethodWithDuplicateAssert().getName());
             methodsNames.add(methodWithDuplicateAssert.getMethodWithDuplicateAssert().getName());
         }
@@ -84,11 +84,11 @@ public class DASmellPanel extends JSplitPane implements ListSelectionListener {
         if(index == -1 && model.getSize() == 0){
             return;
         } else if(index == -1){
-            methodWithDA = duplicateAssertTestInfo.getMethodsThatCauseDuplicateAssert().get(0);
+            methodWithDA = duplicateAssertInfo.getMethodsThatCauseDuplicateAssert().get(0);
         } else {
-            methodWithDA = duplicateAssertTestInfo.getMethodsThatCauseDuplicateAssert().get(index);
+            methodWithDA = duplicateAssertInfo.getMethodsThatCauseDuplicateAssert().get(index);
         }
-        RefactorWindow refactorWindow = new RefactorWindow(methodWithDA, duplicateAssertTestInfo, project, this);
+        RefactorWindow refactorWindow = new RefactorWindow(methodWithDA, duplicateAssertInfo, project, this);
         this.setRightComponent(refactorWindow.getRootPanel());
     }
 }

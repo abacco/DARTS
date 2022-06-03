@@ -26,5 +26,5 @@ public interface IDetector {
 
     ArrayList<CondTestLogicInfo> executeDetectionForCondTestLogic(int threshold);
 
-    ArrayList<DuplicateAssertInfo> executeDetectionForDuplicateAssertInfo(int thresholdEh);
+    ArrayList<DuplicateAssertInfo> executeDetectionForDuplicateAssertInfo();
 }

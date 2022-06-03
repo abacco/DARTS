@@ -26,6 +26,7 @@ public class CommitWindowFactory {
     private static JPanel condTestLogicPanel;
     private static JPanel constructorInitializationPanel;
     private static JPanel exceptionHandlingPanel;
+    private static JPanel duplicateAssertPanel;
 
     /* createWindow per GF-ET-LOC-MN-CTL */
     public static <listDAI> void createWindow(Boolean textual, Boolean structural,
@@ -59,11 +60,11 @@ public class CommitWindowFactory {
         JBTabbedPane detectionTp = (JBTabbedPane) principalFrame.getDetectionTp();
         if(textual){
             principalFrame.removeTextualPanel();
-            principalFrame.addTextualPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI, listCTLI, listCII, listEHI));
+            principalFrame.addTextualPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI, listCTLI, listCII, listEHI, listDAI));
         }
         if(structural){
             principalFrame.removeStructuralPanel();
-            principalFrame.addStructuralPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI, listCTLI, listCII, listEHI));
+            principalFrame.addStructuralPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI, listCTLI, listCII, listEHI, listDAI));
         }
         principalFrame.add(detectionTp);
         // Mostra la schermata al centro dello schermo
@@ -123,7 +124,8 @@ public class CommitWindowFactory {
                                             ArrayList<MagicNumberTestInfo> listMNI,
                                             ArrayList<CondTestLogicInfo> listCTLI,
                                             ArrayList<ConstructorInitializationInfo> listCII,
-                                            ArrayList<ExceptionHandlingInfo> listEHI){
+                                            ArrayList<ExceptionHandlingInfo> listEHI,
+                                            ArrayList<DuplicateAssertInfo> listDAI){
         // Controllo se ho trovato degli smells.
         if (listGFI != null) {
             generalFixturePanel = new GeneralFixtureCP(listGFI, project);
@@ -145,6 +147,9 @@ public class CommitWindowFactory {
         }
         if(listEHI != null){
             exceptionHandlingPanel = new ExceptionHandlingCP(listEHI, project);
+        }
+        if(listDAI != null){
+            duplicateAssertPanel = new DuplicateAssertCP(listDAI, project);
         }
         //In questa parte costruisco le tab della window.
         JBTabbedPane tp = new JBTabbedPane();
@@ -176,6 +181,10 @@ public class CommitWindowFactory {
         if(listEHI != null){
             JBScrollPane scroll = new JBScrollPane(exceptionHandlingPanel);
             tp.add("ExceptionHandling", scroll);
+        }
+        if(listDAI != null){
+            JBScrollPane scroll = new JBScrollPane(duplicateAssertPanel);
+            tp.add("DuplicateAssert", scroll);
         }
         return tp;
     }

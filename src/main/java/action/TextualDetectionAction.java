@@ -41,38 +41,8 @@ public class TextualDetectionAction extends AnAction {
         // Exception Handling
         ArrayList<ExceptionHandlingInfo> exceptionHandlingInfos = detector.executeDetectionForExceptionHandling(THRESHOLD_EH);
         // Duplicate Assert
-        ArrayList<DuplicateAssertInfo> duplicateAssertInfos = detector.executeDetectionForDuplicateAssertInfo(THRESHOLD_EH);
+        ArrayList<DuplicateAssertInfo> duplicateAssertInfos = detector.executeDetectionForDuplicateAssertInfo();
 
-        System.out.println("\n\n ########################### ACTION - DETECTOR TESTUALE: risultato dell'analisi. ###########################\n\n");
-        for(GeneralFixtureInfo info : generalFixtureInfos){
-            System.out.println("\n   GENERAL FIXTURE: " + info.toString());
-        }
-        for(EagerTestInfo info : eagerTestInfos){
-            System.out.println("\n   EAGER TEST: " + info.toString());
-        }
-        for(LackOfCohesionInfo info : lackOfCohesionInfos){
-            System.out.println("\n   LACK OF COHESION: " + info.toString());
-        }
-        //Magic Number
-        for(MagicNumberTestInfo info : magicNumberTestInfos){
-            System.out.println("\n   MAGIC NUMBER: " + info.toString());
-        }
-        //Conditional Test Logic
-        for(CondTestLogicInfo info : condTestLogicInfos){
-            System.out.println("\n   CONDITIONAL TEST LOGIC: " + info.toString());
-        }
-        // ConstructorInitialization
-        for(ConstructorInitializationInfo info : constructorInitializationInfos){
-            System.out.println("\n   CONSTRUCTOR INIT : " + info.toString());
-        }
-        // ExceptionHandling
-        for(ExceptionHandlingInfo info : exceptionHandlingInfos){
-            System.out.println("\n   EXCEPTION HANDLING : " + info.toString());
-        }
-        // DuplicateAssert
-        for(DuplicateAssertInfo info : duplicateAssertInfos){
-            System.out.println("\n   DUPLICATE ASSERT : " + info.toString());
-        }
 
         if(generalFixtureInfos.isEmpty() && eagerTestInfos.isEmpty() && lackOfCohesionInfos.isEmpty() &&
         magicNumberTestInfos.isEmpty() &&

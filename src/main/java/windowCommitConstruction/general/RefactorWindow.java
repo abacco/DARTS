@@ -173,6 +173,36 @@ public class RefactorWindow extends JPanel implements ActionListener{
         setupContextualAnalysisButton(exceptionHandlingInfo);
     }
 
+    /**
+     * Call this for Duplicate Assert Panel.
+     * @param duplicateAssertTestInfo
+     * @param methodWithDA
+     * @param project
+     */
+
+    public RefactorWindow(MethodWithDuplicateAssert methodWithDA, DuplicateAssertInfo duplicateAssertTestInfo, Project project, DASmellPanel daSmellPanel) {
+        super();
+        this.methodWithDuplicateAssert = methodWithDA;
+        this.duplicateAssertInfo = duplicateAssertTestInfo;
+        this.project = project;
+        this.daSmellPanel = daSmellPanel;
+
+        String methodName = "<html> Method " + methodWithDuplicateAssert.getMethodWithDuplicateAssert().getPsiMethod().getName() + " is affected by Duplicate Assert because it uses the literal number in assert <br/>";
+
+        methodName = methodName + "<br/>The Smell will be removed using one of this refactoring operations:<br/>";
+        methodName = methodName + "   - Change argument type: change argument \"Expected\" from literal number to constant integer <br/>";
+
+        tipsTextLabel.setText(methodName);
+
+        String signature = methodWithDuplicateAssert.getMethodWithDuplicateAssert().getPsiMethod().getSignature(PsiSubstitutor.EMPTY).toString();
+        String methodBody = methodWithDuplicateAssert.getMethodWithDuplicateAssert().getPsiMethod().getBody().getText();
+        signature = signature + " " + methodBody;
+        methodTextArea.setText(signature);
+
+        refactorPreviewButton.addActionListener(this);
+        setupContextualAnalysisButton(duplicateAssertTestInfo);
+    }
+
 
     /**
      * Call this for Constructor Initialization.
@@ -299,35 +329,6 @@ public class RefactorWindow extends JPanel implements ActionListener{
         setupContextualAnalysisButton(lackOfCohesionInfo);
     }
 
-    /**
-     * Call this for Duplicate Assert Panel.
-     * @param duplicateAssertTestInfo
-     * @param methodWithDA
-     * @param project
-     */
-
-    public RefactorWindow(MethodWithDuplicateAssert methodWithDA, DuplicateAssertInfo duplicateAssertTestInfo, Project project, DASmellPanel daSmellPanel) {
-        super();
-        this.methodWithDuplicateAssert = methodWithDA;
-        this.duplicateAssertInfo = duplicateAssertTestInfo;
-        this.project = project;
-        this.daSmellPanel = daSmellPanel;
-
-        String methodName = "<html> Method " + methodWithDuplicateAssert.getMethodWithDuplicateAssert().getPsiMethod().getName() + " is affected by Duplicate Assert because it uses the literal number in assert <br/>";
-
-        methodName = methodName + "<br/>The Smell will be removed using one of this refactoring operations:<br/>";
-        methodName = methodName + "   - Change argument type: change argument \"Expected\" from literal number to constant integer <br/>";
-
-        tipsTextLabel.setText(methodName);
-
-        String signature = methodWithDuplicateAssert.getMethodWithDuplicateAssert().getPsiMethod().getSignature(PsiSubstitutor.EMPTY).toString();
-        String methodBody = methodWithDuplicateAssert.getMethodWithDuplicateAssert().getPsiMethod().getBody().getText();
-        signature = signature + " " + methodBody;
-        methodTextArea.setText(signature);
-
-        refactorPreviewButton.addActionListener(this);
-        setupContextualAnalysisButton(duplicateAssertTestInfo);
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
