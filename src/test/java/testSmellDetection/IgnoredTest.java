@@ -12,14 +12,16 @@ import utility.TestSmellUtilities;
 import java.util.ArrayList;
 
 public class IgnoredTest extends TestConfig {
+
     @Test
     public void testIgnoredTestPresent() {
         super.setFileName("test/IgnoredTestPresent.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
         ArrayList<MethodWithIgnoredTest> smellList = IgnoredTestStructural.checkMethodsThatIgnoredTest(testClassBeans.get(0));
-        assertEquals(1, smellList);
+        assertEquals(1, smellList.size());
     }
+
     @Test
     public void testIgnoredTestNotPresent() {
         super.setFileName("test/IgnoredTestNotPresent.java");

@@ -2,6 +2,7 @@ package testSmellDetection.structuralRules;
 
 import com.intellij.psi.PsiAnnotation;
 import com.intellij.psi.PsiMethodCallExpression;
+import com.intellij.psi.PsiModifierList;
 import org.jetbrains.annotations.NotNull;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.bean.PsiMethodBean;
@@ -10,27 +11,9 @@ import testSmellDetection.testSmellInfo.magicNamberTest.MethodWithMagicNumber;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class IgnoredTestStructural {
-    /**
-     * Questo metodo verifica se una classe è affetta da Ignored Test o meno.
-     *
-     * @param testClass la classe da analizzare.
-     * @return vero se la classe è smelly, falso altrimenti.
-     */
-    public static boolean IgnoredTestMethods(PsiClassBean testClass) {
-        for (PsiMethodBean testMethod : testClass.getPsiMethodBeans()) {
-            String methodText = null;
-            //Aggiungo la stringa di controllo al testo del metodo
-            methodText.equals("@Ignored");
-            if (methodText == "true") {
-                return true;
-            } else {
-                return false;
-            }
-        }
-        return false;
-    }
 
     public static ArrayList<MethodWithIgnoredTest> checkMethodsThatIgnoredTest(PsiClassBean testClass) {
         ArrayList<MethodWithIgnoredTest> methodWithIgnoredTests = new ArrayList<>();
@@ -39,11 +22,13 @@ public class IgnoredTestStructural {
             if(!methodName.equals(testClass.getPsiClass().getName()) &&
                     !methodName.toLowerCase().equals("setup") &&
                     !methodName.toLowerCase().equals("teardown")) {
-                /*if (psiMethodBeanInside.getPsiMethod().getAnnotation("Ignored")!= null){
-                    methodWithIgnoredTests.add(new MethodWithIgnoredTest(psiMethodBeanInside));
-                }*/
-                if(psiMethodBeanInside.getPsiClass().getAnnotation("@Ignore") != null) {
-                    methodWithIgnoredTests.add(new MethodWithIgnoredTest(psiMethodBeanInside));
+
+                PsiModifierList psiModifierList = psiMethodBeanInside.getPsiMethod().getModifierList();
+
+                PsiAnnotation[] annotations = psiModifierList.getAnnotations();
+
+                if (psiModifierList.toString().contains("Ignore")){
+                    methodWithIgnoredTests.add(0, new MethodWithIgnoredTest(psiMethodBeanInside));
                 }
             }
         }
