@@ -31,7 +31,7 @@ public class CommitWindowFactory {
     private static JPanel ignoredTestPanel;
 
     /* createWindow per GF-ET-LOC-MN-CTL */
-    public static <listDAI> void createWindow(Boolean textual, Boolean structural,
+    public static void createWindow(Boolean textual, Boolean structural,
                                               Project project,
                                               ArrayList<GeneralFixtureInfo> listGFI,
                                               ArrayList<EagerTestInfo> listETI,
@@ -234,6 +234,4 @@ public class CommitWindowFactory {
         return tp;
     }
 
-    public static void createWindow(boolean b, boolean b1, Project project, ArrayList<GeneralFixtureInfo> generalFixtureInfos, ArrayList<EagerTestInfo> eagerTestInfos, ArrayList<LackOfCohesionInfo> lackOfCohesionInfos, ArrayList<MagicNumberTestInfo> magicNumberTestInfos, ArrayList<CondTestLogicInfo> condTestLogicInfos, ArrayList<ConstructorInitializationInfo> constructorInitializationInfos, ArrayList<ExceptionHandlingInfo> exceptionHandlingInfos, ArrayList<DuplicateAssertInfo> duplicateAssertInfos, ArrayList<IgnoredTestInfo> ignoredTestInfos) {
-    }
 }
