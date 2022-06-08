@@ -1,3 +1,6 @@
+![Build](https://github.com/abacco/DARTS_2.0/actions/workflows/gradle.yml/badge.svg?branch=master)
+
+
 # DARTS
 
 **DARTS** (**D**etection **A**nd **R**efactoring of **T**est **S**mells) is an Intellij plug-in which implements a state-of-the-art detection mechanism to detect instances of three test smell types, *i.e., General Fixture, Eager Test, and Lack of Cohesion of Test Methods*, at commit-level and enables their automated refactoring through the integrated APIs provided by Intellij. 

@@ -1,6 +1,7 @@
 package testSmellDetection.testSmellInfo;
 
 import testSmellDetection.bean.PsiClassBean;
+import testSmellDetection.bean.PsiMethodBean;
 
 public class TestSmellInfo {
     protected PsiClassBean classWithSmell;
@@ -16,4 +17,5 @@ public class TestSmellInfo {
     public void setClassWithSmell(PsiClassBean classWithSmell) {
         this.classWithSmell = classWithSmell;
     }
+
 }

@@ -3,7 +3,9 @@ package action;
 import com.intellij.openapi.project.Project;
 import testSmellDetection.detector.IDetector;
 import testSmellDetection.detector.TestSmellStructuralDetector;
+import testSmellDetection.testSmellInfo.DuplicateAssert.DuplicateAssertInfo;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
+import testSmellDetection.testSmellInfo.IgnoredTest.IgnoredTestInfo;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
 import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
 import testSmellDetection.testSmellInfo.eagerTest.EagerTestInfo;
@@ -134,6 +136,10 @@ public class ThresholdPanelStructural extends JFrame {
                     ArrayList<ConstructorInitializationInfo> constructorInitializationInfos = detector.executeDetectionForConstructorInitialization();
                     // Exception Handling
                     ArrayList<ExceptionHandlingInfo> exceptionHandlingInfos = detector.executeDetectionForExceptionHandling(valOfExceptionHandling);
+                    // Duplicate Assert
+                    ArrayList<DuplicateAssertInfo> duplicateAssertInfos= detector.executeDetectionForDuplicateAssertInfo();
+                    //Ignored Test
+                    ArrayList<IgnoredTestInfo> ignoredTestInfos = detector.executeDetectionForIgnoredTestInfo();
 
                     if (generalFixtureInfos.isEmpty()
                             && eagerTestInfos.isEmpty()
@@ -141,7 +147,9 @@ public class ThresholdPanelStructural extends JFrame {
                             && magicNumberTestInfos.isEmpty()
                             && condTestLogicInfos.isEmpty()
                             && exceptionHandlingInfos.isEmpty()
-                            && constructorInitializationInfos.isEmpty()) {
+                            && constructorInitializationInfos.isEmpty()
+                            && duplicateAssertInfos.isEmpty()
+                            && ignoredTestInfos.isEmpty()) {
                         System.out.println("\n Non si è trovato alcuno Smell");
 
                     } else {
@@ -152,7 +160,9 @@ public class ThresholdPanelStructural extends JFrame {
                                 magicNumberTestInfos,
                                 condTestLogicInfos,
                                 constructorInitializationInfos,
-                                exceptionHandlingInfos);
+                                exceptionHandlingInfos,
+                                duplicateAssertInfos,
+                                ignoredTestInfos);
                     }
                 }
             }

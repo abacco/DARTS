@@ -22,8 +22,12 @@ import refactor.strategy.EagerTestStrategy;
 /*import refactor.strategy.GeneralFixtureStrategy;*/
 import refactor.strategy.LackOfCohesionStrategy;
 import testSmellDetection.bean.PsiMethodBean;
+import testSmellDetection.testSmellInfo.DuplicateAssert.DuplicateAssertInfo;
+import testSmellDetection.testSmellInfo.DuplicateAssert.MethodWithDuplicateAssert;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.MethodWithExceptionHandling;
+import testSmellDetection.testSmellInfo.IgnoredTest.IgnoredTestInfo;
+import testSmellDetection.testSmellInfo.IgnoredTest.MethodWithIgnoredTest;
 import testSmellDetection.testSmellInfo.TestSmellInfo;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.MethodWithCondTestLogic;
@@ -61,6 +65,8 @@ public class RefactorWindow extends JPanel implements ActionListener{
     private MethodWithGeneralFixture methodWithGeneralFixture;
     private MethodWithEagerTest methodWithEagerTest;
     private PsiMethodBean methodWithLOC;
+    private MethodWithDuplicateAssert methodWithDuplicateAssert;
+    private MethodWithIgnoredTest methodWithIT;
 
     private CondTestLogicInfo condTestLogicInfo = null;
     private ExceptionHandlingInfo exceptionHandlingInfo = null;
@@ -69,6 +75,8 @@ public class RefactorWindow extends JPanel implements ActionListener{
     private GeneralFixtureInfo generalFixtureInfo = null;
     private EagerTestInfo eagerTestInfo = null;
     private LackOfCohesionInfo lackOfCohesionInfo = null;
+    private DuplicateAssertInfo duplicateAssertInfo=null;
+    private IgnoredTestInfo ignoredTestInfo=null;
 
     private Project project;
 
@@ -79,6 +87,8 @@ public class RefactorWindow extends JPanel implements ActionListener{
     private GFSmellPanel gfSmellPanel;
     private ETSmellPanel etSmellPanel;
     private LOCSmellPanel locSmellPanel;
+    private DASmellPanel daSmellPanel;
+    private ITSmellPanel itSmellPanel;
 
 
     /**
@@ -166,6 +176,36 @@ public class RefactorWindow extends JPanel implements ActionListener{
 
         refactorPreviewButton.addActionListener(this);
         setupContextualAnalysisButton(exceptionHandlingInfo);
+    }
+
+    /**
+     * Call this for Duplicate Assert Panel.
+     * @param duplicateAssertTestInfo
+     * @param methodWithDA
+     * @param project
+     */
+
+    public RefactorWindow(MethodWithDuplicateAssert methodWithDA, DuplicateAssertInfo duplicateAssertTestInfo, Project project, DASmellPanel daSmellPanel) {
+        super();
+        this.methodWithDuplicateAssert = methodWithDA;
+        this.duplicateAssertInfo = duplicateAssertTestInfo;
+        this.project = project;
+        this.daSmellPanel = daSmellPanel;
+
+        String methodName = "<html> Method " + methodWithDuplicateAssert.getMethodWithDuplicateAssert().getPsiMethod().getName() + " is affected by Duplicate Assert because it uses the literal number in assert <br/>";
+
+        methodName = methodName + "<br/>The Smell will be removed using one of this refactoring operations:<br/>";
+        methodName = methodName + "   - Change argument type: change argument \"Expected\" from literal number to constant integer <br/>";
+
+        tipsTextLabel.setText(methodName);
+
+        String signature = methodWithDuplicateAssert.getMethodWithDuplicateAssert().getPsiMethod().getSignature(PsiSubstitutor.EMPTY).toString();
+        String methodBody = methodWithDuplicateAssert.getMethodWithDuplicateAssert().getPsiMethod().getBody().getText();
+        signature = signature + " " + methodBody;
+        methodTextArea.setText(signature);
+
+        refactorPreviewButton.addActionListener(this);
+        setupContextualAnalysisButton(duplicateAssertTestInfo);
     }
 
 
@@ -294,6 +334,36 @@ public class RefactorWindow extends JPanel implements ActionListener{
         setupContextualAnalysisButton(lackOfCohesionInfo);
     }
 
+    /**
+     * Call this for Lack of Cohesion Panel.
+     * @param methodWithIT
+     * @param project
+     */
+    public RefactorWindow(MethodWithIgnoredTest methodWithIT, IgnoredTestInfo ignoredTestInfo, Project project, ITSmellPanel itSmellPanel) {
+        super();
+        this.methodWithIT = methodWithIT;
+        this.ignoredTestInfo = ignoredTestInfo;
+        this.project = project;
+        this.locSmellPanel = locSmellPanel;
+
+        String methodName = "<html> Method " + methodWithIT.getMethodWithIgnoredTest().getName() + " is affected by Lack of Cohesion of Test Methods: <br/>";
+
+        methodName = methodName + "<br/>The Smell will be removed using one of this refactoring operations:<br/>";
+        methodName = methodName + "   - Extract method: setup method will be splitted into two different methods<br/>";
+        methodName = methodName + "   - Extract class: the test class will be splitted into two separated classes</html>";
+
+        tipsTextLabel.setText(methodName);
+
+        String signature = methodWithIT.getMethodWithIgnoredTest().toString();
+        String methodBody = methodWithIT.getMethodWithIgnoredTest().getPsiMethod().getBody().getText();
+        signature = signature + " " + methodBody;
+        methodTextArea.setText(signature);
+
+        refactorPreviewButton.addActionListener(this);
+        setupContextualAnalysisButton(ignoredTestInfo);
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
         try{
@@ -326,8 +396,8 @@ public class RefactorWindow extends JPanel implements ActionListener{
     }
 
     /**
-    * This method is called when generating panels and it's used to setup the Contextual Analysis button's action listener.
-    * @param testSmellInfo
+     * This method is called when generating panels and it's used to setup the Contextual Analysis button's action listener.
+     * @param testSmellInfo
      */
     private void setupContextualAnalysisButton(TestSmellInfo testSmellInfo) {
         executeContextualAnalysis.addActionListener(new ActionListener() {

@@ -7,7 +7,9 @@ import com.intellij.ui.components.JBTabbedPane;
 import javax.swing.*;
 import java.awt.*;
 
+import testSmellDetection.testSmellInfo.DuplicateAssert.DuplicateAssertInfo;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
+import testSmellDetection.testSmellInfo.IgnoredTest.IgnoredTestInfo;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
 import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
 import testSmellDetection.testSmellInfo.eagerTest.EagerTestInfo;
@@ -25,6 +27,8 @@ public class CommitWindowFactory {
     private static JPanel condTestLogicPanel;
     private static JPanel constructorInitializationPanel;
     private static JPanel exceptionHandlingPanel;
+    private static JPanel duplicateAssertPanel;
+    private static JPanel ignoredTestPanel;
 
     /* createWindow per GF-ET-LOC-MN-CTL */
     public static void createWindow(Boolean textual, Boolean structural,
@@ -35,7 +39,9 @@ public class CommitWindowFactory {
                                     ArrayList<MagicNumberTestInfo> listMNI,
                                     ArrayList<CondTestLogicInfo> listCTLI,
                                     ArrayList<ConstructorInitializationInfo> listCII,
-                                    ArrayList<ExceptionHandlingInfo> listEHI) {
+                                    ArrayList<ExceptionHandlingInfo> listEHI,
+                                    ArrayList<DuplicateAssertInfo> listDAI,
+                                    ArrayList<IgnoredTestInfo> listIT) {
         CommitPrincipalFrame principalFrame = null;
         //Controllo per vedere se la window esiste già.
         boolean frameExist = false;
@@ -56,12 +62,12 @@ public class CommitWindowFactory {
         if(textual){
             principalFrame.removeTextualPanel();
             principalFrame.removeStructuralPanel();
-            principalFrame.addTextualPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI, listCTLI, listCII, listEHI));
+            principalFrame.addTextualPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI, listCTLI, listCII, listEHI, listDAI, listIT));
         }
         if(structural){
             principalFrame.removeStructuralPanel();
             principalFrame.removeTextualPanel();
-            principalFrame.addStructuralPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI, listCTLI, listCII, listEHI));
+            principalFrame.addStructuralPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI, listCTLI, listCII, listEHI, listDAI, listIT));
         }
         principalFrame.add(detectionTp);
         // Mostra la schermata al centro dello schermo
@@ -121,7 +127,9 @@ public class CommitWindowFactory {
                                             ArrayList<MagicNumberTestInfo> listMNI,
                                             ArrayList<CondTestLogicInfo> listCTLI,
                                             ArrayList<ConstructorInitializationInfo> listCII,
-                                            ArrayList<ExceptionHandlingInfo> listEHI){
+                                            ArrayList<ExceptionHandlingInfo> listEHI,
+                                            ArrayList<DuplicateAssertInfo> listDAI,
+                                            ArrayList<IgnoredTestInfo> listIT){
         // Controllo se ho trovato degli smells.
         if (listGFI != null) {
             generalFixturePanel = new GeneralFixtureCP(listGFI, project);
@@ -143,6 +151,12 @@ public class CommitWindowFactory {
         }
         if(listEHI != null){
             exceptionHandlingPanel = new ExceptionHandlingCP(listEHI, project);
+        }
+        if(listDAI != null){
+            duplicateAssertPanel = new DuplicateAssertCP(listDAI, project);
+        }
+        if(listIT != null){
+            ignoredTestPanel = new IgnoredTestCP(listIT, project);
         }
         //In questa parte costruisco le tab della window.
         JBTabbedPane tp = new JBTabbedPane();
@@ -175,6 +189,15 @@ public class CommitWindowFactory {
             JBScrollPane scroll = new JBScrollPane(exceptionHandlingPanel);
             tp.add("ExceptionHandling", scroll);
         }
+        if(listDAI != null){
+            JBScrollPane scroll = new JBScrollPane(duplicateAssertPanel);
+            tp.add("DuplicateAssert", scroll);
+        }
+        if(listIT != null){
+            JBScrollPane scroll = new JBScrollPane(ignoredTestPanel);
+            tp.add("IgnoredTest", scroll);
+        }
+
         return tp;
     }
 
