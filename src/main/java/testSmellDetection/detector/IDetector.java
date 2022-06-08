@@ -2,6 +2,7 @@ package testSmellDetection.detector;
 
 import testSmellDetection.testSmellInfo.DuplicateAssert.DuplicateAssertInfo;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
+import testSmellDetection.testSmellInfo.IgnoredTest.IgnoredTestInfo;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
 import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
 import testSmellDetection.testSmellInfo.eagerTest.EagerTestInfo;
@@ -27,4 +28,8 @@ public interface IDetector {
     ArrayList<CondTestLogicInfo> executeDetectionForCondTestLogic(int threshold);
 
     ArrayList<DuplicateAssertInfo> executeDetectionForDuplicateAssertInfo();
+
+    ArrayList<IgnoredTestInfo> executeDetectionForIgnoredTestInfo();
+
+    ArrayList<IgnoredTestInfo> executeDetectionIgnoredTest();
 }

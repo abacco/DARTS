@@ -4,7 +4,9 @@ import com.intellij.openapi.project.Project;
 import contextualAnalysis.hashUtilies.ProductionClassesSingleton;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.bean.PsiMethodBean;
+import testSmellDetection.structuralRules.IgnoredTestStructural;
 import testSmellDetection.testSmellInfo.DuplicateAssert.DuplicateAssertInfo;
+import testSmellDetection.testSmellInfo.IgnoredTest.IgnoredTestInfo;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
 import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
@@ -107,5 +109,14 @@ public class TestSmellTextualDetector implements IDetector{
         return null;
     }
 
+    @Override
+    public ArrayList<IgnoredTestInfo> executeDetectionForIgnoredTestInfo() {
+       return null;
+    }
+
+    @Override
+    public ArrayList<IgnoredTestInfo> executeDetectionIgnoredTest() {
+        return null;
+    }
 
 }

@@ -5,6 +5,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 
 import testSmellDetection.testSmellInfo.DuplicateAssert.DuplicateAssertInfo;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
+import testSmellDetection.testSmellInfo.IgnoredTest.IgnoredTestInfo;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
 import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
 import testSmellDetection.testSmellInfo.magicNamberTest.MagicNumberTestInfo;
@@ -42,7 +43,8 @@ public class TextualDetectionAction extends AnAction {
         ArrayList<ExceptionHandlingInfo> exceptionHandlingInfos = detector.executeDetectionForExceptionHandling(THRESHOLD_EH);
         // Duplicate Assert
         ArrayList<DuplicateAssertInfo> duplicateAssertInfos = detector.executeDetectionForDuplicateAssertInfo();
-
+        //Ignored Test
+        ArrayList<IgnoredTestInfo> ignoredTestInfos = detector.executeDetectionForIgnoredTestInfo();
 
         if(generalFixtureInfos.isEmpty() && eagerTestInfos.isEmpty() && lackOfCohesionInfos.isEmpty() &&
         magicNumberTestInfos.isEmpty() &&
@@ -61,7 +63,8 @@ public class TextualDetectionAction extends AnAction {
                     condTestLogicInfos,
                     constructorInitializationInfos,
                     exceptionHandlingInfos,
-                    duplicateAssertInfos);
+                    duplicateAssertInfos,
+                    ignoredTestInfos);
 
         }
     }
