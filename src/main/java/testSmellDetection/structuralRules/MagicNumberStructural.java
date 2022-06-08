@@ -13,8 +13,8 @@ public abstract class MagicNumberStructural {
     for(PsiMethodBean psiMethodBeanInside : testClass.getPsiMethodBeans()){
       String methodName = psiMethodBeanInside.getPsiMethod().getName();
       if(!methodName.equals(testClass.getPsiClass().getName()) &&
-              !methodName.toLowerCase().equals("setup") &&
-              !methodName.toLowerCase().equals("teardown")){
+              !methodName.equalsIgnoreCase("setup") &&
+              !methodName.equalsIgnoreCase("teardown")){
         ArrayList<PsiMethodCallExpression> methodCalls = psiMethodBeanInside.getMethodCalls();
         if(methodCalls.size() >= 1){
           for(PsiMethodCallExpression callExpression : methodCalls){

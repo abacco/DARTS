@@ -24,11 +24,9 @@ import java.util.*;
  */
 public class TextualDetectionAction extends AnAction {
 
-    private static final int THRESHOLD_MN = 0;
-    private static final int THRESHOLD_EH = 0;
-
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
+
         IDetector detector = new TestSmellTextualDetector(anActionEvent.getProject());
         ArrayList<GeneralFixtureInfo> generalFixtureInfos = detector.executeDetectionForGeneralFixture();
         ArrayList<EagerTestInfo> eagerTestInfos = detector.executeDetectionForEagerTest();
@@ -36,26 +34,26 @@ public class TextualDetectionAction extends AnAction {
         //Magic Number
         ArrayList<MagicNumberTestInfo> magicNumberTestInfos = detector.executeDetectionForMagicNumber();
         //Conditional Test Logic
-        ArrayList<CondTestLogicInfo> condTestLogicInfos = detector.executeDetectionForCondTestLogic(THRESHOLD_MN);
+        ArrayList<CondTestLogicInfo> condTestLogicInfos = detector.executeDetectionForCondTestLogic(0);
         // ConstructorInitialization
         ArrayList<ConstructorInitializationInfo> constructorInitializationInfos = detector.executeDetectionForConstructorInitialization();
         // Exception Handling
-        ArrayList<ExceptionHandlingInfo> exceptionHandlingInfos = detector.executeDetectionForExceptionHandling(THRESHOLD_EH);
+        ArrayList<ExceptionHandlingInfo> exceptionHandlingInfos = detector.executeDetectionForExceptionHandling(0);
         // Duplicate Assert
         ArrayList<DuplicateAssertInfo> duplicateAssertInfos = detector.executeDetectionForDuplicateAssertInfo();
         //Ignored Test
         ArrayList<IgnoredTestInfo> ignoredTestInfos = detector.executeDetectionForIgnoredTestInfo();
-
-        if(generalFixtureInfos.isEmpty() && eagerTestInfos.isEmpty() && lackOfCohesionInfos.isEmpty() &&
-        magicNumberTestInfos.isEmpty() &&
-        condTestLogicInfos.isEmpty() &&
-        exceptionHandlingInfos.isEmpty() &&
-        constructorInitializationInfos.isEmpty()){
+        if (generalFixtureInfos.isEmpty()
+                && eagerTestInfos.isEmpty()
+                && lackOfCohesionInfos.isEmpty()
+                && magicNumberTestInfos.isEmpty()
+                && condTestLogicInfos.isEmpty()
+                && exceptionHandlingInfos.isEmpty()
+                && constructorInitializationInfos.isEmpty()) {
             System.out.println("\n Non si è trovato alcuno Smell");
+
         } else {
-            //TestSmellWindowFactory.createWindow(true, false, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
-            //CommitWindowFactory.createWindow(true, false, anActionEvent.getProject(), generalFixtureInfos, eagerTestInfos, lackOfCohesionInfos);
-            CommitWindowFactory.createWindow(true, false,anActionEvent.getProject(),
+            CommitWindowFactory.createWindow(true, false, anActionEvent.getProject(),
                     generalFixtureInfos,
                     eagerTestInfos,
                     lackOfCohesionInfos,
@@ -65,8 +63,8 @@ public class TextualDetectionAction extends AnAction {
                     exceptionHandlingInfos,
                     duplicateAssertInfos,
                     ignoredTestInfos);
-
         }
+
     }
 
 }

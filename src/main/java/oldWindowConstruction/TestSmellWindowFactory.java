@@ -63,7 +63,7 @@ public class TestSmellWindowFactory {
                              ArrayList<LackOfCohesionInfo> listLOCI){
         // Controllo se ho trovato degli smells.
         if (listGFI != null) {
-            /*generalFixturePanel = new GeneralFixturePanel(listGFI, project);*/
+            generalFixturePanel = new GeneralFixturePanel(listGFI, project);
         }
         if (listETI != null) {
             eagerTestPanel = new EagerTestPanel(listETI, project);

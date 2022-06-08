@@ -13,7 +13,7 @@ public abstract class ConstructorInitStructural {
         for(PsiMethodBean psiMethodBeanInside : testClass.getPsiMethodBeans()){
             String methodName = psiMethodBeanInside.getPsiMethod().getName();
             if(methodName.equals(testClass.getPsiClass().getName())) {
-               methodWithConstructorInitializationArrayList.add(0, new MethodWithConstructorInitialization(psiMethodBeanInside));
+               methodWithConstructorInitializationArrayList.add(new MethodWithConstructorInitialization(psiMethodBeanInside));
             }
         }
         if(methodWithConstructorInitializationArrayList.isEmpty()){

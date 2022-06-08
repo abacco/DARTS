@@ -32,18 +32,16 @@ public class CommitWindowFactory {
 
     /* createWindow per GF-ET-LOC-MN-CTL */
     public static void createWindow(Boolean textual, Boolean structural,
-                                              Project project,
-                                              ArrayList<GeneralFixtureInfo> listGFI,
-                                              ArrayList<EagerTestInfo> listETI,
-                                              ArrayList<LackOfCohesionInfo> listLOCI,
-                                              ArrayList<MagicNumberTestInfo> listMNI,
-                                              ArrayList<CondTestLogicInfo> listCTLI,
-                                              ArrayList<ConstructorInitializationInfo> listCII,
-                                              ArrayList<ExceptionHandlingInfo> listEHI,
-                                              ArrayList<DuplicateAssertInfo> listDAI,
-                                              ArrayList<IgnoredTestInfo> listIT)
-
-    {
+                                    Project project,
+                                    ArrayList<GeneralFixtureInfo> listGFI,
+                                    ArrayList<EagerTestInfo> listETI,
+                                    ArrayList<LackOfCohesionInfo> listLOCI,
+                                    ArrayList<MagicNumberTestInfo> listMNI,
+                                    ArrayList<CondTestLogicInfo> listCTLI,
+                                    ArrayList<ConstructorInitializationInfo> listCII,
+                                    ArrayList<ExceptionHandlingInfo> listEHI,
+                                    ArrayList<DuplicateAssertInfo> listDAI,
+                                    ArrayList<IgnoredTestInfo> listIT) {
         CommitPrincipalFrame principalFrame = null;
         //Controllo per vedere se la window esiste già.
         boolean frameExist = false;
@@ -63,10 +61,12 @@ public class CommitWindowFactory {
         JBTabbedPane detectionTp = (JBTabbedPane) principalFrame.getDetectionTp();
         if(textual){
             principalFrame.removeTextualPanel();
+            principalFrame.removeStructuralPanel();
             principalFrame.addTextualPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI, listCTLI, listCII, listEHI, listDAI, listIT));
         }
         if(structural){
             principalFrame.removeStructuralPanel();
+            principalFrame.removeTextualPanel();
             principalFrame.addStructuralPanel(createPanel(project, listGFI, listETI, listLOCI, listMNI, listCTLI, listCII, listEHI, listDAI, listIT));
         }
         principalFrame.add(detectionTp);
@@ -83,8 +83,7 @@ public class CommitWindowFactory {
                                     Project project,
                                     ArrayList<GeneralFixtureInfo> listGFI,
                                     ArrayList<EagerTestInfo> listETI,
-                                    ArrayList<LackOfCohesionInfo> listLOCI
-                                    ) {
+                                    ArrayList<LackOfCohesionInfo> listLOCI) {
         CommitPrincipalFrame principalFrame = null;
         //Controllo per vedere se la window esiste già.
         boolean frameExist = false;
@@ -198,14 +197,14 @@ public class CommitWindowFactory {
             JBScrollPane scroll = new JBScrollPane(ignoredTestPanel);
             tp.add("IgnoredTest", scroll);
         }
+
         return tp;
     }
 
     private static JBTabbedPane createPanel(Project project,
                                             ArrayList<GeneralFixtureInfo> listGFI,
                                             ArrayList<EagerTestInfo> listETI,
-                                            ArrayList<LackOfCohesionInfo> listLOCI
-                                            ){
+                                            ArrayList<LackOfCohesionInfo> listLOCI){
         // Controllo se ho trovato degli smells.
         if (listGFI != null) {
             generalFixturePanel = new GeneralFixtureCP(listGFI, project);
@@ -233,5 +232,4 @@ public class CommitWindowFactory {
         }
         return tp;
     }
-
 }

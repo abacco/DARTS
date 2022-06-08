@@ -14,26 +14,22 @@ import java.util.ArrayList;
 public abstract class ExceptionHandlingStructural {
 
     public static ArrayList<MethodWithExceptionHandling> checkMethodsThatContainExceptions(@NotNull PsiClassBean testClass, int threshold) {
+        if(threshold<0 || threshold>5)
+            return null;
         ArrayList<MethodWithExceptionHandling> methodsWithExceptHandling = new ArrayList<>();
         int count = 0;
         for(PsiMethodBean method : testClass.getPsiMethodBeans()) {
-
             PsiCodeBlock body = method.getPsiMethod().getBody();
-
-            if (body == null) {
-                return null;
-            }
             final PsiStatement[] statements = body.getStatements();
-            ArrayList<PsiStatement> arrayList1 = new ArrayList<>();
             for(PsiStatement statement : statements){
-                arrayList1.add(0, statement);
                 if(statement instanceof PsiTryStatement || statement instanceof PsiThrowStatement){
                     count++;
                 }
             }
             if(count > threshold){
-                methodsWithExceptHandling.add(0, new MethodWithExceptionHandling(method));
+                methodsWithExceptHandling.add(new MethodWithExceptionHandling(method));
             }
+            count = 0;
         }
         if (methodsWithExceptHandling.isEmpty()){
             return null;

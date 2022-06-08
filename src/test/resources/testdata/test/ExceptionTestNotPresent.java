@@ -11,4 +11,8 @@ public class ExceptionTestNotPresent {
         int tryi = 1;
         Assert.assertEquals(1,tryi);
     }
+    @Test
+    public void test2() {
+
+    }
 }

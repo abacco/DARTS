@@ -15,6 +15,22 @@ public class IntegrationUtilities extends TestConfig {
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
         assertNotNull(testClassBeans);
     }
+
+    @Test
+    public void testIntegrationUtilities_ClassNull() {
+        super.setFileName("main/ProductionClass.java");
+        ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
+        ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
+        assertEquals( 0,testClassBeans.size());
+    }
+
+    @Test
+    public void testIntegrationUtilitiesNull() {
+        super.setFileName("test/CondTestLogicPresentTest.java");
+        ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(null);
+        ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
+        assertNull(testClassBeans);
+    }
     @Test
     public void testIntegrationUtilitiesIstanceOfArrayList() {
         super.setFileName("test/CondTestLogicPresentTest.java");
