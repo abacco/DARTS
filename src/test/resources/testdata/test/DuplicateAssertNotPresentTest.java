@@ -1,7 +1,7 @@
 package test;
 import org.junit.Test;
 
-public class DuplicateAssertNotPresent {
+public class DuplicateAssertNotPresentTest {
 
         @Test
         public void test3(){
