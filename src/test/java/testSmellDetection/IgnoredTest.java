@@ -28,7 +28,7 @@ public class IgnoredTest extends TestConfig {
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
         ArrayList<MethodWithIgnoredTest> smellList = IgnoredTestStructural.checkMethodsThatIgnoredTest(testClassBeans.get(0));
-        assertEquals(0, smellList.size());
+        assertEquals(null, smellList);
     }
 }
 

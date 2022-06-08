@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-public class IgnoredTestStructural {
+public abstract class IgnoredTestStructural {
 
     public static ArrayList<MethodWithIgnoredTest> checkMethodsThatIgnoredTest(PsiClassBean testClass) {
         ArrayList<MethodWithIgnoredTest> methodWithIgnoredTests = new ArrayList<>();
@@ -33,7 +33,7 @@ public class IgnoredTestStructural {
             }
         }
         if(methodWithIgnoredTests.isEmpty()){
-            return new ArrayList<>();
+            return null;
         } else {
             return methodWithIgnoredTests;
         }
