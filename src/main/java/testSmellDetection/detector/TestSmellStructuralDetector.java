@@ -5,7 +5,11 @@ import contextualAnalysis.hashUtilies.ProductionClassesSingleton;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.bean.PsiMethodBean;
 import testSmellDetection.structuralRules.*;
+import testSmellDetection.testSmellInfo.DuplicateAssert.DuplicateAssertInfo;
+import testSmellDetection.testSmellInfo.DuplicateAssert.MethodWithDuplicateAssert;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.MethodWithExceptionHandling;
+import testSmellDetection.testSmellInfo.IgnoredTest.IgnoredTestInfo;
+import testSmellDetection.testSmellInfo.IgnoredTest.MethodWithIgnoredTest;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.MethodWithCondTestLogic;
@@ -91,6 +95,38 @@ public class TestSmellStructuralDetector implements IDetector{
         }
         return classesWithCondTestLogic;
     }
+
+    @Override
+    public ArrayList<DuplicateAssertInfo> executeDetectionForDuplicateAssertInfo() {
+        ArrayList<DuplicateAssertInfo> classesWithDuplicateAssert = new ArrayList<>();
+        for(PsiClassBean testClass : testClasses){
+            ArrayList<MethodWithDuplicateAssert> methodWithDuplicateAsserts = DuplicateAssertStructural.checkMethodsThatCauseDuplicateAssert(testClass);
+            if(methodWithDuplicateAsserts != null){
+                classesWithDuplicateAssert.add(new DuplicateAssertInfo(testClass, methodWithDuplicateAsserts));
+            }
+        }
+        return classesWithDuplicateAssert;
+    }
+
+    @Override
+    public ArrayList<IgnoredTestInfo> executeDetectionForIgnoredTestInfo() {
+        ArrayList<IgnoredTestInfo> classesWithIgnoredTest = new ArrayList<>();
+        for(PsiClassBean testClass : testClasses){
+            if(testClass.getProductionClass() != null) {
+                ArrayList<MethodWithIgnoredTest> methodsWithIgnoredTest = IgnoredTestStructural.checkMethodsThatIgnoredTest(testClass);
+                if (methodsWithIgnoredTest != null) {
+                    classesWithIgnoredTest.add(new IgnoredTestInfo(testClass, testClass.getProductionClass(), methodsWithIgnoredTest));
+                }
+            }
+        }
+        return classesWithIgnoredTest;
+    }
+
+    @Override
+    public ArrayList<IgnoredTestInfo> executeDetectionIgnoredTest() {
+        return null;
+    }
+
 
     public ArrayList<GeneralFixtureInfo> executeDetectionForGeneralFixture() {
         ArrayList<GeneralFixtureInfo> classesWithGeneralFixture = new ArrayList<>();

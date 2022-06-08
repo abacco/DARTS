@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class LackOfCohesionOfTestSmellTextualTest extends TestConfig {
     @Test
-    public void testLackOfCohesionOfTestSmellNotPresent() {
+    public void test_TC_Reg_Sys_6() {
         super.setFileName("main/LackOfCohesionOfTestSmell.java");
         super.setFileName("test/LackOfCohesionOfTestSmellNotPresent.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
@@ -21,7 +21,7 @@ public class LackOfCohesionOfTestSmellTextualTest extends TestConfig {
         assertEquals(null, smellList);
     }
     @Test
-    public void testLackOfCohesionOfTestSmellPresent() {
+    public void test_TC_Reg_Sys_5() {
         super.setFileName("main/LackOfCohesionOfTestSmell.java");
         super.setFileName("test/LackOfCohesionOfTestSmellPresent.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());

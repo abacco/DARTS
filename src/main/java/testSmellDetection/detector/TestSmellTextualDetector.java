@@ -4,23 +4,18 @@ import com.intellij.openapi.project.Project;
 import contextualAnalysis.hashUtilies.ProductionClassesSingleton;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.bean.PsiMethodBean;
-import testSmellDetection.structuralRules.CondTestLogicStructural;
-import testSmellDetection.structuralRules.ConstructorInitStructural;
-import testSmellDetection.structuralRules.ExceptionHandlingStructural;
-import testSmellDetection.structuralRules.MagicNumberStructural;
+import testSmellDetection.structuralRules.IgnoredTestStructural;
+import testSmellDetection.testSmellInfo.DuplicateAssert.DuplicateAssertInfo;
+import testSmellDetection.testSmellInfo.IgnoredTest.IgnoredTestInfo;
 import testSmellDetection.testSmellInfo.conditionalTestLogic.CondTestLogicInfo;
-import testSmellDetection.testSmellInfo.conditionalTestLogic.MethodWithCondTestLogic;
 import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.ExceptionHandlingInfo;
-import testSmellDetection.testSmellInfo.ExceptionHandlingInfo.MethodWithExceptionHandling;
 import testSmellDetection.testSmellInfo.constructorInitialization.ConstructorInitializationInfo;
-import testSmellDetection.testSmellInfo.constructorInitialization.MethodWithConstructorInitialization;
 import testSmellDetection.testSmellInfo.eagerTest.EagerTestInfo;
 import testSmellDetection.testSmellInfo.eagerTest.MethodWithEagerTest;
 import testSmellDetection.testSmellInfo.generalFixture.GeneralFixtureInfo;
 import testSmellDetection.testSmellInfo.generalFixture.MethodWithGeneralFixture;
 import testSmellDetection.testSmellInfo.lackOfCohesion.LackOfCohesionInfo;
 import testSmellDetection.testSmellInfo.magicNamberTest.MagicNumberTestInfo;
-import testSmellDetection.testSmellInfo.magicNamberTest.MethodWithMagicNumber;
 import testSmellDetection.textualRules.*;
 import utility.ConverterUtilities;
 import utility.TestSmellUtilities;
@@ -109,5 +104,19 @@ public class TestSmellTextualDetector implements IDetector{
         return null;
     }
 
+    @Override
+    public ArrayList<DuplicateAssertInfo> executeDetectionForDuplicateAssertInfo() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<IgnoredTestInfo> executeDetectionForIgnoredTestInfo() {
+       return null;
+    }
+
+    @Override
+    public ArrayList<IgnoredTestInfo> executeDetectionIgnoredTest() {
+        return null;
+    }
 
 }
