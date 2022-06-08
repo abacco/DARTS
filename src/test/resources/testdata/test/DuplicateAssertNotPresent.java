@@ -1,8 +1,10 @@
+package test;
 import org.junit.Test;
 
-public class DuplicateAssertPresent {
-@Test
-public void test3(){
-        new Example0().doSomething(22);
+public class DuplicateAssertNotPresent {
+
+        @Test
+        public void test3(){
+                System.out.println("ok");
         }
 }
