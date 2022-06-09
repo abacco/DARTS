@@ -28,12 +28,12 @@ public class IgnoredTestStructural {
                 PsiAnnotation[] annotations = psiModifierList.getAnnotations();
 
                 if (psiModifierList.toString().contains("Ignore")){
-                    methodWithIgnoredTests.add(0, new MethodWithIgnoredTest(psiMethodBeanInside));
+                    methodWithIgnoredTests.add(new MethodWithIgnoredTest(psiMethodBeanInside));
                 }
             }
         }
         if(methodWithIgnoredTests.isEmpty()){
-            return new ArrayList<>();
+            return null;
         } else {
             return methodWithIgnoredTests;
         }
