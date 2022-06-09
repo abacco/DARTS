@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class EagerTestTextualTest extends TestConfig {
     @Test
-    public void testEagerTestNotPresent() {
+    public void test_TC_Reg_Sys_2() {
         super.setFileName("test/EagerTestNotPresentTest.java");
         super.setFileName("main/EagerTestNotPresent.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
@@ -20,7 +20,7 @@ public class EagerTestTextualTest extends TestConfig {
         assertEquals(null, smellList);
     }
     @Test
-    public void testEagerTestPresent() {
+    public void test_TC_Reg_Sys_1() {
         super.setFileName("test/EagerTestPresentTest.java");
         super.setFileName("main/EagerTestPresent.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class GeneralFixtureTextualTest extends TestConfig {
 
     @Test
-    public void testGeneralFixtureNotPresent() {
+    public void test_TC_Reg_Sys_4() {
         super.setFileName("test/GeneralFixtureNotPresent.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<MethodWithGeneralFixture> smellList = GeneralFixtureTextual.checkMethodsThatCauseGeneralFixture(psiClassBeans.get(0));
@@ -20,7 +20,7 @@ public class GeneralFixtureTextualTest extends TestConfig {
     }
 
     @Test
-    public void testGeneralFixturePresent() {
+    public void test_TC_Reg_Sys_3() {
         super.setFileName("test/GeneralFixturePresent.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<MethodWithGeneralFixture> smellList = GeneralFixtureTextual.checkMethodsThatCauseGeneralFixture(psiClassBeans.get(0));
