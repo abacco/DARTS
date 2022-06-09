@@ -107,7 +107,7 @@ public class RefactorWindow extends JPanel implements ActionListener{
         String methodName = "<html> Method " + methodWithCondTestLogic.getMethodWithCondTestLogic().getPsiMethod().getName() + " is affected by Condition Test Logic because it contains one or more control statement  <br/>";
 
         methodName = methodName + "<br/>The Smell will be removed using one of this refactoring operations:<br/>";
-        methodName = methodName + "   - Change ...<br/>";
+        methodName = methodName + "   - Substitute conditional logic with equal assertion or guard assertion <br/>";
 
         tipsTextLabel.setText(methodName);
 
@@ -192,10 +192,10 @@ public class RefactorWindow extends JPanel implements ActionListener{
         this.project = project;
         this.daSmellPanel = daSmellPanel;
 
-        String methodName = "<html> Method " + methodWithDuplicateAssert.getMethodWithDuplicateAssert().getPsiMethod().getName() + " is affected by Duplicate Assert because it uses the literal number in assert <br/>";
+        String methodName = "<html> Method " + methodWithDuplicateAssert.getMethodWithDuplicateAssert().getPsiMethod().getName() + " is affected by Duplicate Assert because there are two or more assert in single test <br/>";
 
         methodName = methodName + "<br/>The Smell will be removed using one of this refactoring operations:<br/>";
-        methodName = methodName + "   - Change argument type: change argument \"Expected\" from literal number to constant integer <br/>";
+        methodName = methodName + "   - Refactor test case in order to have one assert <br/>";
 
         tipsTextLabel.setText(methodName);
 
@@ -225,7 +225,7 @@ public class RefactorWindow extends JPanel implements ActionListener{
         String methodName = "<html> Method " + methodWithConstructorInitialization.getMethodWithConstructorInitialization().getPsiMethod().getName() + " is affected by Constructor Initialization because it uses the constructor instead of setup method <br/>";
 
         methodName = methodName + "<br/>The Smell will be removed using one of this refactoring operations:<br/>";
-        methodName = methodName + "   - Change ... <br/>";
+        methodName = methodName + "   - Substitute constructor with setup method <br/>";
 
         tipsTextLabel.setText(methodName);
 
@@ -346,11 +346,11 @@ public class RefactorWindow extends JPanel implements ActionListener{
         this.project = project;
         this.locSmellPanel = locSmellPanel;
 
-        String methodName = "<html> Method " + methodWithIT.getMethodWithIgnoredTest().getName() + " is affected by Lack of Cohesion of Test Methods: <br/>";
+        String methodName = "<html> Method " + methodWithIT.getMethodWithIgnoredTest().getName() + " is affected by Ignored Test: <br/>";
 
         methodName = methodName + "<br/>The Smell will be removed using one of this refactoring operations:<br/>";
-        methodName = methodName + "   - Extract method: setup method will be splitted into two different methods<br/>";
-        methodName = methodName + "   - Extract class: the test class will be splitted into two separated classes</html>";
+        methodName = methodName + "   - Remove test case<br/>";
+        methodName = methodName + "   - Remove annotation</html>";
 
         tipsTextLabel.setText(methodName);
 
