@@ -1,3 +1,5 @@
+DISCLAIMER: Consultare i documenti in formato word per la visualizzazione non sgranata delle immagini relative ai CFG e all'architettura del sistema
+
 ![Build](https://github.com/abacco/DARTS_2.0/actions/workflows/gradle.yml/badge.svg?branch=master)
 
 
